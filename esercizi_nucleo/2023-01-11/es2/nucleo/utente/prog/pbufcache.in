@@ -1,0 +1,361 @@
+#include <all.h>
+
+#define dbg(s, ...) flog(LOG_DEBUG, "TEST %d: " s, test_num, ## __VA_ARGS__)
+#define msg(s, ...) printf("TEST %d PROC %d: " s "\n", test_num, getpid(), ## __VA_ARGS__)
+#define err(s, ...) msg("ERRORE: " s, ## __VA_ARGS__)
+#define die(s, ...) do { err(s, ## __VA_ARGS__); goto error; } while (0)
+
+#define new_proc(tn, pn)\
+	t##tn##p##pn = activate_p(t##tn##p##pn##b, test_num, prio--, LIV_UTENTE);
+
+natl end_test; // sync
+
+#define end_subtest() do {\
+	(void)&&error;\
+error:\
+	terminate_p();\
+} while (0)
+
+#define end_test() do {\
+	(void)&&error;\
+error:\
+	sem_signal(end_test);\
+	terminate_p();\
+} while (0)
+
+#define TCNT(n)	natl t##n##m0; natl t##n##n0;
+#define testok(n) do {\
+	sem_wait(t##n##m0);\
+	t##n##n0++;\
+	sem_signal(t##n##m0);\
+} while (0)
+
+int test_num;
+
+///**********************************************************************
+// *             test 01: scrittura                                     *
+// **********************************************************************/
+
+static const natl first_block = 50;
+
+natl t01p0;
+TCNT(01);
+
+static const int t01w0 = 5;
+natb t01b0[DIM_BLOCK * t01w0];
+natb t01b1[DIM_BLOCK * t01w0];
+
+void t01p0b(natq test_num)
+{
+	for (int i = 0; i < t01w0; i++)
+		for (natq j = 0; j < DIM_BLOCK; j++)
+			t01b0[i * DIM_BLOCK + j] = 'A' + i;
+	writehd_n(t01b0, first_block, t01w0);
+	if (bufcache_status(nullptr, nullptr) > 0)
+		die("la scrittura ha portato dei blocchi in cache");
+	dmareadhd_n(t01b1, first_block, t01w0);
+	for (int i = 0; i < t01w0; i++)
+		for (natq j = 0; j < DIM_BLOCK; j++)
+			if (t01b0[i * DIM_BLOCK + j] != 'A' + i)
+				die("blocco %d, byte %d: letto %c invece di %c", first_block + i, j,
+					t01b0[i * DIM_BLOCK + j], 'A' + i);
+	testok(01);
+	end_test();
+}
+
+///**********************************************************************
+// *             test 02: lettura                                       *
+// **********************************************************************/
+
+natb t02b0[DIM_BLOCK];
+static const natl t02w0 = 3;
+natl t02p0;
+TCNT(02);
+
+void t02p0b(natq test_num)
+{
+	natl blocks[MAX_BUF_DES];
+	int n;
+
+	readhd_n(t02b0, first_block + t02w0, 1);
+	for (natq j = 0; j < DIM_BLOCK; j++)
+		if (t02b0[j] != 'A' + t02w0)
+			die("blocco %d, byte %d: letto %c invece di %c",
+				first_block + t02w0, j, t02b0[j], 'A' + t02w0);
+	if ( (n = bufcache_status(blocks, nullptr)) != 1)
+		die("la bufcache contiene %d blocchi invece di 1", n);
+	if (blocks[0] != first_block + t02w0)
+		die("la bufcache contiene il blocco %d invece di %d",
+			blocks[0], first_block + t02w0);
+	testok(02);
+	end_test();
+}
+
+///**********************************************************************
+// *             test 03: lettura da cache                              *
+// **********************************************************************/
+
+natb t03b0[DIM_BLOCK];
+static const natl t03w0 = 3;
+natl t03p0;
+TCNT(03);
+
+void t03p0b(natq test_num)
+{
+	natl blocks[MAX_BUF_DES];
+	int n;
+	natl r1, r2;
+
+	bufcache_status(nullptr, &r1);
+	readhd_n(t03b0, first_block + t03w0, 1);
+	for (natq j = 0; j < DIM_BLOCK; j++)
+		if (t03b0[j] != 'A' + t03w0)
+			die("blocco %d, byte %d: letto %c invece di %c",
+				first_block + t03w0, j, t03b0[j], 'A' + t03w0);
+	if ( (n = bufcache_status(blocks, &r2)) != 1)
+		die("la bufcache contiene %d blocchi invece di 1", n);
+	if (blocks[0] != first_block + t03w0)
+		die("la bufcache contiene il blocco %d invece di %d",
+			blocks[0], first_block + t03w0);
+	if (r1 != r2)
+		die("eseguite operazioni di I/O anche se il blocco era in cache");
+	testok(03);
+	end_test();
+}
+
+///**********************************************************************
+// *             test 04: scrittura in cache                            *
+// **********************************************************************/
+
+natb t04b0[DIM_BLOCK];
+natb t04b1[DIM_BLOCK];
+natb t04b2[DIM_BLOCK];
+static const natl t04w0 = t03w0;
+natl t04p0;
+TCNT(04);
+
+void t04p0b(natq test_num)
+{
+	natl blocks[MAX_BUF_DES];
+	int n;
+	natl r1, r2, r3;
+
+	bufcache_status(nullptr, &r1);
+	for (natq j = 0; j < DIM_BLOCK; j++)
+		t04b0[j] = 'a' + t04w0;
+	writehd_n(t04b0, first_block + t04w0, 1);
+	if ( (n = bufcache_status(blocks, &r2)) != 1)
+		die("la bufcache contiene %d blocchi invece di 1", n);
+	if (blocks[0] != first_block + t04w0)
+		die("la bufcache contiene il blocco %d invece di %d",
+			blocks[0], first_block + t04w0);
+	if (r1 == r2)
+		die("operazione di write through non eseguita");
+	else if (r1 > r2 + 1)
+		die("eseguita piu' di una operazione di write through");
+	readhd_n(t04b1, first_block + t04w0, 1);
+	for (natq j = 0; j < DIM_BLOCK; j++)
+		if (t04b1[j] != 'a' + t04w0)
+			die("blocco %d, byte %d: letto %c invece di %c",
+				first_block + t04w0, j, t04b1[j], 'a' + t04w0);
+	if ( (n = bufcache_status(blocks, &r3)) != 1)
+		die("la bufcache contiene %d blocchi invece di 1", n);
+	if (blocks[0] != first_block + t04w0)
+		die("la bufcache contiene il blocco %d invece di %d",
+			blocks[0], first_block + t04w0);
+	if (r2 != r3)
+		die("eseguite operazioni di I/O anche se il blocco era in cache");
+	dmareadhd_n(t04b2, first_block + t04w0, 1);
+	for (natq j = 0; j < DIM_BLOCK; j++)
+		if (t04b2[j] != 'a' + t04w0)
+			die("blocco %d, byte %d: letto %c invece di %c",
+				first_block + t04w0, j, t04b0[j], 'a' + t04w0);
+	testok(04);
+	end_test();
+}
+
+///**********************************************************************
+// *             test 05: riempimento cache                             *
+// **********************************************************************/
+
+natb t05b0[DIM_BLOCK];
+static const natl t05w0[] = { 2, 0, 1 };
+natl t05p0;
+TCNT(05);
+
+void t05p0b(natq test_num)
+{
+	natl blocks[MAX_BUF_DES];
+	int n;
+	natl r1, r2;
+	natq m1, m2;
+
+	bufcache_status(nullptr, &r1);
+	m1 = 1U << t04w0;
+	for (int i: t05w0) {
+		m1 |= 1U << i;
+		readhd_n(t05b0, first_block + i, 1);
+	}
+	if ( (n = bufcache_status(blocks, &r2)) != 4)
+		die("la bufcache contiene %d blocchi invece di 4", n);
+	m2 = 0;
+	for (int i = 0; i < n; i++)
+		m2 |= 1U << (blocks[i] - first_block);
+	if (m2 != m1)
+		die("la bufcache non contiene tutti e soli i blocchi attesi");
+	if (r2 - r1 != 3)
+		die("esegute %d operazioni di I/O invece di 3", r2 - r1);
+	testok(05);
+	end_test();
+}
+
+///**********************************************************************
+// *             test 06: rimpiazzamento                                *
+// **********************************************************************/
+
+natb t06b0[DIM_BLOCK];
+static const natl t06w0 = 4;
+natl t06p0;
+TCNT(06);
+
+void t06p0b(natq test_num)
+{
+	natl blocks[MAX_BUF_DES];
+	int n;
+	natl r1, r2;
+	natq m1, m2, m3;
+
+	n = bufcache_status(blocks, &r1);
+	m1 = 0;
+	for (int i = 0; i < n; i++)
+		m1 |= 1U << (blocks[i] - first_block);
+	readhd_n(t06b0, first_block + t06w0, 1);
+	if ( (n = bufcache_status(blocks, &r2)) != 4)
+		die("la bufcache contiene %d blocchi invece di 4", n);
+	m3 = (m1 & ~(1U << t04w0)) | (1U << t06w0);
+	m2 = 0;
+	for (int i = 0; i < n; i++)
+		m2 |= 1U << (blocks[i] - first_block);
+	if (m2 != m3)
+		die("la bufcache non contiene tutti e soli i blocchi attesi");
+	if (r2 - r1 != 1)
+		die("esegute %d operazioni di I/O invece di 1", r2 - r1);
+	testok(06);
+	end_test();
+}
+
+///**********************************************************************
+// *             test 07: rimpiazzamento dopo scrittura                 *
+// **********************************************************************/
+
+natb t07b0[DIM_BLOCK];
+natb t07b1[DIM_BLOCK];
+static const natl t07w0 = t05w0[0];
+natl t07p0;
+TCNT(07);
+
+void t07p0b(natq test_num)
+{
+	natl blocks[MAX_BUF_DES];
+	int n;
+	natl r1, r2, r3;
+	natq m1, m2, m3;
+
+	n = bufcache_status(blocks, &r1);
+	m1 = 0;
+	for (int i = 0; i < n; i++)
+		m1 |= 1U << (blocks[i] - first_block);
+	for (natq j = 0; j < DIM_BLOCK; j++)
+		t07b0[j] = 'a' + t07w0;
+	writehd_n(t07b0, first_block + t07w0, 1);
+	if ( (n = bufcache_status(blocks, &r2)) != 4)
+		die("la bufcache contiene %d blocchi invece di 4", n);
+	m2 = 0;
+	for (int i = 0; i < n; i++)
+		m2 |= 1U << (blocks[i] - first_block);
+	if (m2 != m1)
+		die("la scrittura ha causato un rimpiazzamento");
+	readhd_n(t06b0, first_block + t04w0, 1);
+	m3 = (m1 & ~(1U << t05w0[1])) | (1U << t04w0);
+	if ( (n = bufcache_status(blocks, &r3)) != 4)
+		die("la bufcache contiene %d blocchi invece di 4", n);
+	m2 = 0;
+	for (int i = 0; i < n; i++)
+		m2 |= 1U << (blocks[i] - first_block);
+	if (m2 != m3)
+		die("la bufcache non contiene tutti e soli i blocchi attesi");
+	if (r3 - r2 != 1)
+		die("esegute %d operazioni di I/O invece di 1", r3 - r2);
+	testok(07);
+	end_test();
+}
+
+/**********************************************************************/
+
+
+process mainp body main_body(0), 900, LIV_UTENTE;
+
+process_body main_body(natq id)
+{
+	natl prio = 600;
+
+	end_test = sem_ini(0);
+
+	test_num = 1;
+	dbg(">>>INIZIO<<<: funzionalita' minima");
+	t01m0 = sem_ini(1);
+	new_proc(01, 0);
+	sem_wait(end_test);
+	if (t01n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 2;
+	dbg(">>>INIZIO<<<: lettura");
+	t02m0 = sem_ini(1);
+	new_proc(02, 0);
+	sem_wait(end_test);
+	if (t02n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 3;
+	dbg(">>>INIZIO<<<: lettura da cache");
+	t03m0 = sem_ini(1);
+	new_proc(03, 0);
+	sem_wait(end_test);
+	if (t03n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 4;
+	dbg(">>>INIZIO<<<: lettura da cache");
+	t04m0 = sem_ini(1);
+	new_proc(04, 0);
+	sem_wait(end_test);
+	if (t04n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 5;
+	dbg(">>>INIZIO<<<: riempimento cache");
+	t05m0 = sem_ini(1);
+	new_proc(05, 0);
+	sem_wait(end_test);
+	if (t05n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 6;
+	dbg(">>>INIZIO<<<: rimpiazzamento");
+	t06m0 = sem_ini(1);
+	new_proc(06, 0);
+	sem_wait(end_test);
+	if (t06n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 7;
+	dbg(">>>INIZIO<<<: rimpiazzamento dopo scrittura");
+	t07m0 = sem_ini(1);
+	new_proc(07, 0);
+	sem_wait(end_test);
+	if (t07n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	pause();
+}

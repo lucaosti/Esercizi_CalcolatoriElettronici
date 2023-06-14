@@ -1,0 +1,517 @@
+#line 1 "utente/prog/pmsend.in"
+#include <all.h>
+#include <vm.h>
+#pragma GCC diagnostic ignored "-Wuninitialized"
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+
+#define dbg(s, ...) flog(LOG_DEBUG, "TEST %d: " s, test_num, ## __VA_ARGS__)
+#define msg(s, ...) printf("TEST %d PROC %d: " s "\n", test_num, getpid(), ## __VA_ARGS__)
+#define err(s, ...) msg("ERRORE: " s, ## __VA_ARGS__)
+#define die(s, ...) do { err(s, ## __VA_ARGS__); goto error; } while (0)
+
+#define new_proc(tn, pn)\
+	t##tn##p##pn = activate_p(t##tn##p##pn##b, test_num, prio--, LIV_UTENTE);
+
+natl end_test; // sync
+
+#define end_subtest() do {\
+	(void)&&error;\
+error:\
+	terminate_p();\
+} while (0)
+
+#define end_test() do {\
+	(void)&&error;\
+error:\
+	sem_signal(end_test);\
+	terminate_p();\
+} while (0)
+
+#define TCNT(n)	natl t##n##m0; natl t##n##n0;
+#define testok(n) do {\
+	sem_wait(t##n##m0);\
+	t##n##n0++;\
+	sem_signal(t##n##m0);\
+} while (0)
+
+int test_num;
+
+const char *b2s(bool b)
+{
+	return b ? "true" : "false";
+}
+
+#define checkmasend(v__, p__, e__) do\
+{\
+	bool b__ = masend(v__, p__);\
+	if (b__ != (e__)) {\
+		err("masend(%p, %d) ha restituito %s invece di %s",\
+			(v__), (p__), b2s(b__), b2s(e__));\
+		goto error;\
+	}\
+} while (0)
+
+#define checkmarecv(v__, s__) \
+({\
+	des_ma m__ = marecv();\
+	if (!(v__) && m__.base) {\
+		err("marecv() non ha restituito errore come ci si attendeva");\
+		goto error;\
+	}\
+	if ((v__) && !m__.base) {\
+		err("marecv() ha restituito errore");\
+		goto error;\
+	}\
+	if (m__.npag != (s__)) {\
+		err("marecv() ha restituito dimensione %d invece di %d",\
+			m__.npag, (s__));\
+		goto error;\
+	}\
+	m__;\
+})
+
+char dummy;
+
+///**********************************************************************
+// *             test 00: errori vari                                   *
+// *                                                                    *
+// * Il primo processo chiama masend() senza essere owner di una msg     *
+// * area. Il secondo tenta di inviare la msg area a se stesso. Il      *
+// * terzo tenta di inviarla a dummy (id = 0). Ci aspettiamo che tutti  *
+// * e tre vengano abortiti.                                            *
+// **********************************************************************/
+
+natl t00p0;
+natl t00p1;
+natl t00p2;
+natl t00s0;
+
+void t00p0b(natq test_num)
+{
+	sem_wait(t00s0);
+	masend(0, t00p1);
+	err("masend senza chiamare macreate non ha causato abort");
+	terminate_p();
+}
+
+void t00p1b(natq test_num)
+{
+	sem_signal(t00s0);
+	void *v = macreate(1);
+	masend(v, getpid());
+	err("masend a se stesso non ha causato abort\n");
+	terminate_p();
+}
+
+void t00p2b(natq test_num)
+{
+	void *v = macreate(1);
+	masend(v, 0);
+	err("masend a processo di sistema non ha causato abort\n");
+	terminate_p();
+}
+
+// **********************************************************************
+// *             test 01: funzionalità minima                           *
+// *                                                                    *
+// * Il secondo processo crea una msg area, ci scrive un valore e la    *
+// * invia al primo processo, che è già in attesa di un msg area.       *
+// * Ci aspettiamo che il primo processo legga il valore scritto dal    *
+// * secondo.                                                           *
+// **********************************************************************
+
+natl t01p0;
+natl t01p1;
+natq* t01w0;
+TCNT(01);
+
+void t01p0b(natq test_num)
+{
+	natq *w;
+	des_ma ma = checkmarecv(1, 3);
+	w = static_cast<natq*>(ma.base);
+	if (*w == 10)
+		testok(01);
+	else
+		err("la ma contiene %d invece del valore scritto dal sender (10)", *w);
+	end_test();
+}
+
+void t01p1b(natq test_num)
+{
+	t01w0 = static_cast<natq*>(macreate(3));
+	*t01w0 = 10;
+	checkmasend(t01w0, t01p0, true);
+	testok(01);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 02: funzionalità minima  (2)                      *
+// *                                                                    *
+// * come nel test 01, ma questa volta il processo ricevitore non è in  *
+// * attesa al momento dell'invio. Ci aspettiamo lo stesso risultato    *
+// * del test precedente.                                               *
+// **********************************************************************
+
+natl t02p0;
+natl t02p1;
+natq* t02w0;
+TCNT(02);
+
+void t02p0b(natq test_num)
+{
+	t02w0 = static_cast<natq*>(macreate(7));
+	*t02w0 = 20;
+	checkmasend(t02w0, t02p1, true);
+	testok(02);
+	end_test();
+}
+
+void t02p1b(natq test_num)
+{
+	natq *w;
+	des_ma ma = checkmarecv(1, 7);
+	w = static_cast<natq*>(ma.base);
+	if (*w == 20)
+		testok(02);
+	else
+		err("la ma contiene %d invece del valore scritto dal sender (20)", *w);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 03: accesso dopo masend                            *
+// *                                                                    *
+// * come nel test 01, ma questa volta il processo che invia prova a    *
+// * scrivere nella msg area dopo averla inviata. Ci aspettiamo che     *
+// * l'accesso causi un page fault.                                     *
+// **********************************************************************
+
+natl t03p0;
+natl t03p1;
+natl t03s0;
+natl t03w0;
+TCNT(03);
+
+void t03p0b(natq test_num)
+{
+	natq* m = static_cast<natq*>(macreate(1));
+	checkmasend(m, t03p1, true);
+	*m = 20;
+	t03w0 = 1;
+	err("accesso alla message area dopo masend non ha causato fault");
+	end_test();
+}
+
+void t03p1b(natq test_num)
+{
+	checkmarecv(1, 1);
+	if (!t03w0)
+		testok(03);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 04: accesso prima e dopo masend                    *
+// *                                                                    *
+// * Come nel test 03, ma questa volta il processo che invia accede     *
+// * alla msg area anche subito prima di averla inviata (cosa cambia?)  *
+// * Anche in questo caso ci aspettiamo che l'accesso eseguito dopo     *
+// * l'invio della msg area causi un page fault.                        *
+// **********************************************************************
+
+natl t04p0;
+natl t04p1;
+natl t04p2;
+natl t04s0;
+natl t04s1;
+natl t04w0;
+TCNT(04);
+
+void t04p0b(natq test_num)
+{
+	natq* m = static_cast<natq*>(macreate(1));
+	sem_wait(t04s0);
+	*m = 40;
+	checkmasend(m, t04p1, true);
+	*m = 45;
+	t04w0 = 1;
+	err("accesso alla message area dopo masend non ha causato fault");
+	end_test();
+}
+
+void t04p1b(natq test_num)
+{
+	sem_wait(t04s1);
+	checkmarecv(1, 1);
+	if (!t04w0)
+		testok(04);
+	end_test();
+}
+
+void t04p2b(natq test_num)
+{
+	sem_signal(t04s1);
+	sem_signal(t04s0);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 05: msg area multiple                             *
+// *                                                                    *
+// **********************************************************************
+
+natl t05p0;
+natl t05p1;
+long* t05w0;
+long* t05w1;
+TCNT(05);
+
+void t05p0b(natq test_num)
+{
+	t05w0 = static_cast<long*>(macreate(1));
+	t05w1 = static_cast<long*>(macreate(1));
+	*t05w1 = 50;
+	checkmasend(t05w1, t05p1, true);
+	*t05w0 = 55;
+	testok(05);
+	end_test();
+}
+
+void t05p1b(natq test_num)
+{
+	natq *w;
+	des_ma ma = checkmarecv(1, 1);
+	w = static_cast<natq*>(ma.base);
+	if (*w == 50)
+		testok(05);
+	else
+		err("la ma contiene %d invece del valore scritto dal sender (50)", *w);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 06: msg area grandi                               *
+// *                                                                    *
+// **********************************************************************
+
+natl t06p0;
+natl t06p1;
+natl t06p2;
+long* t06w0;
+TCNT(06);
+
+void t06p0b(natq test_num)
+{
+	macreate(MSG_AREA_PAGES - 1);
+	checkmarecv(1, 1);
+	testok(06);
+	end_test();
+}
+
+void t06p1b(natq test_num)
+{
+	void *m = macreate(2);
+	checkmasend(m, t06p0, false);
+	testok(06);
+	end_test();
+}
+
+void t06p2b(natq test_num)
+{
+	void *m = macreate(1);
+	checkmasend(m, t06p0, true);
+	testok(06);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 07: gestione delle msg area                       *
+// *                                                                    *
+// **********************************************************************
+
+natl t07p0;
+natl t07p1;
+TCNT(07);
+
+void t07p0b(natq test_num)
+{
+	void *m;
+	for (int i = 0; i < MAX_MEM_AREA; i++)
+		m = macreate(1);
+	checkmarecv(0, 0);
+	checkmasend(m, t07p1, true);
+	checkmarecv(1, 1);
+	testok(07);
+	end_test();
+}
+
+void t07p1b(natq test_num)
+{
+	des_ma ma = checkmarecv(1, 1);
+	checkmasend(ma.base, t07p0, true);
+	testok(07);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 08: accesso su più pagine                         *
+// *                                                                    *
+// * Come nel testo 01, ma questa volta viene scritto e poi letto un    *
+// * valore da ciascuna delle pagine della msg area.                    *
+// **********************************************************************
+
+natl t08p0;
+natl t08p1;
+natl t08s0;
+TCNT(08);
+
+void t08p0b(natq test_num)
+{
+	des_ma ma;
+	natq *w;
+
+	ma = checkmarecv(1, MSG_AREA_PAGES);
+	w = static_cast<natq*>(ma.base);
+	for (natq i = 0; i < ma.npag; i++) {
+		natq j = w[DIM_PAGINA/sizeof(natq) * i];
+		if (j != 600 + i) {
+			err("atteso %d, ricevuto %d", 600 + i, j);
+		}
+	}
+	testok(08);
+	end_test();
+}
+
+void t08p1b(natq test_num)
+{
+	natq *w = static_cast<natq*>(macreate(MSG_AREA_PAGES));
+	for (natq i = 0; i < MSG_AREA_PAGES; i++)
+		w[DIM_PAGINA/sizeof(natq) * i] = 600 + i;
+	checkmasend(w, t08p0, true);
+	testok(08);
+	end_test();
+}
+
+/**********************************************************************/
+
+
+
+#line 401 "utente/prog/pmsend.in"
+extern natl mainp;
+#line 401 "utente/prog/pmsend.in"
+void main_body(natq id)
+#line 402 "utente/prog/pmsend.in"
+{
+	natl prio = 600;
+	natl membefore = getmeminfo().num_frame_liberi;
+
+	end_test = sem_ini(0);
+
+	test_num = 0;
+	dbg(">>>INIZIO<<<: errori vari");
+	t00s0 = sem_ini(0);
+	new_proc(00, 0);
+	delay(10);
+	new_proc(00, 1);
+	delay(10);
+	new_proc(00, 2);
+	delay(10);
+	dbg("=== FINE ===");
+
+	test_num = 1;
+	dbg(">>>INIZIO<<<: funzionalita' minima");
+	new_proc(01, 0);
+	new_proc(01, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t01n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 2;
+	dbg(">>>INIZIO<<<: funzionalita' minima (2)");
+	new_proc(02, 0);
+	new_proc(02, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t02n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 3;
+	dbg(">>>INIZIO<<<: accesso dopo masend");
+	t03s0 = sem_ini(0);
+	new_proc(03, 0);
+	new_proc(03, 1);
+	sem_wait(end_test);
+	if (t03n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 4;
+	dbg(">>>INIZIO<<<: accesso prima e dopo masend");
+	t04s0 = sem_ini(0);
+	new_proc(04, 0);
+	new_proc(04, 1);
+	new_proc(04, 2);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t04n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 5;
+	dbg(">>>INIZIO<<<: msg area multiple");
+	new_proc(05, 0);
+	new_proc(05, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t05n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 6;
+	dbg(">>>INIZIO<<<: msg area grandi");
+	new_proc(06, 0);
+	new_proc(06, 1);
+	new_proc(06, 2);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t06n0 == 3) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 7;
+	dbg(">>>INIZIO<<<: gestione delle msg area");
+	new_proc(07, 0);
+	new_proc(07, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t07n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 8;
+	dbg(">>>INIZIO<<<: accesso su piu' pagine");
+	new_proc(08, 0);
+	new_proc(08, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t08n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	delay(10);
+	test_num = 9;
+	// controlliamo che tutta la memoria sia stata correttamente rilasciata
+	natl memafter = getmeminfo().num_frame_liberi;
+	if (memafter != membefore)
+		err("memoria non liberata: %d frame", membefore - memafter);
+
+	pause();
+
+	terminate_p();
+}
+natl mainp;
+#line 512 "utente/utente.cpp"
+
+void main()
+{
+	mainp = activate_p(main_body, 0, 900, LIV_UTENTE);
+
+	terminate_p();}

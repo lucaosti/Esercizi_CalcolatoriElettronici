@@ -1,0 +1,32 @@
+Il modulo I/O del nucleo contiene le primitive \texttt{readhd\_n()} e \texttt{writehd\_n()} che
+permettono di leggere o scrivere blocchi dell'hard disk. Vogliamo velocizzare le due primitive
+introducendo una {\em buffer cache} che mantenga in memoria i blocchi letti pi\`u di recente,
+in modo che eventuali letture di blocchi che si trovino nella buffer cache possano essere realizzate
+con una semplice copia da memoria a memoria, invece che con una costosa operazione di I/O.
+Per quanto riguarda le scritture adottiamo una politica no-allocate/write-through. Per il rimpiazzamento
+adottiamo la politica LRU (Least Recently Used): se la cache \`e piena e deve essere letto un blocco
+non in cache, si rimpiazza il blocco a cui non si accede da pi\`u tempo (nota: per acesso ad un blocco
+si intende una qualunque \texttt{readhd\_n()} o \texttt{writehd\_n()} che lo ha coinvolto).
+
+Per realizzare la buffer cache definiamo la seguente struttura dati nel modulo I/O:
+\begin{verbatim}
+    struct buf_des {
+        natl block;
+        bool full;
+        int next, prev;
+        natb buf[DIM_BLOCK];
+    };
+\end{verbatim}
+La struttura rappresenta un singolo elemento della buffer cache. I campi sono significativi solo
+se \texttt{full} \`e \texttt{true}. In quel caso \texttt{buf} contiene una copia del blocco \texttt{block}.
+I campi \texttt{next} e \texttt{prev} servono a realizzare la coda LRU come una lista doppia (si veda pi\`u avanti).
+Aggiungiamo poi i seguenti campi alla struttura \texttt{des\_ata} (che \`e il descrittore dell'hard disk):
+\begin{verbatim}
+    buf_des bufcache[MAX_BUF_DES];
+    int lru, mru;
+\end{verbatim}
+Il campo \texttt{bufcache} \`e la buffer cache vera e propria; il campo \texttt{lru} \`e l'indice in \texttt{bufcache}
+del prossimo buffer da rimpiazzare (testa della coda LRU) e il campo \texttt{mru} \`e l'indice del buffer acceduto pi\`u di recente (ultimo elemento della coda LRU).
+I campi \texttt{next} e \texttt{prev} in ogni elemento di \texttt{bufcache} sono gli indici del prossimo e del precedente buffer nella coda LRU.
+
+Modificare il file \verb|io.cpp| in modo da realizzare il meccanismo descritto.

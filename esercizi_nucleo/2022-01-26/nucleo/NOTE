@@ -1,0 +1,3 @@
+tema: memory-area
+sottotema: intercettazione page-fault
+tipo: memoria-virtuale, sincronizzazione

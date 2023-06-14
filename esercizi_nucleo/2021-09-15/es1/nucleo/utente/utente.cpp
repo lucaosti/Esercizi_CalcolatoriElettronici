@@ -1,0 +1,547 @@
+#line 1 "utente/prog/pmshare.in"
+#include <all.h>
+#include <vm.h>
+#pragma GCC diagnostic ignored "-Wuninitialized"
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+
+#define dbg(s, ...) flog(LOG_DEBUG, "TEST %d: " s, test_num, ## __VA_ARGS__)
+#define msg(s, ...) printf("TEST %d PROC %d: " s "\n", test_num, getpid(), ## __VA_ARGS__)
+#define err(s, ...) msg("ERRORE: " s, ## __VA_ARGS__)
+#define die(s, ...) do { err(s, ## __VA_ARGS__); goto error; } while (0)
+
+#define new_proc(tn, pn)\
+	t##tn##p##pn = activate_p(t##tn##p##pn##b, test_num, prio--, LIV_UTENTE);
+
+natl end_test; // sync
+
+#define end_subtest() do {\
+	(void)&&error;\
+error:\
+	terminate_p();\
+} while (0)
+
+#define end_test() do {\
+	(void)&&error;\
+error:\
+	sem_signal(end_test);\
+	terminate_p();\
+} while (0)
+
+natl tokmux;
+#define TCNT(n)	natl t##n##n0;
+#define testok(n) do {\
+	sem_wait(tokmux);\
+	t##n##n0++;\
+	sem_signal(tokmux);\
+} while (0)
+
+int test_num;
+
+const char *b2s(bool b)
+{
+	return b ? "true" : "false";
+}
+
+template<typename T>
+const char *p2s(T b)
+{
+	return b ? "un puntatore" : "nullptr";
+}
+
+#define checkmacreate(n__, e__) \
+({\
+	void* b__ = macreate(n__);\
+	if (((e__) && !b__) || (!(e__) && b__)) {\
+		err("macreate(%d) ha restituito %s invece di %s",\
+			(n__), p2s(b__), p2s(e__));\
+		goto error;\
+	}\
+	b__;\
+})
+
+#define checkmashare(v__, p__, e__) \
+({\
+	void* b__ = mashare(v__, p__);\
+	if (((e__) && !b__) || (!(e__) && b__)) {\
+		err("mashare(%p, %d) ha restituito %s invece di %s",\
+			(v__), (p__), p2s(b__), p2s(e__));\
+		goto error;\
+	}\
+	b__;\
+})
+
+#define checkmarevoke(v__, p__, e__) \
+({\
+	bool b__ = marevoke(v__, p__);\
+	if (b__ != (e__)) {\
+		err("marevoke(%p, %d) ha restituito %s invece di %s",\
+			(v__), (p__), b2s(b__), b2s(e__));\
+		goto error;\
+	}\
+	b__;\
+})
+
+char dummy;
+
+///**********************************************************************
+// *             test 00: errori vari                                   *
+// **********************************************************************/
+
+natl t00p0;
+
+void t00p0b(natq test_num)
+{
+	void *v = checkmacreate(1, true);
+	mashare(v, 0);
+	err("mashare con processo di sistema non ha causato abort\n");
+error:
+	terminate_p();
+}
+
+// **********************************************************************
+// *             test 01: funzionalità minima                           *
+// *                                                                    *
+// * Il secondo processo crea una msg area, ci scrive un valore e la    *
+// * condivide con il primo processo.                                   *
+// * Ci aspettiamo che il primo processo legga il valore scritto dal    *
+// * secondo.                                                           *
+// **********************************************************************
+
+natl t01s0;
+natl t01p0;
+natl t01p1;
+natq* t01w0;
+TCNT(01);
+
+void t01p0b(natq test_num)
+{
+	sem_wait(t01s0);
+	if (*t01w0 == 10)
+		testok(01);
+	else
+		err("la ma contiene %d invece del valore scritto dal sender (10)", *t01w0);
+	end_test();
+}
+
+void t01p1b(natq test_num)
+{
+	natq* w = static_cast<natq*>(checkmacreate(3, true));
+	*w = 10;
+	t01w0 = static_cast<natq*>(checkmashare(w, t01p0, true));
+	sem_signal(t01s0);
+	testok(01);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 02: funzionalità minima  (2)                      *
+// *                                                                    *
+// * come nel test 01, ma questa volta il processo che condivide la ma  *
+// * vi riaccede dopo la condivisione. Ci aspettiamo lo stesso risultato*
+// * del test precedente.                                               *
+// **********************************************************************
+
+natl t02s0;
+natl t02p0;
+natl t02p1;
+natq* t02w0;
+TCNT(02);
+
+void t02p0b(natq test_num)
+{
+	sem_wait(t02s0);
+	if (*t02w0 == 20)
+		testok(02);
+	else
+		err("la ma contiene %d invece del valore scritto dal sender (20)", *t02w0);
+	*t02w0 = 25;
+	sem_signal(t02s0);
+	end_test();
+}
+
+void t02p1b(natq test_num)
+{
+	natq* w = static_cast<natq*>(checkmacreate(3, true));
+	*w = 20;
+	t02w0 = static_cast<natq*>(checkmashare(w, t02p0, true));
+	sem_signal(t02s0);
+	sem_wait(t02s0);
+	if (*t02w0 == 25)
+		testok(02);
+	else
+		err("la ma contiene %d invece del valore scritto dal sender (25)", *t02w0);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 03: accesso dopo marevoke                         *
+// *                                                                    *
+// * come nel test 01, ma questa volta il processo che invia fa una     *
+// * revoca dopo il primo accesso del processo ricevitore. Ci aspettiamo*
+// * successivi accessi del ricevitore causino page fault.              *
+// **********************************************************************
+
+natl t03p0;
+natl t03p1;
+natl t03s0;
+natq* t03w0;
+volatile natq t03w1;
+TCNT(03);
+
+void t03p0b(natq test_num)
+{
+	sem_wait(t03s0);
+	*t03w0 = 30;
+	while (t03w1 != 1)
+		delay(1);
+	t03w1 = 2;
+	*t03w0 = 35;
+	t03w1 = 3;
+	err("accesso alla message area dopo marevoke non ha causato fault");
+	end_test();
+}
+
+void t03p1b(natq test_num)
+{
+	natq* w = static_cast<natq*>(checkmacreate(1, true));
+	t03w0 = static_cast<natq*>(checkmashare(w, t03p0, true));
+	sem_signal(t03s0);
+	checkmarevoke(t03w0, t03p0, true);
+	t03w1 = 1;
+	while (t03w1 == 1)
+		delay(1);
+	if (t03w1 == 2)
+		testok(03);
+	end_test();
+}
+
+
+// **********************************************************************
+// *             test 04: accesso dopo marevoke (2)                     *
+// *                                                                    *
+// * come nel test 03, ma questa volta è il processo che riceve a       *
+// * revocare la condivisione al processo che invia.                    *
+// * Ci aspettiamo che sia il processo che invia a causare page fault   *
+// **********************************************************************
+
+natl t04p0;
+natl t04p1;
+natl t04s0;
+natq* t04w0;
+volatile natq t04w1;
+TCNT(04);
+
+void t04p0b(natq test_num)
+{
+	sem_wait(t04s0);
+	checkmarevoke(t04w0, t04p1, true);
+	sem_signal(t04s0);
+	while (!t04w1)
+		delay(1);
+	if (t04w1 == 1)
+		testok(04);
+	end_test();
+}
+
+void t04p1b(natq test_num)
+{
+	natq* w = static_cast<natq*>(checkmacreate(1, true));
+	t04w0 = static_cast<natq*>(checkmashare(w, t04p0, true));
+	sem_signal(t04s0);
+	sem_wait(t04s0);
+	t04w1 = 1;
+	*w = 1;
+	t04w1 = 2;
+	err("accesso alla message area dopo masend non ha causato fault");
+	end_test();
+}
+
+// **********************************************************************
+// *             test 05: condivisione a indirizzi diversi              *
+// *                                                                    *
+// * Facciamo in modo che i due processi usino indirizzi diversi per la *
+// * stessa msg area e controlliamo che riescano comunque a comunicare  *
+// * e che le msg-area vengano correttamente revocate                   *
+// **********************************************************************
+
+natl t05p0;
+natl t05p1;
+natl t05s0;
+natl t05s1;
+natq* t05w0;
+natq t05w1;
+TCNT(05);
+
+void t05p0b(natq test_num)
+{
+	checkmacreate(1, true);
+	sem_wait(t05s0);
+	*t05w0 = 50;
+	sem_signal(t05s1);
+	sem_wait(t05s0);
+	*t05w0 = 55;
+	t05w1 = 1;
+	err("accesso a message area revocata non ha causato abort");
+	end_test();
+}
+
+void t05p1b(natq test_num)
+{
+	natq* w = static_cast<natq*>(checkmacreate(1, true));
+	t05w0 = static_cast<natq*>(checkmashare(w, t05p0, true));
+	sem_signal(t05s0);
+	sem_wait(t05s1);
+	if (*w == 50)
+		testok(05);
+	else
+		err("la ma contiene %d invece del valore scritto dal sender (50)", *w);
+	checkmarevoke(w, t05p0, true);
+	sem_signal(t05s0);
+	if (!t05w1)
+		testok(05);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 06: processo che revoca se stesso                 *
+// *                                                                    *
+// **********************************************************************
+
+natl t06p0;
+natl t06p1;
+natq t06w0;
+TCNT(06);
+
+void t06p0b(natq test_num)
+{
+	natq* w = static_cast<natq*>(checkmacreate(1, true));
+	*w = 60;
+	checkmarevoke(w, t06p0, true);
+	*w = 65;
+	t06w0 = 1;
+	err("accesso alla msg area dopo una revoke non ha causato abort");
+	end_test();
+}
+
+void t06p1b(natq test_num)
+{
+	if (!t06w0)
+		testok(06);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 07: condivisione tra molti processi               *
+// *                                                                    *
+// **********************************************************************
+
+natl t07p0;
+natl t07p1;
+natl t07p2;
+natq* t07w0;
+natq* t07w1;
+TCNT(07);
+
+void t07p0b(natq test_num)
+{
+	natq* w = static_cast<natq*>(checkmacreate(1, true));
+	t07w0 = static_cast<natq*>(checkmashare(w, t07p1, true));
+	checkmarevoke(w, t07p0, true);
+	testok(07);
+	end_test();
+}
+
+void t07p1b(natq test_num)
+{
+	t07w1 = static_cast<natq*>(checkmashare(t07w0, t07p2, true));
+	checkmarevoke(t07w0, t07p1, true);
+	testok(07);
+	end_test();
+}
+
+void t07p2b(natq test_num)
+{
+	*t07w1 = 70;
+	testok(07);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 08: viste multiple                                *
+// *                                                                    *
+// **********************************************************************
+
+natl t08p0;
+natl t08p1;
+natl t08p2;
+natl t08p3;
+natq t08s0;
+natq* t08w0;
+natq* t08w1;
+natq* t08w2;
+natq* t08w3;
+natq t08w4;
+TCNT(08);
+
+void t08p0b(natq test_num)
+{
+	natq* w = static_cast<natq*>(checkmacreate(1, true));
+	t08w0 = static_cast<natq*>(checkmashare(w, t08p1, true));
+	t08w1 = static_cast<natq*>(checkmashare(w, t08p2, true));
+	testok(08);
+	end_test();
+}
+
+void t08p1b(natq test_num)
+{
+	t08w2 = static_cast<natq*>(checkmashare(t08w0, t08p2, true));
+	t08w3 = static_cast<natq*>(checkmashare(t08w0, t08p3, true));
+	testok(08);
+	end_test();
+}
+
+void t08p2b(natq test_num)
+{
+	*t08w1 = 80;
+	if (*t08w2 != 80)
+		err("le due view non corrispondono alla stessa msg-area");
+	sem_wait(t08s0);
+	*t08w1 = 81;
+	t08w4 = 1;
+	err("accesso dopo revoke non ha causato page fault");
+	*t08w2 = 82;
+	t08w4 = 2;
+	err("accesso dopo revoke non ha causato page fault");
+	end_test();
+}
+
+void t08p3b(natq test_num)
+{
+	checkmarevoke(t08w3, t08p2, true);
+	sem_signal(t08s0);
+	if (!t08w4)
+		testok(08);
+	end_test();
+}
+
+/**********************************************************************/
+
+
+
+#line 431 "utente/prog/pmshare.in"
+extern natl mainp;
+#line 431 "utente/prog/pmshare.in"
+void main_body(natq id)
+#line 432 "utente/prog/pmshare.in"
+{
+	natl prio = 600;
+	natl membefore = getmeminfo().num_frame_liberi;
+
+	end_test = sem_ini(0);
+	tokmux = sem_ini(1);
+
+	test_num = 0;
+	dbg(">>>INIZIO<<<: errori vari");
+	new_proc(00, 0);
+	delay(10);
+	dbg("=== FINE ===");
+
+	test_num = 1;
+	dbg(">>>INIZIO<<<: funzionalita' minima");
+	t01s0 = sem_ini(0);
+	new_proc(01, 0);
+	new_proc(01, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t01n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 2;
+	dbg(">>>INIZIO<<<: funzionalita' minima (2)");
+	t02s0 = sem_ini(0);
+	new_proc(02, 0);
+	new_proc(02, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t02n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 3;
+	dbg(">>>INIZIO<<<: accesso dopo masend");
+	t03s0 = sem_ini(0);
+	new_proc(03, 0);
+	new_proc(03, 1);
+	sem_wait(end_test);
+	if (t03n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 4;
+	dbg(">>>INIZIO<<<: accesso dopo masend (2)");
+	t04s0 = sem_ini(0);
+	new_proc(04, 0);
+	new_proc(04, 1);
+	sem_wait(end_test);
+	if (t04n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 5;
+	dbg(">>>INIZIO<<<: condivisione a indirizzi diversi");
+	t05s0 = sem_ini(0);
+	t05s1 = sem_ini(0);
+	new_proc(05, 0);
+	new_proc(05, 1);
+	sem_wait(end_test);
+	if (t05n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 6;
+	dbg(">>>INIZIO<<<: processo che revoca se stesso");
+	new_proc(06, 0);
+	new_proc(06, 1);
+	sem_wait(end_test);
+	if (t06n0 == 1) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 7;
+	dbg(">>>INIZIO<<<: condivisione tra molti processi");
+	new_proc(07, 0);
+	new_proc(07, 1);
+	new_proc(07, 2);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t07n0 == 3) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 8;
+	dbg(">>>INIZIO<<<: viste multiple");
+	t08s0 = sem_ini(0);
+	new_proc(08, 0);
+	new_proc(08, 1);
+	new_proc(08, 2);
+	new_proc(08, 3);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t08n0 == 3) msg("OK");
+	dbg("=== FINE ===");
+
+	delay(10);
+	test_num = 9;
+	// controlliamo che tutta la memoria sia stata correttamente rilasciata
+	natl memafter = getmeminfo().num_frame_liberi;
+	if (memafter != membefore)
+		err("memoria non liberata: %d frame", membefore - memafter);
+
+	pause();
+
+	terminate_p();
+}
+natl mainp;
+#line 542 "utente/utente.cpp"
+
+void main()
+{
+	mainp = activate_p(main_body, 0, 900, LIV_UTENTE);
+
+	terminate_p();}

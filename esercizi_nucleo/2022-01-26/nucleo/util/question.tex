@@ -1,0 +1,73 @@
+Definiamo una ``memory-area'' come una zona della memoria privata di un processo $P_1$
+gestita da un secondo processo $P_2$, detto {\em monitor} di $P_1$. Un processo 
+$P_2$ pu\`o diventare il monitor di $P_1$ tramite una primitiva \verb|ma_attach()|, che
+definisce anche la dimensione (in pagine) della memory-area di $P_1$.
+Da quel momento in poi, tutti i page-fault generati da $P_1$ su indirizzi che cadono
+all'interno della sua memory-area verranno intercettati da $P_2$. Il processo $P_2$
+pu\`o sospendersi in attesa che $P_1$ causi un page fault tramite
+una primitiva \verb|ma_wait()|. La primitiva restituisce a $P_2$ l'indirizzo $v$ che
+ha causato il fault in $P_1$. Il processo $P_1$ non viene distrutto e resta in attesa
+che $P_2$ risolva il page fault, creando una traduzione per $v$. Il processo $P_2$
+pu\`o creare una traduzione usando una primitiva \verb|ma_map(src)|, dove \verb|src|
+deve essere un indirizzo dello spazio utente/condiviso, accessibile in scrittura.
+La primitiva \verb|ma_map| deve creare il mapping tra la pagina che contiene
+$v$ (nello spazio di $P_1$) e il frame che corrisponde a \verb|src|,
+quindi deve risvegliare $P_1$, in modo
+che questi riesegua l'accesso a $v$ e prosegua con la sua normale esecuzione.
+
+Casi particolari: se $P_1$ termina mentre \`e monitorato da $P_2$, la \verb|ma_wait()|
+deve comunque risvegliare $P_2$, ma restituire 0. Se invece \`e $P_2$ a terminare mentre sta
+monitorando $P_1$, la memory-area di $P_1$ resta nello stato in cui $P_2$ l'ha lasciata,
+ma eventuali nuovi page-faut si devono comportare normalmente (abortendo $P_1$).
+
+Per realizzare il meccanismo appena descritto aggiungiamo i seguenti campi al descrittore di
+processo:
+
+\begin{verbatim}
+    // significativi per i processi monitor
+    des_proc *monitored; // processo monitorato
+    bool pending_event;	
+    
+    // significativi per i processi monitorati
+    des_proc *monitor;   // processo monitor
+    vaddr last_cr2;	     // indirizzo che ha causato il fault
+    natq ma_npag;	     // dimensione in pagine della memory area
+    
+    // significativo per entrambi
+    bool waiting;
+\end{verbatim}
+
+Il booleano \verb|pending_event| vale \verb|true| se il processo monitorato
+ha causato un ``evento'' (ha generato un page fault nella memory-area, oppure \`e terminato):
+serve alla primitiva \verb|ma_wait()| per capire se sospendere o meno il processo (monitor)
+che la invoca. Il significato del booleano \verb|waiting| dipende dal tipo di processo:
+per i processi monitor indica che il processo \`e sospeso nella \verb|ma_wait()|; per
+i processi monitorati indica che il processo ha causato un page-fault nella memory
+area e sta aspettando una \verb|ma_map()| che lo risvegli.
+
+Aggiungiamo inoltre le seguenti primitive (abortiscono il processo in caso di errore)
+\begin{itemize}
+  \item \verb|bool ma_attach(natw pid, natq ma_npag)| (da realizzare):
+    il processo che invoca la primitiva diventa monitor del processo di
+    identificatore \verb|pid|. Il processo \verb|pid| acquisisce una memory-area
+    grande \verb|ma_npag| pagine a partire dall'indirizzo \verb|ini_utn_p|.
+    La primitiva restituisce \verb|false| se il processo \verb|pid| o il processo
+    chiamante sono gi\`a monitorati, oppure se \verb|pid| non esiste.
+    \`E un errore se \verb|pid| non \`e un identificatore valido, oppure se \verb|npag|
+    non \`e compreso tra 1 e \verb|MAX_MA_PAGES| (inclusi), oppure se il processo
+    chiamante \`e gi\`a monitor.
+  \item \verb|vaddr ma_wait()| (da realizzare):
+    Attende che il processo monitorato generi un page fault nella memory area, o termini.
+    Nel primo caso restituisce l'indirizzo che ha causato il fault, nel secondo 0.
+    \`E un errore se il processo che invoca la primitiva non \`e un monitor.
+  \item \verb|bool ma_map(vaddr src)| (da realizzare):
+    Crea la traduzione tra la pagina che contiene l'indirizzo che ha causato il fault
+    e il frame che corrisponde a \verb|src|, quindi risveglia il processo monitorato.
+    Restituisce \verb|false| se non \`e stato possibile creare la traduzione.
+    \`E un errore se il processo che invoca la primitiva non \`e un monitor, oppure
+    se il processo monitorato non aveva causato un fault (e dunque non era sospeso
+    in attessa della \verb|ma_map|). \`E un errore se \verb|src| non appartiene
+    allo spazio utente condiviso o non \`e accessibile in scrittura.
+\end{itemize}
+
+Modificare il file \verb|sistema.cpp| in modo da specificare la parti mancanti.

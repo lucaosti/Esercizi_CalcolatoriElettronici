@@ -1,0 +1,70 @@
+Definiamo una ``msg-area'' come una zona della memoria fisica composta da un certo numero di frame.
+I processi possono accedere alle msg-area tramite delle {\em view}, cio\`e intervalli di indirizzi della parte utente/privata della loro memoria virtuale.
+Se un processo $p$ possiede una view con indirizzo base \verb|vv| per una msg-area \verb|ma|, diciamo che \verb|ma| \`e visibile a partire da \verb|vv|
+in $p$.
+In ogni processo, le view occupano sempre intervalli di indirizzi non sovrapposti.
+Un processo pu\`o creare una nuova msg-area, ottenendone contestualmente una view.
+Tutti i processi che hanno almeno una view su una data msg-area sono detti {\em owner} della msg-area. Tutti gli owner di una msg-area possono
+{\em condividerla} con altri processi, che acquisicono cos\`i una propria view e diventano anch'essi owner della msg-area (se non lo erano gi\`a).
+Le varie view di una stessa msg-area possono partire da indirizzi virtuali diversi, e uno stesso processo pu\`o avere pi\`u view della stessa
+msg-area.
+Un processo che sia owner di una msg-area pu\`o anche eliminare tutte le view di un processo (incluso se stesso)
+tramite una operazione di {\em revoca}.
+Una msg-area viene deallocata (i suoi frame rientrano nella lista dei frame liberi) quando non esistono pi\`u view corrispondenti.
+Quando un processo termina vengono automaticamente distrutte tutte le sue view.
+
+Una msg-area \`e descritta dalla seguente struttura:
+\begin{verbatim}
+    struct des_ma {
+        natq  npag;
+        natq  views;
+    };
+\end{verbatim}
+dove \verb|npag| \`e la dimensione della msg-area in pagine e \verb|views| \`e il numero di view esistenti per questa msg-area.
+Un \verb|des_ma| in cui \verb|npag| \`e zero \`e detto {\em non valido}.
+
+Una view \`e descritta dalla seguente struttura:
+\begin{verbatim}
+    struct des_view {
+        des_ma* ma;
+        vaddr base;
+    };
+\end{verbatim}
+Dove \verb|ma| punta alla descrittore della corrispondente msg-area e \verb|base| \`e l'indirizzo virtuale della view nello
+spazio di indirizzamento del processo a cui la view appartiene. Una view in cui \verb|ma| \`e \verb|nullptr| \`e detta {\em non valida}.
+
+Per realizzare il meccanismo precedente aggiungiamo i seguenti campi ai descrittori di processo:
+\begin{verbatim}
+    des_view view[MAX_MSG_AREA_VIEW];
+    vaddr next_view;
+\end{verbatim}
+I descrittori validi dell'array \verb|view| sono relativi alle view del processo. Il campo
+\verb|next_view| contiene l'indirizzo della base della prossima view creata o ricevuta dal processo.
+
+Introduciamo inoltre le seguenti primitive (abortiscono il processo in caso di errore):
+
+\begin{itemize}
+  \item \verb|void* macreate(natl npag)| (gi\`a realizzata): crea una nuova msg-area, grande \verb|npag| pagine,
+    e una corrispondente view nel processo corrente;
+    restituisce un puntatore alla base della view, o \verb|nullptr| se non
+    \`e stato possibile creare la msg-area o la view. \`E un errore se \verb|npag| \`e zero.
+  \item \verb|void* mashare(void *vv, natl pid)| (da realizzare):
+      crea nel processo \verb|pid| una nuova view per la msg-area
+      che \`e visibile, nel processo corrente, a partire dall'indirizzo \verb|vv| (\verb|pid| pu\`o anche coincidere
+      con il processo corrente). Restituisce l'indirizzo (valido nello
+      spazio di indirizzamento del processo \verb|pid|) della nuova view, oppure \verb|nullptr| se non \`e stato
+      possibile completare l'operazione (perch\'e la view non esiste, o il processo destinatario non esiste o non pu\`o
+      creare altre view). \`E un errore tentare di condividere una msg-area con un processo di livello sistema.
+    \item \verb|bool marevoke(void *vv, natl pid)| (da realizzare): elimina dal processo \verb|pid| (che pu\`o
+      essere anche il processo corrente) tutte le view corrispondenti alla msg-area visibile
+      a partire dall'indirizzo \verb|vv| nel processo corrente. Il processo \verb|pid| non pu\`o dunque pi\`u accedere alla msg-area (a meno
+      che qualche owner non la condivida nuovamente con lui). Restituisce \verb|true| in caso di successo 
+      (anche nel caso particolare in cui \verb|pid| non aveva alcuna view della msg-area) e \verb|false|
+      se l'operazione non \`e possibile (perch\'e il processo corrente non ha una view che parte da \verb|vv|,
+      oppure perch\'e il processo destinatario non esiste).
+\end{itemize}
+
+Modificare il file \verb|sistema.cpp| in modo da realizzare le primitive e le parti mancanti.
+
+{\bf SUGGERIMENTO}: per rispettare il vincolo sugli indirizzi delle view \`e sufficiente avanzare sempre \verb|next_view|.
+Quando \verb|next_view| esce dalla regione destinata alle view, il processo non potr\`a pi\`u creare msg-area o ricevere view.

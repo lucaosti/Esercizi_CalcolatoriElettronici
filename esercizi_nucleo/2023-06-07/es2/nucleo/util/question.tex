@@ -1,0 +1,52 @@
+Aggiungiamo una nuova zona ``utente/cow'' alla memoria virtuale dei nuovi processi utente.
+Il contenuto di questa zona \`e inizializzato all'avvio del sistema e ogni processo ne possiede
+una copia privata.
+
+Invece di copiare l'intera zona ogni volta che creiamo un nuovo processo, adottiamo la tecnica
+del {\em copy on write} (abbreviato in {\em cow}): tutti i processi condividono inizialmente
+la stessa zona, ma in solo lettura, e copiamo le singole pagine se e solo se un processo tenta
+di scrivervi.
+
+Pi\`u in dettaglio:
+\begin{itemize}
+  \item all'avvio del sistema creiamo e inizializziamo
+la zona cow, allocando e inizializzando i frame e creando le opportune
+traduzioni partendo da una tabella di livello 4 che chiamiamo
+{\tt cow\_root}, avendo cura di vietare le scritture in tutti gli
+indirizzi della zona;
+  \item alla creazione di ogni processo utente copiamo le entrate opportune
+    di {\tt cow\_root} nella tabella radice del nuovo processo;
+  \item se un processo genera un page fault per accesso in scrittura
+    su un indirizzo appartenente alla zona utente/cow, invece di terminare
+    il processo copiamo la corrispondente pagina, abilitiamo l'accesso
+    in scrittura e facciamo ripartire il processo.
+\end{itemize}
+Attenzione: l'accesso in scrittura deve essere abilitato solo per il processo
+che ha generato il fault, e solo sulla pagina che contiene l'indirizzo cha ha
+causato il fault. Inoltre, se l'accesso {\em non} appartiene alla zona utente/cow del
+processo, il processo deve essere abortito come al solito.
+
+Per realizzare il meccanismo appena descritto sono state definite le nuove
+costanti {\tt ini\_utn\_w} e {\tt fin\_utn\_w}, che delimitano gli indirizzi
+riservati alla nuova zona, e la costante {\tt DIM\_USR\_COW} che ne specifica
+la dimensione effettiva. Inoltre sono state aggiunte le seguenti funzioni, chiamate
+nei punti opportuni:
+\begin{itemize}
+  \item {\tt bool crea\_cow\_condivisa()} (chiamata durante l'inizializzazione del sistema):
+    crea e inizializza la zona cow iniziale,
+    con dimensione pari a {\tt DIM\_USR\_COW}, visibile a partire dall'indirizzo
+    {\tt ini\_utn\_w}; la zona deve inizialmente contenere solo byte nulli;
+    restituisce {\tt false} se non \`e stato possibile creare la zona, {\tt true} altrimenti;
+  \item {\tt void copia\_cow\_condivisa()} (chiamata durante la creazione di un processo):
+    copia le entrate opportune di {\tt cow\_root} nella tabella radice del nuovo
+    processo;
+  \item {\tt aggiorna\_cow\_condivisa(vaddr v)} (chiamata durante un page fault):
+    se {\tt v} cade nella zona utente/cow effettua la copia, aggiorna la traduzione
+    come descritto e restituisce {\tt true};
+    se {\tt v} non cade nella zona utente/cow, o se l'aggiornamento fallisce per qualche motivo,
+    restiuisce {\tt false};
+  \item {\tt void distruggi\_cow\_privata()} (chiamata durante la distruzione di un processo):
+    disfa quanto eventualmente fatto nelle precedenti {\tt copia\_cow\_condivisa()} e
+    {\tt aggiorna\_cow\_condivisa()}.
+\end{itemize}
+Modificare il file {\tt sistema.cpp} scrivendo le parti mancanti tra i tag {\tt SOLUZIONE}.

@@ -1,0 +1,1 @@
+CEHDPATH=hd.img

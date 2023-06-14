@@ -1,0 +1,117 @@
+INF	-	Boot loader Calcolatori Elettronici, v0.02
+INF	-	argomenti: /home/giuseppe/CE/lib/ce/boot.bin -s
+INF	-	argv[0] = '/home/giuseppe/CE/lib/ce/boot.bin'
+INF	-	argv[1] = '-s'
+INF	-	DEBUG MODE
+INF	-	mods_count = 3, mods_addr = 0x10a000
+INF	-	mod[0]:build/sistema: start 0x10b000 end 0x149828
+INF	-	Copiato segmento di 56920 byte all'indirizzo 0x200000
+INF	-	Copiato segmento di 522 byte all'indirizzo 0x20efe8
+INF	-	... azzerati ulteriori 78478 byte
+INF	-	entry point 0x200178
+INF	-	Attendo collegamento da gdb...
+INF	-	Nucleo di Calcolatori Elettronici, v6.7.2
+INF	-	GDT inizializzata
+INF	-	APIC inizializzato
+INF	-	Numero di frame: 547 (M1) 7645 (M2)
+INF	-	sis/cond [0x0, 0x8000000000)
+INF	-	sis/priv [0x8000000000, 0x10000000000)
+INF	-	io /cond [0x10000000000, 0x18000000000)
+INF	-	usr/cond [0xffff800000000000, 0xffffc00000000000)
+INF	-	usr/cow  [0xffffc00000000000, 0xffffe00000000000)
+INF	-	usr/priv [0xffffe00000000000, 0x0)
+INF	-	Creata finestra sulla memoria centrale:  [0x1000, 0x2000000)
+INF	-	Creata finestra per memory-mapped-IO:    [0xfec00000, 0x100000000)
+INF	-	mappo il modulo I/O:
+INF	-	 - segmento sistema read-only  mappato a [0x10000000000, 0x10000005000)
+INF	-	 - segmento sistema read/write mappato a [0x10000010000, 0x10000021000)
+INF	-	 - heap:                                 [0x10000021000, 0x10000121000)
+INF	-	 - entry point: 0x10000000178
+INF	-	mappo il modulo utente:
+INF	-	 - segmento utente  read-only  mappato a [0xffff800000000000, 0xffff800000005000)
+INF	-	 - segmento utente  read/write mappato a [0xffff800000005000, 0xffff800000007000)
+INF	-	 - heap:                                 [0xffff800000007000, 0xffff800000107000)
+INF	-	 - entry point: 0xffff8000000016cd
+INF	-	Create le traduzioni per le parti condivise
+INF	-	Creata la zona utente copy-on-write
+INF	-	Frame liberi: 7073 (M2)
+INF	-	CR3 caricato
+INF	-	Heap del modulo sistema: 100000B [0x100000, 0x200000)
+INF	-	Creato il processo dummy (id = 0)
+INF	-	Creato il processo main_sistema (id = 1)
+INF	1	Timer attivato (DELAY=59659)
+INF	1	proc=2 entry=0x10000000178(1024) prio=4294967295 liv=0
+INF	1	Creato il processo main I/O (id = 2)
+INF	1	attendo inizializzazione modulo I/O...
+INF	2	Heap del modulo I/O: 100000B [0x10000021000, 0x10000121000)
+INF	2	estern=3 entry=0x100000005ea(0) prio=1104 (tipo=50) liv=0 irq=1
+INF	2	kbd: tastiera inizializzata
+INF	2	vid: video inizializzato
+INF	2	bm: 00:01.1
+INF	2	estern=4 entry=0x10000000e91(0) prio=1120 (tipo=60) liv=0 irq=14
+INF	2	Processo 2 terminato
+INF	1	... inizializzazione modulo I/O terminata
+INF	1	proc=5 entry=0xffff8000000016cd(0) prio=4294967295 liv=3
+INF	1	Creato il processo start_utente (id = 5)
+INF	1	passo il controllo al processo utente...
+INF	1	Processo 1 terminato
+INF	5	Heap del modulo utente: 100000B [0xffff800000006068, 0xffff800000106068)
+INF	5	proc=6 entry=0xffff800000001076(0) prio=900 liv=3
+INF	5	Processo 5 terminato
+DBG	6	TEST 0: >>>INIZIO<<<: errori vari
+INF	6	proc=7 entry=0xffff8000000001b7(0) prio=600 liv=3
+WRN	7	Eccezione 14 (page fault), errore 4, rip ffff8000000001d3
+WRN	7	  indirizzo virtuale: 0xffffc00000011000 
+WRN	7	  dettagli: pag o tab assente, lettura, da utente, 
+WRN	7	proc 7: corpo 0xffff8000000001b7(0), livello UTENTE, precedenza 600
+WRN	7	  RIP=0xffff8000000001d3 CPL=LIV_UTENTE
+WRN	7	  RFLAGS=286 [-- -- -- IF -- SF -- -- PF --, IOPL=SISTEMA]
+WRN	7	  RAX=ffffc00000011000 RBX=               0 RCX=               0 RDX=               0
+WRN	7	  RDI=               0 RSI=               0 RBP=fffffffffffffff0 RSP=ffffffffffffffd0
+WRN	7	  R8 =               0 R9 =               0 R10=               0 R11=               0
+WRN	7	  R12=               0 R13=               0 R14=               0 R15=               0
+WRN	7	  backtrace:
+WRN	7	  > 0xaaaaaaaaaaaaaaa9
+WRN	7	Processo 7 abortito
+INF	6	proc=8 entry=0xffff800000000203(0) prio=599 liv=3
+WRN	8	Eccezione 14 (page fault), errore 4, rip ffff80000000021f
+WRN	8	  indirizzo virtuale: 0xffffc00000010000 
+WRN	8	  dettagli: pag o tab assente, lettura, da utente, 
+WRN	8	proc 8: corpo 0xffff800000000203(0), livello UTENTE, precedenza 599
+WRN	8	  RIP=0xffff80000000021f CPL=LIV_UTENTE
+WRN	8	  RFLAGS=286 [-- -- -- IF -- SF -- -- PF --, IOPL=SISTEMA]
+WRN	8	  RAX=ffffc00000010000 RBX=               0 RCX=               0 RDX=               0
+WRN	8	  RDI=               0 RSI=               0 RBP=fffffffffffffff0 RSP=ffffffffffffffd0
+WRN	8	  R8 =               0 R9 =               0 R10=               0 R11=               0
+WRN	8	  R12=               0 R13=               0 R14=               0 R15=               0
+WRN	8	  backtrace:
+WRN	8	  > 0xaaaaaaaaaaaaaaa9
+WRN	8	Processo 8 abortito
+DBG	6	TEST 0: === FINE ===
+DBG	6	TEST 1: >>>INIZIO<<<: lettura di un byte
+INF	6	proc=9 entry=0xffff80000000024f(1) prio=598 liv=3
+DBG	6	TEST 1: === FINE ===
+DBG	6	TEST 2: >>>INIZIO<<<: scrittura di un byte
+INF	6	proc=10 entry=0xffff800000000343(2) prio=597 liv=3
+INF	9	Processo 9 terminato
+WRN	10	Eccezione 14 (page fault), errore 7, rip ffff80000000040b
+DBG	6	TEST 2: === FINE ===
+DBG	6	TEST 3: >>>INIZIO<<<: scrittura di un byte non allineato alla pagina
+INF	6	proc=11 entry=0xffff800000000546(3) prio=596 liv=3
+INF	10	Processo 10 terminato
+WRN	11	Eccezione 14 (page fault), errore 7, rip ffff80000000060e
+DBG	6	TEST 3: === FINE ===
+DBG	6	TEST 4: >>>INIZIO<<<: scrittura di due byte nella stessa pagina
+INF	6	proc=12 entry=0xffff800000000749(4) prio=595 liv=3
+INF	11	Processo 11 terminato
+WRN	12	Eccezione 14 (page fault), errore 7, rip ffff800000000811
+DBG	6	TEST 4: === FINE ===
+DBG	6	TEST 5: >>>INIZIO<<<: scrittura di due byte in due pagine diverse
+INF	6	proc=13 entry=0xffff800000000b90(5) prio=594 liv=3
+INF	12	Processo 12 terminato
+WRN	13	Eccezione 14 (page fault), errore 7, rip ffff800000000cf4
+WRN	13	Eccezione 14 (page fault), errore 7, rip ffff800000000e9f
+DBG	6	TEST 5: === FINE ===
+INF	13	Processo 13 terminato
+INF	6	Processo 6 terminato
+INF	0	Shutdown
