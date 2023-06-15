@@ -2156,19 +2156,6 @@ extern "C" void c_macreate(natq npag)
 //   ESAME 2021-09-15 )
 
 // ( SOLUZIONE 2021-09-15
-struct getv {
-	des_proc *p;
-	vaddr b;
-
-	getv(des_proc *p_, vaddr b_): p(p_), b(b_) {}
-
-	paddr operator()(vaddr v) {
-		paddr f = trasforma(p->cr3, b);
-		b += DIM_PAGINA;
-		return f;
-	}
-};
-
 extern "C" void c_mashare(void *vv, natl pid)
 {
 	// controllo parametri
@@ -2202,9 +2189,11 @@ extern "C" void c_mashare(void *vv, natl pid)
 	if (dend > fin_view_p)
 		return;
 
-	getv m(src, view_beg(w));
-
-	vaddr va = map(dst->cr3, dbeg, dend, BIT_RW | BIT_US, m);
+	vaddr va = map(dst->cr3, dbeg, dend, BIT_RW | BIT_US, [](vaddr v){
+		paddr f = trasforma(p->cr3, b);
+		b += DIM_PAGINA;
+		return f;
+	});
 	if (va != dend) {
 		unmap(dst->cr3, dbeg, va, [](vaddr, paddr, int) {});
 		return;
