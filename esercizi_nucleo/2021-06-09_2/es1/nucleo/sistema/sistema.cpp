@@ -27,6 +27,10 @@ struct des_proc {
 	// radice del TRIE del processo
 	paddr cr3;
 
+// ( SOLUZIONE 2021-06-09
+	vaddr usr_stack_top;
+//   SOLUZIONE 2021-06-09 )
+
 	// prossimo processo in coda
 	des_proc *puntatore;
 
@@ -239,7 +243,7 @@ extern "C" void c_sem_wait(natl sem)
 {
 	// una primitiva non deve mai fidarsi dei parametri
 	if (!sem_valido(sem)) {
-		flog(LOG_WARN, "semaforo errato: %u", sem);
+		flog(LOG_WARN, "semaforo errato: %d", sem);
 		c_abort_p();
 		return;
 	}
@@ -258,7 +262,7 @@ extern "C" void c_sem_signal(natl sem)
 {
 	// una primitiva non deve mai fidarsi dei parametri
 	if (!sem_valido(sem)) {
-		flog(LOG_WARN, "semaforo errato: %u", sem);
+		flog(LOG_WARN, "semaforo errato: %d", sem);
 		c_abort_p();
 		return;
 	}
@@ -451,14 +455,16 @@ static const natq SE_IDT   = 1U << 1;
 static const natq SE_TI    = 1U << 2;
 
 extern "C" vaddr readCR2();
-extern "C" natb start[]; // primo indirizzo del codice di sistema
-extern "C" natb end[];	 // ultimo indirizzo del codice sistema (fornito dal collegatore)
+extern "C" natb end[];	// ultimo indirizzo del codice sistema (fornito dal collegatore)
 
+// ( ESAME 2021-06-09
+natl exc_counter;
+//   ESAME 2021-06-09 )
 
-// ( ESAME 2023-06-07
-natl pf_counter = 0; // solo per debug
-bool aggiorna_cow_privata(vaddr v);
-//   ESAME 2023-06-07 )
+// ( SOLUZIONE 2021-06-09
+bool extend_stack();
+//   SOLUZIONE 2021-06-09 )
+
 // gestore generico di eccezioni (chiamata da tutti i gestori di eccezioni in
 // sistema.s, tranne quello per il Non-Maskable-Interrupt)
 void process_dump(des_proc*, log_sev sev);
@@ -472,7 +478,17 @@ extern "C" void gestore_eccezioni(int tipo, natq errore, vaddr rip)
 	// bloccare il sistema.
 	const char *panic_msg = nullptr;
 
-	flog(LOG_WARN, "Eccezione %d (%s), errore %lx, rip %lx", tipo, eccezioni[tipo], errore, rip);
+// ( ESAME 2021-06-09
+	exc_counter++;
+//   ESAME 2021-06-09 )
+	
+// ( SOLUZIONE 2021-06-09
+	if (tipo == 14 && extend_stack()) {
+		return;
+	}
+//   SOLUZIONE 2021-06-09 )
+
+	flog(LOG_WARN, "Eccezione %d (%s), errore %x, rip %lx", tipo, eccezioni[tipo], errore, rip);
 	// se l'eccezione fornisce un codice di errore, diamo ulteriori dettagli
 	switch (tipo) {
 	case 8: // double fault
@@ -499,11 +515,7 @@ extern "C" void gestore_eccezioni(int tipo, natq errore, vaddr rip)
 		// page fault. Cerchiamo di dare più dettagli possibile.
 		// In CR2 c'è l'indirizzo virtuale che ha causato il fault.
 		v = readCR2();
-// ( ESAME 2023-06-07
-		pf_counter++; // solo per debug
-		if (aggiorna_cow_privata(v))
-			return;
-//   ESAME 2023-06-07 )
+	
 		flog(LOG_WARN, "  indirizzo virtuale: %p %s", v,
 			(v < DIM_PAGINA) ? "(probabile puntatore NULL)" : "");
 		flog(LOG_WARN, "  dettagli: %s, %s, %s, %s",
@@ -522,7 +534,7 @@ extern "C" void gestore_eccezioni(int tipo, natq errore, vaddr rip)
 		// le altre eccezioni non forniscono codici di errore
 		break;
 	}
-	if (rip >= reinterpret_cast<vaddr>(start) && rip < reinterpret_cast<vaddr>(end)) {
+	if (rip < reinterpret_cast<vaddr>(end)) {
 		// l'indirizzo dell'istruzione che ha causato il fault è
 		// all'interno del modulo sistema.
 		panic_msg = "ERRORE DI SISTEMA";
@@ -586,10 +598,6 @@ void init_frame()
 	// creiamo la lista dei frame liberi, che inizialmente contiene tutti i
 	// frame di M2
 	primo_frame_libero = N_M1;
-// ( ESAME 2023-06-07
-// 	solo per debug
-	memset(reinterpret_cast<void*>(primo_frame_libero * DIM_PAGINA), 0xaa, N_M2 * DIM_PAGINA);
-//   ESAME 2023-06-07 )
 #ifndef N_STEP
 	// alcuni esercizi definiscono N_STEP == 2 per creare mapping non
 	// contigui in memoria virtale e controllare meglio alcuni possibili
@@ -674,9 +682,6 @@ const vaddr ini_sis_c = norm(I_SIS_C * PART_SIZE); // sistema condivisa
 const vaddr ini_sis_p = norm(I_SIS_P * PART_SIZE); // sistema privata
 const vaddr ini_mio_c = norm(I_MIO_C * PART_SIZE); // modulo IO
 const vaddr ini_utn_c = norm(I_UTN_C * PART_SIZE); // utente condivisa
-// ( ESAME 2023-06-07
-const vaddr ini_utn_w = norm(I_UTN_W * PART_SIZE); // utente copy-on-write
-//   ESAME 2023-06-07 )
 const vaddr ini_utn_p = norm(I_UTN_P * PART_SIZE); // utente privata
 
 // indirizzo limite di ogni parte
@@ -684,9 +689,6 @@ const vaddr fin_sis_c = ini_sis_c + PART_SIZE * N_SIS_C;
 const vaddr fin_sis_p = ini_sis_p + PART_SIZE * N_SIS_P;
 const vaddr fin_mio_c = ini_mio_c + PART_SIZE * N_MIO_C;
 const vaddr fin_utn_c = ini_utn_c + PART_SIZE * N_UTN_C;
-// ( ESAME 2023-06-07
-const vaddr fin_utn_w = ini_utn_w + PART_SIZE * N_UTN_W;
-//   ESAME 2023-06-07 )
 const vaddr fin_utn_p = ini_utn_p + PART_SIZE * N_UTN_P;
 
 // alloca un frame libero destinato a contenere una tabella
@@ -995,9 +997,6 @@ extern "C" bool c_access(vaddr begin, natq dim, bool writeable, bool shared = tr
 	if (!tab_iter::valid_interval(begin, dim))
 		return false;
 
-	if (shared && (!in_utn_c(begin) || (dim > 0 && !in_utn_c(begin + dim - 1))))
-		return false;
-
 	// usiamo un tab_iter per percorrere tutto il sottoalbero relativo
 	// alla traduzione degli indirizzi nell'intervallo [begin, begin+dim).
 	for (tab_iter it(esecuzione->cr3, begin, dim); it; it.next()) {
@@ -1089,126 +1088,6 @@ extern "C" paddr c_trasforma(vaddr ind_virt)
 {
 	return trasforma(esecuzione->cr3, ind_virt);
 }
-
-// ( ESAME 2023-06-07
-paddr cow_root;
-// crea la prima copia della zona cow, inizialmente condivisa
-// in sola lettura tra tutti i processi. Inizialmente la zona
-// deve contenere solo byte nulli.
-bool crea_cow_condivisa()
-{
-// ( SOLUZIONE 2023-06-07
-	cow_root = alloca_tab();
-
-	if (!cow_root)
-		return false;
-
-	// Provo a mappare
-	vaddr v = map(cow_root, ini_utn_w, ini_utn_w + DIM_USR_COW, BIT_US, 
-				[](vaddr v){
-					paddr f = alloca_frame();
-					memset(reinterpret_cast<void*>(f), 0, DIM_PAGINA); // Azzero la pagina
-					return f;
-				});
-
-	// Nel caso in cui non torni la mappatura fatta unmappo
-	if(v != ini_utn_w + DIM_USR_COW){ 
-		// poiché deve sempre ritornare l'estremo destro la funzione map()
-		// non dovesse tornare, sfaccio quello che ho fatto
-		unmap(cow_root, ini_utn_w, v,
-				[](vaddr, paddr p, int){
-					rilascia_frame(p);
-				});
-		return false;
-	}
-
-	return true;
-//   SOLUZIONE 2023-06-07 )
-}
-
-// copia la zona cow originaria nel trie di radice dest
-// (convididendo tutto il sottoalbero dal livello 3 in giù)
-void copia_cow_condivisa(paddr dest)
-{
-	copy_des(cow_root, dest, I_UTN_W, N_UTN_W);
-}
-
-// aggiorna la cow privata in modo che l'indirizzo v sia scrivibile
-// dal processo corrente
-bool aggiorna_cow_privata(vaddr v)
-{
-// ( SOLUZIONE 2023-06-07
-	if(esecuzione->livello != LIV_UTENTE || v < ini_utn_w || v >= ini_utn_w + DIM_USR_COW)
-		return false;
-
-	vaddr b = base(v, 0); // normalizzo l'indirizzo
-	for (tab_iter it(esecuzione->cr3, b, DIM_PAGINA); it; it.next()) {
-		tab_entry& e = it.get_e();
-
-		if(!(e & BIT_P)) // BIT_P è per la validità della traduzione
-			fpanic("indirizzo cow %lx non mappato", b);
-
-		if(e & BIT_RW) // se c'è già l'accesso in scrittura passo al prossimo
-			continue;
-
-		paddr new_frame;
-		paddr old_frame = extr_IND_FISICO(e);
-
-		if(it.get_l() > 1) {
-			new_frame = alloca_tab();
-
-			if(!new_frame)
-				return false;
-
-			copy_des(old_frame, new_frame, 0, 512);
-		} else {
-			new_frame = alloca_frame();
-
-			if(!new_frame)
-				return false;
-
-			memcpy(reinterpret_cast<void*>(new_frame), reinterpret_cast<void*>(old_frame), DIM_PAGINA);
-			invalida_entrata_TLB(it.get_v());
-		}
-		set_IND_FISICO(e, new_frame);
-		e |= BIT_RW; // abilito le scritture sulla pagine
-	}
-	return true;
-//   SOLUZIONE 2023-06-07 )
-}
-
-// disfa le azioni di copia_cow_condivisa() e aggiorna_cow_condivisa()
-// per il processo corrente
-void distruggi_cow_privata()
-{
-	tab_iter it(esecuzione->cr3, ini_utn_w, DIM_USR_COW);
-	for (it.post(); it; it.next_post()) {
-		tab_entry& e = it.get_e();
-		if (!(e & BIT_P))
-			continue;
-		int liv = it.get_l();
-		// set il bit RW è settato il frame puntato
-		// deve essere stato allocato da aggiorna_cow_privata,
-		// quindi dobbiamo deallocarlo
-		if (e & BIT_RW) {
-			paddr f = extr_IND_FISICO(e);
-			if (liv > 1) {
-				set_des(f, 0, 512, 0);
-				rilascia_tab(f);
-			} else {
-				rilascia_frame(f);
-			}
-		}
-		// azzeriamo l'entrata corrente. Se la tabella corrente
-		// è la radice dobbiamo farlo in ogni caso, per disfare
-		// quanto fatto in copia_cow_condivisa()
-		if (liv == MAX_LIV || (e & BIT_RW)) {
-			e = 0;
-			dec_ref(it.get_tab());
-		}
-	}
-}
-//   ESAME 2023-06-07 )
 
 // )
 
@@ -1306,9 +1185,6 @@ des_proc* crea_processo(void f(natq), natq a, int prio, char liv)
 	if (p->cr3 == 0)
 		goto err_rel_id;
 	init_root_tab(p->cr3);
-// ( ESAME 2023-06-07
-	copia_cow_condivisa(p->cr3);
-//   ESAME 2023-06-07 )
 
 	// creazione della pila sistema
 	if (!crea_pila(p->cr3, fin_sis_p, DIM_SYS_STACK, LIV_SISTEMA))
@@ -1335,12 +1211,15 @@ des_proc* crea_processo(void f(natq), natq a, int prio, char liv)
 		// passerà ad eseguire la prima istruzione della funzione f,
 		// usando come pila la pila utente (al suo indirizzo virtuale)
 
-
 		// creazione della pila utente
-		if (!crea_pila(p->cr3, fin_utn_p, DIM_USR_STACK, LIV_UTENTE)) {
+// ( SOLUZIONE 2021-06-09
+		if (!crea_pila(p->cr3, fin_utn_p, DIM_PAGINA, LIV_UTENTE)) {
 			flog(LOG_WARN, "creazione pila utente fallita");
 			goto err_del_sstack;
 		}
+
+		p->usr_stack_top = fin_utn_p - DIM_PAGINA;
+//   SOLUZIONE 2021-06-09 )
 
 		// inizialmente, il processo si trova a livello sistema, come
 		// se avesse eseguito una istruzione INT, con la pila sistema
@@ -1415,17 +1294,13 @@ extern "C" void distruggi_pila_precedente() {
 	rilascia_tab(ultimo_terminato);
 	ultimo_terminato = 0;
 }
-// ( ESAME 2023-06-07
-void distruggi_cow_privata();
-//   ESAME 2023-06-07 )
 void distruggi_processo(des_proc* p)
 {
 	paddr root_tab = p->cr3;
-// ( ESAME 2023-06-07
-	distruggi_cow_privata();
-//   ESAME 2023-06-07 )
+// ( SOLUZIONE 2021-06-09
 	if (p->livello == LIV_UTENTE)
-		distruggi_pila(root_tab, fin_utn_p, DIM_USR_STACK);
+		distruggi_pila(root_tab, fin_utn_p, fin_utn_p - p->usr_stack_top);
+//   SOLUZIONE 2021-06-09 )
 	ultimo_terminato = root_tab;
 	if (p != esecuzione_precedente) {
 		distruggi_pila_precedente();
@@ -1444,7 +1319,7 @@ c_activate_p(void f(natq), natq a, natl prio, natl liv)
 	// non possiamo accettare una priorità minore di quella di dummy
 	// o maggiore di quella del processo chiamante
 	if (prio < MIN_PRIORITY || prio > esecuzione->precedenza) {
-		flog(LOG_WARN, "priorita' non valida: %u", prio);
+		flog(LOG_WARN, "priorita' non valida: %d", prio);
 		c_abort_p();
 		return;
 	}
@@ -1452,7 +1327,7 @@ c_activate_p(void f(natq), natq a, natl prio, natl liv)
 	// controlliamo che 'liv' contenga un valore ammesso
 	// [segnalazione di E. D'Urso]
 	if (liv != LIV_UTENTE && liv != LIV_SISTEMA) {
-		flog(LOG_WARN, "livello non valido: %u", liv);
+		flog(LOG_WARN, "livello non valido: %d", liv);
 		c_abort_p();
 		return;
 	}
@@ -1474,7 +1349,7 @@ c_activate_p(void f(natq), natq a, natl prio, natl liv)
 		processi++;
 		id = p->id;			// id del processo creato
 						// (allocato da crea_processo)
-		flog(LOG_INFO, "proc=%u entry=%p(%lu) prio=%u liv=%u", id, f, a, prio, liv);
+		flog(LOG_INFO, "proc=%d entry=%p(%d) prio=%d liv=%d", id, f, a, prio, liv);
 	}
 
 	esecuzione->contesto[I_RAX] = id;
@@ -1485,7 +1360,7 @@ c_activate_p(void f(natq), natq a, natl prio, natl liv)
 void term_cur_proc(log_sev sev, const char *mode)
 {
 	des_proc *p = esecuzione;
-	flog(sev, "Processo %u %s", p->id, mode);
+	flog(sev, "Processo %d %s", p->id, mode);
 	distruggi_processo(p);
 	processi--;
 	schedulatore();
@@ -1528,15 +1403,15 @@ extern "C" bool load_handler(natq tipo, natq irq);
 bool aggiungi_pe(des_proc *p, natw tipo, natb irq)
 {
 	if (irq >= MAX_IRQ) {
-		flog(LOG_WARN, "irq %hhu non valido (max %u)", irq, MAX_IRQ);
+		flog(LOG_WARN, "irq %d non valido (max %d)", irq, MAX_IRQ);
 		return false;
 	}
 	if (a_p[irq]) {
-		flog(LOG_WARN, "irq %hhu occupato", irq);
+		flog(LOG_WARN, "irq %d occupato", irq);
 		return false;
 	}
 	if (!load_handler(tipo, irq)) {
-		flog(LOG_WARN, "tipo %hx occupato", tipo);
+		flog(LOG_WARN, "tipo %x occupato", tipo);
 		return false;
 	}
 
@@ -1554,7 +1429,7 @@ extern "C" void c_activate_pe(void f(natq), natq a, natl prio, natl liv, natb ir
 	natw		tipo;
 
 	if (prio < MIN_EXT_PRIO || prio > MAX_EXT_PRIO) {
-		flog(LOG_WARN, "priorita' non valida: %u", prio);
+		flog(LOG_WARN, "priorita' non valida: %d", prio);
 		c_abort_p();
 		return;
 	}
@@ -1567,7 +1442,7 @@ extern "C" void c_activate_pe(void f(natq), natq a, natl prio, natl liv, natb ir
 	if (!aggiungi_pe(p, tipo, irq))
 		goto err_del_p;
 
-	flog(LOG_INFO, "estern=%u entry=%p(%lu) prio=%u (tipo=%2x) liv=%u irq=%hhu",
+	flog(LOG_INFO, "estern=%d entry=%p(%d) prio=%d (tipo=%2x) liv=%d irq=%d",
 			p->id, f, a, prio, tipo, liv, irq);
 
 	esecuzione->contesto[I_RAX] = p->id;
@@ -1651,7 +1526,7 @@ extern "C" void main(paddr mbi)
 	init.cr3 = readCR3();
 	esecuzione = &init;
 
-	flog(LOG_INFO, "Nucleo di Calcolatori Elettronici, v6.7.2");
+	flog(LOG_INFO, "Nucleo di Calcolatori Elettronici, v6.7");
 	init_gdt();
 	flog(LOG_INFO, "GDT inizializzata");
 
@@ -1662,15 +1537,12 @@ extern "C" void main(paddr mbi)
 
 	// iizializziamo la parte M2
 	init_frame();
-	flog(LOG_INFO, "Numero di frame: %lu (M1) %lu (M2)", N_M1, N_M2);
+	flog(LOG_INFO, "Numero di frame: %d (M1) %d (M2)", N_M1, N_M2);
 
 	flog(LOG_INFO, "sis/cond [%p, %p)", ini_sis_c, fin_sis_c);
 	flog(LOG_INFO, "sis/priv [%p, %p)", ini_sis_p, fin_sis_p);
 	flog(LOG_INFO, "io /cond [%p, %p)", ini_mio_c, fin_mio_c);
 	flog(LOG_INFO, "usr/cond [%p, %p)", ini_utn_c, fin_utn_c);
-// ( ESAME 2023-06-07
-	flog(LOG_INFO, "usr/cow  [%p, %p)", ini_utn_w, fin_utn_w);
-//   ESAME 2023-06-07 )
 	flog(LOG_INFO, "usr/priv [%p, %p)", ini_utn_p, fin_utn_p);
 
 	// creiamo le parti condivise della memoria virtuale di tutti i processi
@@ -1688,32 +1560,27 @@ extern "C" void main(paddr mbi)
 	if (!crea_spazio_condiviso(root_tab, mbi))
 		goto error;
 	flog(LOG_INFO, "Create le traduzioni per le parti condivise");
-// ( ESAME 2023-06-07
-	if (!crea_cow_condivisa())
-		goto error;
-	flog(LOG_INFO, "Creata la zona utente copy-on-write");
-//   ESAME 2023-06-07 )
-	flog(LOG_INFO, "Frame liberi: %lu (M2)", num_frame_liberi);
+	flog(LOG_INFO, "Frame liberi: %d (M2)", num_frame_liberi);
 
 	loadCR3(root_tab);
 	flog(LOG_INFO, "CR3 caricato");
 
 	// Assegna allo heap di sistema HEAP_SIZE byte nel secondo MiB
 	heap_init((void*)HEAP_START, HEAP_SIZE);
-	flog(LOG_INFO, "Heap del modulo sistema: %lxB [%p, %p)", HEAP_SIZE,
+	flog(LOG_INFO, "Heap del modulo sistema: %xB [%p, %p)", HEAP_SIZE,
 			HEAP_START, HEAP_START + HEAP_SIZE);
 
 	// creazione del processo dummy
 	dummy_id = crea_dummy();
 	if (dummy_id == 0xFFFFFFFF)
 		goto error;
-	flog(LOG_INFO, "Creato il processo dummy (id = %u)", dummy_id);
+	flog(LOG_INFO, "Creato il processo dummy (id = %d)", dummy_id);
 
 	// creazione del processo main_sistema
 	mid = crea_main_sistema(mbi);
 	if (mid == 0xFFFFFFFF)
 		goto error;
-	flog(LOG_INFO, "Creato il processo main_sistema (id = %u)", mid);
+	flog(LOG_INFO, "Creato il processo main_sistema (id = %d)", mid);
 
 	// selezioniamo main_sistema
 	schedulatore();
@@ -1745,7 +1612,7 @@ void main_sistema(natq mbi)
 	// attiviamo il timer, in modo che i processi di inizializzazione
 	// possano usare anche delay(), se ne hanno bisogno.
 	attiva_timer(DELAY);
-	flog(LOG_INFO, "Timer attivato (DELAY=%u)", DELAY);
+	flog(LOG_INFO, "Timer attivato (DELAY=%d)", DELAY);
 
 	// inizializzazione del modulo di io
 	// Creiamo un processo che esegua la procedura cmain del modulo I/O.
@@ -1761,7 +1628,7 @@ void main_sistema(natq mbi)
 		flog(LOG_ERR, "impossibile creare il processo main I/O");
 		goto error;
 	}
-	flog(LOG_INFO, "Creato il processo main I/O (id = %u)", id);
+	flog(LOG_INFO, "Creato il processo main I/O (id = %d)", id);
 	flog(LOG_INFO, "attendo inizializzazione modulo I/O...");
 	sem_wait(sync_io);
 	flog(LOG_INFO, "... inizializzazione modulo I/O terminata");
@@ -1772,7 +1639,7 @@ void main_sistema(natq mbi)
 		flog(LOG_ERR, "impossibile creare il processo main utente");
 		goto error;
 	}
-	flog(LOG_INFO, "Creato il processo start_utente (id = %u)", id);
+	flog(LOG_INFO, "Creato il processo start_utente (id = %d)", id);
 
 
 	// terminazione
@@ -1963,7 +1830,7 @@ extern "C" void panic(const char *msg)
 	in_panic = 1;
 
 	flog(LOG_ERR, "PANIC: %s", msg);
-	flog(LOG_ERR, "  processi: %u", processi);
+	flog(LOG_ERR, "  processi: %d", processi);
 	flog(LOG_ERR, "------------------------------ PROCESSO IN ESECUZIONE -------------------------------");
 	setup_self_dump();
 	process_dump(esecuzione, LOG_ERR);
@@ -2022,10 +1889,10 @@ extern "C" meminfo c_getmeminfo()
 	m.num_frame_liberi = num_frame_liberi;
 	// id del processo in esecuzione
 	m.pid = esecuzione->id;
-// ( ESAME 2023-06-07
-// solo per debug: numero di page fault
-	m.pf_counter = pf_counter;
-//   ESAME 2023-06-07 )
+// ( ESAME 2021-06-09
+	// numero di eccezioni sollevate
+	m.exceptions = exc_counter;
+//   ESAME 2021-06-09 )
 
 	return m;
 }
@@ -2109,7 +1976,7 @@ void process_dump(des_proc *p, log_sev sev)
 {
 	natq *pila = reinterpret_cast<natq*>(trasforma(p->cr3, p->contesto[I_RSP]));
 
-	flog(sev, "proc %u: corpo %p(%u), livello %s, precedenza %u", p->id, p->corpo, p->parametro,
+	flog(sev, "proc %d: corpo %p(%d), livello %s, precedenza %d", p->id, p->corpo, p->parametro,
 			p->livello == LIV_UTENTE ? "UTENTE" : "SISTEMA", p->precedenza);
 	if (pila) {
 		flog(sev, "  RIP=0x%lx CPL=%s", pila[0], pila[1] == SEL_CODICE_UTENTE ? "LIV_UTENTE" : "LIV_SISTEMA");
@@ -2130,22 +1997,22 @@ void process_dump(des_proc *p, log_sev sev)
 	} else {
 		flog(sev, "  impossibile leggere la pila del processo");
 	}
-	flog(sev, "  RAX=%16lx RBX=%16lx RCX=%16lx RDX=%16lx",
+	flog(sev, "  RAX=%lx RBX=%lx RCX=%lx RDX=%lx",
 			p->contesto[I_RAX],
 			p->contesto[I_RBX],
 			p->contesto[I_RCX],
 			p->contesto[I_RDX]);
-	flog(sev, "  RDI=%16lx RSI=%16lx RBP=%16lx RSP=%16lx",
+	flog(sev, "  RDI=%lx RSI=%lx RBP=%lx RSP=%lx",
 			p->contesto[I_RDI],
 			p->contesto[I_RSI],
 			p->contesto[I_RBP],
 			pila ? pila[3] : 0);
-	flog(sev, "  R8 =%16lx R9 =%16lx R10=%16lx R11=%16lx",
+	flog(sev, "  R8 =%lx R9 =%lx R10=%lx R11=%lx",
 			p->contesto[I_R8],
 			p->contesto[I_R9],
 			p->contesto[I_R10],
 			p->contesto[I_R11]);
-	flog(sev, "  R12=%16lx R13=%16lx R14=%16lx R15=%16lx",
+	flog(sev, "  R12=%lx R13=%lx R14=%lx R15=%lx",
 			p->contesto[I_R12],
 			p->contesto[I_R13],
 			p->contesto[I_R14],
@@ -2155,3 +2022,28 @@ void process_dump(des_proc *p, log_sev sev)
 		backtrace(p, sev, "  > ");
 	}
 }
+
+// ( SOLUZIONE 2021-06-09
+bool extend_stack()
+{
+	vaddr new_stack_top = base(readCR2(), 0);
+
+	if (new_stack_top < ini_utn_p)
+		return false;
+
+	natq extension = esecuzione->usr_stack_top - new_stack_top;
+
+	if (fin_utn_p - new_stack_top > DIM_USR_STACK) {
+		flog(LOG_WARN, "stack troppo grande");
+		return false;
+	}
+
+	if (!crea_pila(esecuzione->cr3, esecuzione->usr_stack_top, extension, LIV_UTENTE)) {
+		flog(LOG_WARN, "impossibile estendere la pila");
+		return false;
+	}
+
+	esecuzione->usr_stack_top = new_stack_top;
+	return true;
+}
+//   SOLUZIONE 2021-06-09 )

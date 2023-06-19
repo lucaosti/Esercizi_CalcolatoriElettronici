@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "__config": "cpp",
+        "bit": "cpp",
+        "bitset": "cpp",
+        "cstdlib": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "filesystem": "cpp",
+        "iomanip": "cpp",
+        "iterator": "cpp",
+        "locale": "cpp",
+        "string": "cpp",
+        "type_traits": "cpp",
+        "vector": "cpp"
+    }
+}

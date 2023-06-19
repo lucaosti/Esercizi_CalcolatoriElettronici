@@ -1,0 +1,54 @@
+Definiamo una ``msg-area'' come una zona della memoria fisica accessibile tramite indirizzi della parte utente/privata di un processo.
+Ogni msg-area, in ogni istante, \`e accessibile da un solo processo, e ciascun processo pu\`o accedere al pi\`u a \verb|MAX_MEM_AREA| msg-area per volta
+(dunque anche nessuna).  
+Tutte le msg-area di un processo sono accessibili nelle prime \verb|MSG_AREA_PAGES| pagine
+della parte utente/privata della memoria virtuale del processo.
+
+Se un processo pu\`o accedere ad una msg-area $m$ diciamo che \`e l'{\em owner} (temporaneo) di $m$.
+Un processo pu\`o creare una nuova msg-area, diventandone contestualmente l'owner, tramite la primitiva \verb|macreate(natl npag)|, che 
+ne richiede la dimensione in pagine e ne restituisce
+un puntatore alla base. Un processo $P_1$ che \`e owner di una msg-area $m$ pu\`o {\em spedirla} a un processo diverso $P_2$, purch\'e
+questo abbia lo spazio per accoglierla. Dopo la spedizione, $P_2$ diventa il nuovo owner di $m$ e vi pu\`o accedere liberamente
+in lettura e scrittura, mentre $P_1$ non \`e pi\`u l'owner e non pu\`o pi\`u accedervi.
+
+Una msg-area \`e descritta dalla seguente struttura:
+\begin{verbatim}
+    struct des_ma {
+        void* base;
+        natq  npag;
+    };
+\end{verbatim}
+dove \verb|base| punta alla base della msg-area (nella memoria virtuale del processo owner) e \verb|npag| \`e la dimensione della msg-area
+in pagine.  Un \verb|des_ma| in cui \verb|base| \`e un \verb|nullptr| e \verb|npag| \`e zero \`e detto {\em non valido}.
+
+Per realizzare il meccanismo precedente aggiungiamo almeno i seguenti campi ai descrittori di processo:
+\begin{verbatim}
+    des_ma ma[MAX_MEM_AREA];
+    vaddr next_ma;
+\end{verbatim}
+I descrittori validi dell'array \verb|ma| sono relativi alle msg-area di cui il processo \`e owner. Il campo
+\verb|next_ma| contiene l'indirizzo della base della prossima msg-area creata o ricevuta dal processo.
+
+Introduciamo inoltre le seguenti primitive (abortiscono il processo in caso di errore):
+
+\begin{itemize}
+  \item \verb|void* macreate(natl npag)| (gi\`a realizzata): crea una nuova msg-area, grande \verb|npag| pagine,
+    e restitutisce un puntatore alla base, o \verb|nullptr| se non
+    \`e stato possibile crearla. \`E un errore se \verb|npag| \`e zero.
+  \item \verb|bool masend(void *m, natl pid)| (da realizzare): attende, se necessario, che il processo \verb|pid| 
+    invochi \verb|marecv()|, quindi gli trasferisce la msg-area di indirizzo base \verb|m|.
+        Restituisce \verb|false| se il processo \verb|pid| non esiste, oppure se non \`e stato possibile
+	eseguire il trasferimento, per esempio per esaurimento della memoria. Nei casi in cui restituisce \verb|false| la primitiva deve lasciare
+	la situazione corrente inalterata. In particolare, se il processo destinatario era bloccato nella \verb|marecv()|, non
+      deve essere sbloccato. \`E un errore se \verb|m| non \`e l'indirizzo base di nessuna delle msg-area del processo che invoca
+      la primitiva, oppure se un processo tenta di inviare la msg-area a se stesso o a un processo di livello sistema.
+    \item \verb|des_ma marecv()| (da realizzare): blocca, se necessario, il processo in attesa che un altro processo
+      trasferisca con sucesso una msg-area, quindi restituisce il descrittore della msg-area ricevuta. Restituisce un descrittore
+      non valido se non \`e possibile ricevere nuove msg-area. Gli indirizzi virtuali che rendono la msg-area accessible non
+      devono sovrapporsi con gli indirizzi appartenuti a tutte le msg-area di cui il processo \`e stato, o \`e, owner.
+\end{itemize}
+
+Modificare il file \verb|sistema.cpp| in modo da realizzare le primitive mancanti.
+
+{\bf SUGGERIMENTO}: per rispettare il vincolo sugli indirizzi delle msg-area ricevute \`e sufficiente avanzare sempre \verb|next_ma|.
+Quando \verb|next_ma| esce dalla regione destinata alle msg-area, il processo non potr\`a pi\`u creare o ricevere altre msg-area.

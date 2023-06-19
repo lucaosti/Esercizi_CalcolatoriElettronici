@@ -1,0 +1,21 @@
+Nel sistema base, tutti i processi utente partono con una pila utente della
+stessa dimensione, pari a {\tt DIM\_USR\_STACK} (la costante \`e definita in {\tt include/costanti.h}).
+Normalmente, per\`o, la maggior parte dei processi
+useranno solo una piccola parte della loro pila, e il resto dello spazio sar\`a sprecato.
+
+Per migliorare l'uso della memoria fisica realizziamo il meccanismo dell'{\em estensione automatica dello stack}.
+Con questo meccanismo un processo viene creato con una pila utente di dimensioni fisiche inferiori a {\tt DIM\_USR\_STACK}\@. Se, durante
+la sua esecuzione, il processo accede a parti della pila che non erano state allocate, il sistema non abortisce il processo,
+ma estende automaticamente la sua pila e lo lascia proseguire.
+
+Per realizzare il meccanismo di cui sopra possiamo intercettare i page fault e osservare se per caso
+l'indirizzo non tradotto cade all'interno degli indirizzi previsti per la pila utente. In caso
+affermativo estendiamo la pila in modo che includa tutti gli indirizzi che vanno dall'indirizzo non tradotto
+fino alla base della pila e lasciamo che il processo prosegua la sua esecuzione,
+altrimenti ritorniamo alla normale gestione dell'eccezione (che abortir\`a il processo).
+
+Modificare il file {\tt sistema.cpp} per realizzare il meccanismo appena descritto. La pila utente iniziale
+dei processi deve essere grande una sola pagina. L'estensione della pila non deve spingersi oltre il minimo
+indirizzo necessario a risolvere il page fault. Inoltre, in ogni caso, la dimensione complessiva della pila di ogni processo non deve mai
+superare {\tt DIM\_USR\_STACK}\@. Quando si distrugge un processo, ricordarsi di deallocare anche le eventuali risorse
+allocate durante le estensioni della pila.
