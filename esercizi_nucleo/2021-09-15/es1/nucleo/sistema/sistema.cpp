@@ -2156,103 +2156,108 @@ extern "C" void c_macreate(natq npag)
 //   ESAME 2021-09-15 )
 
 // ( SOLUZIONE 2021-09-15
-struct getv {
-	des_proc *p;
+struct fun{
+	des_proc* p;
 	vaddr b;
 
-	getv(des_proc *p_, vaddr b_): p(p_), b(b_) {}
-
-	paddr operator()(vaddr v) {
+	paddr operator()(vaddr){
 		paddr f = trasforma(p->cr3, b);
 		b += DIM_PAGINA;
 		return f;
 	}
 };
 
-extern "C" void c_mashare(void *vv, natl pid)
-{
-	// controllo parametri
-	des_proc *dst = des_p(pid);
-	des_proc *src = esecuzione;
+extern "C" void c_mashare(void *vv, natl pid){
+	des_proc* src = esecuzione;
+	des_proc* dst = des_p(pid);
 
 	src->contesto[I_RAX] = 0;
 
-	if (!dst)
-		return;
-
-	if (dst->livello == LIV_SISTEMA) {
-		flog(LOG_WARN, "masend a processo sistema non valida");
-		c_abort_p();
-		return;
+	// Controlli di base
+	if(!dst || dst->livello != LIV_UTENTE){
+	c_abort_p();
+		return;	
 	}
 
+	// Cerco la des_view (mi servirà dopo per il paddr) e 
+	// la des_ma relativa al processo
 	vaddr v = reinterpret_cast<vaddr>(vv);
+	
 	des_view* w = find_view(src, v);
 	if (!w)
 		return;
-
-	int j = find_free_view(dst);
-	if (j < 0)
-		return;
-
 	des_ma* ma = w->ma;
-	vaddr dbeg = dst->next_view;
-	vaddr dend = dbeg + ma->npag * DIM_PAGINA;
-
-	if (dend > fin_view_p)
+	if(!ma){
 		return;
+	}
 
-	getv m(src, view_beg(w));
+	int i_dst = find_free_view(dst);
+	if(i_dst == -1){
+		return;
+	}
 
-	vaddr va = map(dst->cr3, dbeg, dend, BIT_RW | BIT_US, m);
-	if (va != dend) {
-		unmap(dst->cr3, dbeg, va, [](vaddr, paddr, int) {});
+	vaddr beg = dst->next_view;
+	vaddr end = beg + ma->npag * DIM_PAGINA;
+
+	fun f;
+	f.p = src;
+	f.b = view_beg(w);
+
+	if(end > fin_view_p){
+		return;
+	}
+
+	vaddr ret = map(dst->cr3, beg, end, BIT_RW | BIT_US, f);
+
+	if(ret != end){
+		unmap(dst->cr3, beg, ret, [](vaddr, paddr, int){});
 		return;
 	}
 
 	ma->views++;
-	dst->view[j].ma = ma;
-	dst->view[j].base = dbeg;
-	dst->next_view = dend;
+	dst->view[i_dst].ma = ma;
+	dst->view[i_dst].base = beg;
+	dst->next_view = end;
 
-	src->contesto[I_RAX] = dbeg;
+	src->contesto[I_RAX] = beg;
 }
 
-extern "C" void c_marevoke(void *vv, natl pid)
-{
-	// controllo parametri
-	des_proc *dst = des_p(pid);
-	des_proc *src = esecuzione;
+extern "C" void c_marevoke(void *vv, natl pid){
+	des_proc* src = esecuzione;
+	des_proc* dst = des_p(pid);
 
-	src->contesto[I_RAX] = false;
+	dst->contesto[I_RAX] = false;
 
-	if (!dst)
+	// Controlli di base
+	if(!dst || dst->livello != LIV_UTENTE)
 		return;
 
 	vaddr v = reinterpret_cast<vaddr>(vv);
 	des_view* w = find_view(src, v);
 	if (!w)
 		return;
+
 	des_ma* ma = w->ma;
 
 	while (des_view *dw = find_view(dst, ma)) {
 		vaddr beg = view_beg(dw),
 		      end = view_end(dw);
-
+		
 		ma->views--;
-		if (!ma->views) {
-			unmap(dst->cr3, beg, end, [](vaddr, paddr p, int l) { rilascia_frame(p); });
+		if(!ma->views){
+			unmap(dst->cr3, beg, end, [](vaddr, paddr p, int){ rilascia_frame(p); });
 			ma->npag = 0;
 		} else {
-			unmap(dst->cr3, beg, end, [](vaddr, paddr p, int l) {});
+			unmap(dst->cr3, beg, end, [](vaddr, paddr, int){});
 		}
-		if (src == dst) {
-			for ( ; beg != end; beg += DIM_PAGINA)
-				invalida_entrata_TLB(beg);
-		}
+		if(src == dst)
+			invalida_TLB();
+		
 		dw->base = 0;
 		dw->ma = nullptr;
 	}
+
+	// Lo posso tenere qui, tanto è true anche in caso di 0 rimozioni
 	src->contesto[I_RAX] = true;
 }
 //   SOLUZIONE 2021-09-15 )
