@@ -1,0 +1,52 @@
+#include "libce.h"
+#ifdef AUTOCORR
+int autocorr_printf(const char *, ...);
+#define printf(_s, ...) autocorr_printf(_s, ##__VA_ARGS__)
+#else
+static __attribute__((used)) void iostream_init(void)
+{
+	extern int pause_caller;
+	pause_caller = 1;
+}
+#endif
+namespace std {
+	class ostream {
+	};
+
+	static ostream& operator << (ostream& o, double d) {
+		printf("%d", d);
+		return o;
+	}
+
+	static ostream& operator << (ostream& o, long l) {
+		printf("%ld", l);
+		return o;
+	}
+
+	static ostream& operator << (ostream& o, int i) {
+		printf("%d", i);
+		return o;
+	}
+
+	static ostream& operator << (ostream& o, char c) {
+		printf("%c", c);
+		return o;
+	}
+
+	static ostream& operator << (ostream& o, const char *c) {
+		printf("%s", c);
+		return o;
+	}
+
+	extern ostream cout;
+
+	class newline {
+	};
+
+	static ostream& operator << (ostream& o, newline&) {
+		printf("\n");
+		return o;
+	}
+
+	extern newline endl;
+}
