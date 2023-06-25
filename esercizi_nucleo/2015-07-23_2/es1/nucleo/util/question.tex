@@ -1,0 +1,73 @@
+Prevediamo che un processo possa creare delle zone di memoria, dette 
+\verb|shmem|, ciascuna con
+un identificatore unico. I processi che vogliono accedere ad una \verb|shmem|
+devono aggiungerla al proprio spazio di indirizzamento, specificandone l'identificatore.
+Una volta aggiunta, la \verb|shmem| sar\`a disponibile contiguamente all'interno della parte
+utente/condivisa dello spazio di indirizzamento del processo. Un processo pu\`o aggiungere
+pi\`u \verb|shmem| al proprio spazio e le diverse \verb|shmem| non devono sovrapporsi.
+Non \`e importante che i processi che condividono una stessa \verb|shmem| la vedano tutti
+allo stesso indirizzo.
+In qualunque momento, un processo pu\`o eliminare dal proprio spazio di indirizzamento 
+una \verb|shmem| precedentemente aggiunta.
+
+Per descrivere una \verb|shmem| aggiungiamo al nucleo la seguente struttura dati:
+
+\begin{verbatim}
+    struct des_shmem {
+        natl npag;
+        natl first_frame_number;
+    };
+\end{verbatim}
+
+Il campo \verb|npag| contiene la dimensione (in pagine) della \verb|shmem|.
+Tutte i frame che contengono la \verb|shmem|, nell'ordine in cui
+devono comparire nella memoria di tutti i processi che la condividono,
+sono mantenuti in una lista; il numero del frame in testa alla lista \`e contenuto nel campo
+\verb|first_frame_number|. Ogni frame
+punta al successivo tramite un nuovo campo \verb|natl next_shmem| che abbiamo
+aggiunto ai descrittori di frame.
+
+Inoltre, aggiungiamo i seguenti campi ai descrittori di processo:
+
+\begin{verbatim}
+    vaddr avail_addr;
+    des_attached *att;
+\end{verbatim}
+
+Il campo \verb|avail_addr| contiene il primo indirizzo libero nella parte utente/condivisa del processo.
+Tutti gli indirizzi da \verb|avail_addr| fino a \verb|fin_utn_c| (escluso) sono disponibili
+per contenere zone di memoria condivisa.
+Il campo \verb|att| \`e la testa di una lista di elementi di tipo \verb|des_attached|,
+il cui scopo \`e di tener traccia di tutte le \verb|shmem| a cui il processo \`e
+collegato. Il tipo \verb|des_attached| \`e cos\`i definito:
+
+\begin{verbatim}
+    struct des_attached {
+        natl id;
+        vaddr start;
+        des_attached *next;
+    }
+\end{verbatim}
+
+Il campo \verb|id| \`e l'identificatore di una shmem \verb|shmem|; 
+il campo \verb|start| \`e l'indirizzo virtuale (nello spazio di indirizzamento
+del processo) a partire dal quale questa \verb|shmem| \`e visibile.
+Il campo \verb|next| punta al prossimo elemento della lista.
+
+Aggiungiamo infine le seguenti primitive:
+\begin{itemize}
+   \item \verb|natl shmem_create(natl npag)| (tipo 0x5c, gi\`a realizzata):
+   	Crea una nuova zona di memoria condivisibile tra pi\`u processi, grande \verb|npag| pagine,
+	e ne restituisce l'identificatore.
+   \item \verb|vaddr shmem_attach(natl id)| (tipo 0x5d, gi\`a realizzata):
+   	Permette ad un processo di aggiungere la \verb|shmem| \verb|id| al proprio spazio di indirizzamento
+	e ne restituisce l'indirizzo di partenza.
+   \item \verb|void shmem_detach(natl id)| (tipo 0x5e, da realizzare):
+   	Permette ad un processo di eliminare la \verb|shmem| \verb|id| dal proprio
+	spazio di indirizzamento. Abortisce il processo se la \verb|shmem| \verb|id|
+	non \`e tra quelle a cui il processo \`e collegato.
+\end{itemize}
+
+Modificare i file \verb|sistema.cpp| e \verb|sistema.S| in modo da realizzare le primitive appena descritte.
+
+{\bf ATTENZIONE}: nella \verb|shmem_detach()|, tralasciare la gestione di \verb|avail_addr|.
