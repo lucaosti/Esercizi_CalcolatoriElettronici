@@ -1117,7 +1117,6 @@ bool crea_cow_condivisa()
 	}
 
 	return true;
-
 //   SOLUZIONE 2023-06-07 )
 }
 
