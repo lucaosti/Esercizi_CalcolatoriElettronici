@@ -1,4 +1,4 @@
-#include "cc.h"
+#include "s/cc.h"
 cl::cl(char c, st2 s2)
 {
 	for (int i = 0; i < 4; i++) {
