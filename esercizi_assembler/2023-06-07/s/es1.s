@@ -19,7 +19,11 @@ Struttura della classe
 /*
 Struttura della elab1
 +-------------------+
-|    i    | XXXXXXX | -48
+| XXXXXXXXXXXXXXXXX | -64
++-------------------+
+|    i    | XXXXXXX | -56
++-------------------+
+|        cla        | -48
 +-------------------+
 |        cla        | -40
 +-------------------+
@@ -37,8 +41,8 @@ Struttura della elab1
 
 .set this, -8
 .set ptr_s1, -16
-.set cla, -40
-.set i, -44
+.set cla, -48
+.set i, -52
 
 .global _ZN2cl5elab1ER3st1
 
@@ -46,7 +50,7 @@ _ZN2cl5elab1ER3st1:
     # prologo
     pushq %rbp
     movq %rsp, %rbp
-    subq $48, %rsp # Allineo a 16
+    subq $64, %rsp
 
     # Copio nello stack
     movq %rdi, this(%rbp)
