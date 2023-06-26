@@ -1,0 +1,23 @@
+Definiamo una ``msg-area'' come una zona della memoria fisica accessibile tramite indirizzi della parte utente/privata di un processo.
+Tutte le msg-area hanno una dimensione costante pari a \verb|MSG_AREA_PAGES| pagine.
+Ogni msg-area, in ogni istante, \`e accessibile da un solo processo, e ciascun processo pu\`o accedere al pi\`u ad una msg-area per volta
+(dunque anche nessuna).  Se un processo pu\`o accedere ad una msg-area $m$ diciamo che \`e l'{\em owner} (temporaneo) di $m$.
+Un processo che non sia gi\`a owner di una msg-area pu\`o crearne una nuova tramite la primitiva \verb|macreate()|, che ne restituisce
+un puntatore alla base. Un processo $P_1$ che \`e owner di una msg-area $m$ pu\`o {\em spedirla} a un processo diverso $P_2$, purch\'e
+questo non sia gi\`a owner di un'altra msg-area. Dopo la spedizione, $P_2$ diventa il nuovo owner di $m$ e vi pu\`o accedere liberamente
+in lettura e scrittura, mentre $P_1$ non \`e pi\`u l'owner e non pu\`o pi\`u accedervi.
+
+Per realizzare il meccanismo precedente aggiungiamo ai descrittori di processo il campo \verb|bool maowner|, che vale \verb|true| se e
+solo se il processo \`e owner di una msg-area. Introduciamo inoltre le seguenti primitive (abortiscono il processo in caso di errore):
+
+\begin{itemize}
+  \item \verb|void* macreate()| (gi\`a realizzata): crea una nuova msg-area e restitutisce un puntatore alla base, o \verb|nullptr| se non
+  \`e stato possibile crearla. \`E un errore se il processo che invoca la primitiva \`e gi\`a owner di un'altra msg-area.
+  \item \verb|bool masend(natl pid)| (da realizzare): spedisce la msg-area del processo corrente al processo \verb|pid|; restituisce \verb|false| se
+	il processo \verb|pid| non esiste, oppure \`e gi\`a owner di un'altra msg-area, oppure se non \`e stato possibile
+	eseguire il trasferimento, per esempio per esaurimento della memoria. In tutti questi casi la primitiva deve lasciare
+	la situazione corrente inalterata. \`E un errore se la primitiva viene invocata da un processo che non \`e owner di
+	una msg-area, oppure se un processo tenta di inviare la msg-area a se stesso o a un processo di livello sistema.
+\end{itemize}
+
+Modificare il file \verb|sistema.cpp| in modo da realizzare la primitiva mancante.
