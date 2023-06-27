@@ -1,4 +1,4 @@
-/*
+/* NON VA
 Struttura della classe
 +-------------------+
 | clc_s | XXXXXXXXX | 0
