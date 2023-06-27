@@ -1,0 +1,1355 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+ACCB_MASK	/home/giuseppe/CE/include/ce/vm.h	/^const natq ACCB_MASK  = 0x00000000000000FF; \/\/ maschera per il byte di accesso$/;"	v	typeref:typename:const natq
+ADDR_MASK	/home/giuseppe/CE/include/ce/vm.h	/^const natq ADDR_MASK  = 0x7FFFFFFFFFFFF000; \/\/ maschera per l'indirizzo$/;"	v	typeref:typename:const natq
+APICBASE	/home/giuseppe/CE/include/ce/piix3.h	/^	const natb APICBASE = 0x80;$/;"	v	namespace:piix3	typeref:typename:const natb
+BIT_A	/home/giuseppe/CE/include/ce/vm.h	/^const natq BIT_A    = 1U << 5; \/\/ il bit di accesso$/;"	v	typeref:typename:const natq
+BIT_D	/home/giuseppe/CE/include/ce/vm.h	/^const natq BIT_D    = 1U << 6; \/\/ il bit "dirty"$/;"	v	typeref:typename:const natq
+BIT_IF	sistema/sistema.cpp	/^const natl BIT_IF = 1L << 9;$/;"	v	typeref:typename:const natl
+BIT_P	/home/giuseppe/CE/include/ce/vm.h	/^const natq BIT_P    = 1U << 0; \/\/ il bit di presenza$/;"	v	typeref:typename:const natq
+BIT_PCD	/home/giuseppe/CE/include/ce/vm.h	/^const natq BIT_PCD  = 1U << 4; \/\/ il bit Page Cache Disable$/;"	v	typeref:typename:const natq
+BIT_PS	/home/giuseppe/CE/include/ce/vm.h	/^const natq BIT_PS   = 1U << 7; \/\/ il bit "page size"$/;"	v	typeref:typename:const natq
+BIT_PWT	/home/giuseppe/CE/include/ce/vm.h	/^const natq BIT_PWT  = 1U << 3; \/\/ il bit Page Wright Through$/;"	v	typeref:typename:const natq
+BIT_RW	/home/giuseppe/CE/include/ce/vm.h	/^const natq BIT_RW   = 1U << 1; \/\/ il bit di lettura\/scrittura$/;"	v	typeref:typename:const natq
+BIT_SEGNO	/home/giuseppe/CE/include/ce/vm.h	/^static const natq BIT_SEGNO = (1ULL << (12 + 9 * MAX_LIV - 1));$/;"	v	typeref:typename:const natq
+BIT_US	/home/giuseppe/CE/include/ce/vm.h	/^const natq BIT_US   = 1U << 2; \/\/ il bit utente\/sistema$/;"	v	typeref:typename:const natq
+CAP	/home/giuseppe/CE/include/ce/pci.h	/^	const ioaddr CAP = 0x0CF8;$/;"	v	namespace:pci	typeref:typename:const ioaddr
+CDP	/home/giuseppe/CE/include/ce/pci.h	/^	const ioaddr CDP = 0x0CFC;$/;"	v	namespace:pci	typeref:typename:const ioaddr
+CFI	/home/giuseppe/CE/include/ce/cfi.h	/^enum CFI {$/;"	g
+COLS	/home/giuseppe/CE/include/ce/vid.h	/^	const natl COLS = 80;$/;"	v	namespace:vid	typeref:typename:const natl
+CR3	sistema/sistema.s	/^.set CR3, CTX+128$/;"	d
+CTX	sistema/sistema.s	/^.set CTX, 16$/;"	d
+CUR_HIGH	/home/giuseppe/CE/include/ce/vid.h	/^	const natb CUR_HIGH = 0x0e;$/;"	v	namespace:vid	typeref:typename:const natb
+CUR_LOW	/home/giuseppe/CE/include/ce/vid.h	/^	const natb CUR_LOW = 0x0f;$/;"	v	namespace:vid	typeref:typename:const natb
+DEC_BUFSIZE	/home/giuseppe/Compile/libce/vsnprintf.cpp	/^#define DEC_BUFSIZE /;"	d	file:
+DEF_PRIO	util/parse.c	/^#define DEF_PRIO	/;"	d	file:
+DELAY	sistema/sistema.cpp	/^const natl DELAY = 59659;$/;"	v	typeref:typename:const natl
+DELM_MSK	/home/giuseppe/CE/include/ce/apic.h	/^	const natl DELM_MSK = 0x00000700; \/\/ delivery mode field mask (000=fixed)$/;"	v	namespace:apic	typeref:typename:const natl
+DELM_SHF	/home/giuseppe/CE/include/ce/apic.h	/^	const natl DELM_SHF = 8;          \/\/ delivery mode field shift$/;"	v	namespace:apic	typeref:typename:const natl
+DEST_MSK	/home/giuseppe/CE/include/ce/apic.h	/^	const natl DEST_MSK = 0xFF000000; \/\/ destination field mask$/;"	v	namespace:apic	typeref:typename:const natl
+DEST_SHF	/home/giuseppe/CE/include/ce/apic.h	/^	const natl DEST_SHF = 24;         \/\/ destination field shift$/;"	v	namespace:apic	typeref:typename:const natl
+DEVICE_ID	/home/giuseppe/CE/include/ce/piix3.h	/^	const natw DEVICE_ID = 0x7000;$/;"	v	namespace:piix3	typeref:typename:const natw
+DIM_BLOCK	include/costanti.h	/^#define DIM_BLOCK	/;"	d
+DIM_IO_HEAP	include/costanti.h	/^#define DIM_IO_HEAP	/;"	d
+DIM_PAGINA	include/costanti.h	/^#define DIM_PAGINA	/;"	d
+DIM_SYS_STACK	include/costanti.h	/^#define DIM_SYS_STACK	/;"	d
+DIM_USR_HEAP	include/costanti.h	/^#define DIM_USR_HEAP	/;"	d
+DIM_USR_STACK	include/costanti.h	/^#define DIM_USR_STACK	/;"	d
+DSTM_BIT	/home/giuseppe/CE/include/ce/apic.h	/^	const natl DSTM_BIT = (1U << 11); \/\/ destination mode (0=physical, 1=logical)$/;"	v	namespace:apic	typeref:typename:const natl
+DUMMY_PRIORITY	sistema/sistema.cpp	/^const natl DUMMY_PRIORITY = 0;$/;"	v	typeref:typename:const natl
+DW_CFA_advance_loc	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_advance_loc	/;"	d	file:
+DW_CFA_advance_loc1	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_advance_loc1	/;"	d	file:
+DW_CFA_advance_loc2	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_advance_loc2	/;"	d	file:
+DW_CFA_advance_loc4	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_advance_loc4	/;"	d	file:
+DW_CFA_def_cfa	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_def_cfa	/;"	d	file:
+DW_CFA_def_cfa_expression	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_def_cfa_expression	/;"	d	file:
+DW_CFA_def_cfa_offset	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_def_cfa_offset	/;"	d	file:
+DW_CFA_def_cfa_offset_sf	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_def_cfa_offset_sf	/;"	d	file:
+DW_CFA_def_cfa_register	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_def_cfa_register	/;"	d	file:
+DW_CFA_def_cfa_sf	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_def_cfa_sf	/;"	d	file:
+DW_CFA_expression	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_expression	/;"	d	file:
+DW_CFA_hi_user	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_hi_user	/;"	d	file:
+DW_CFA_himask	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_himask	/;"	d	file:
+DW_CFA_lo_user	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_lo_user	/;"	d	file:
+DW_CFA_nop	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_nop	/;"	d	file:
+DW_CFA_offset	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_offset	/;"	d	file:
+DW_CFA_offset_extended	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_offset_extended	/;"	d	file:
+DW_CFA_offset_extended_sf	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_offset_extended_sf	/;"	d	file:
+DW_CFA_register	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_register	/;"	d	file:
+DW_CFA_remember_state	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_remember_state	/;"	d	file:
+DW_CFA_restore	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_restore	/;"	d	file:
+DW_CFA_restore_extended	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_restore_extended	/;"	d	file:
+DW_CFA_restore_state	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_restore_state	/;"	d	file:
+DW_CFA_same_value	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_same_value	/;"	d	file:
+DW_CFA_set_loc	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_set_loc	/;"	d	file:
+DW_CFA_undefined	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_undefined	/;"	d	file:
+DW_CFA_val_expression	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_val_expression	/;"	d	file:
+DW_CFA_val_offset	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_val_offset	/;"	d	file:
+DW_CFA_val_offset_sf	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^#define DW_CFA_val_offset_sf	/;"	d	file:
+EI_CLASS	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_CLASS	/;"	d
+EI_DATA	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_DATA	/;"	d
+EI_MAG0	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_MAG0	/;"	d
+EI_MAG1	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_MAG1	/;"	d
+EI_MAG2	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_MAG2	/;"	d
+EI_MAG3	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_MAG3	/;"	d
+EI_NIDENT	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_NIDENT /;"	d
+EI_PAD	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_PAD	/;"	d
+EI_VERSION	/home/giuseppe/CE/include/ce/elf.h	/^#define EI_VERSION /;"	d
+ELFCLASS32	/home/giuseppe/CE/include/ce/elf.h	/^#define ELFCLASS32	/;"	d
+ELFCLASS64	/home/giuseppe/CE/include/ce/elf.h	/^#define ELFCLASS64	/;"	d
+ELFCLASSNONE	/home/giuseppe/CE/include/ce/elf.h	/^#define ELFCLASSNONE /;"	d
+ELFDATA2LSB	/home/giuseppe/CE/include/ce/elf.h	/^#define ELFDATA2LSB	/;"	d
+ELFDATA2MSB	/home/giuseppe/CE/include/ce/elf.h	/^#define ELFDATA2MSB	/;"	d
+ELFDATANONE	/home/giuseppe/CE/include/ce/elf.h	/^#define ELFDATANONE	/;"	d
+ELFMAG0	/home/giuseppe/CE/include/ce/elf.h	/^#define ELFMAG0	/;"	d
+ELFMAG1	/home/giuseppe/CE/include/ce/elf.h	/^#define	ELFMAG1	/;"	d
+ELFMAG2	/home/giuseppe/CE/include/ce/elf.h	/^#define	ELFMAG2	/;"	d
+ELFMAG3	/home/giuseppe/CE/include/ce/elf.h	/^#define	ELFMAG3	/;"	d
+EM_386	/home/giuseppe/CE/include/ce/elf.h	/^#define EM_386	/;"	d
+EM_68K	/home/giuseppe/CE/include/ce/elf.h	/^#define EM_68K	/;"	d
+EM_860	/home/giuseppe/CE/include/ce/elf.h	/^#define EM_860	/;"	d
+EM_88K	/home/giuseppe/CE/include/ce/elf.h	/^#define EM_88K	/;"	d
+EM_AMD64	/home/giuseppe/CE/include/ce/elf.h	/^#define EM_AMD64	/;"	d
+EM_M32	/home/giuseppe/CE/include/ce/elf.h	/^#define	EM_M32	/;"	d
+EM_MIPS	/home/giuseppe/CE/include/ce/elf.h	/^#define EM_MIPS	/;"	d
+EM_NONE	/home/giuseppe/CE/include/ce/elf.h	/^#define EM_NONE	/;"	d
+EM_SPARC	/home/giuseppe/CE/include/ce/elf.h	/^#define	EM_SPARC	/;"	d
+EOIR	/home/giuseppe/Compile/libce/IOAPIC_EOIR.cpp	/^volatile natl* EOIR = reinterpret_cast<volatile natl*>(0xFEE000B0);$/;"	v	namespace:apic	typeref:typename:volatile natl *
+ESTERN_BUSY	sistema/sistema.cpp	/^des_proc* const ESTERN_BUSY = (des_proc*)1;$/;"	v	typeref:typename:des_proc * const
+ET_CORE	/home/giuseppe/CE/include/ce/elf.h	/^#define	ET_CORE	/;"	d
+ET_DYN	/home/giuseppe/CE/include/ce/elf.h	/^#define	ET_DYN	/;"	d
+ET_EXEC	/home/giuseppe/CE/include/ce/elf.h	/^#define	ET_EXEC	/;"	d
+ET_HIPROC	/home/giuseppe/CE/include/ce/elf.h	/^#define	ET_HIPROC	/;"	d
+ET_LOPROC	/home/giuseppe/CE/include/ce/elf.h	/^#define	ET_LOPROC	/;"	d
+ET_NONE	/home/giuseppe/CE/include/ce/elf.h	/^#define ET_NONE	/;"	d
+ET_REL	/home/giuseppe/CE/include/ce/elf.h	/^#define	ET_REL	/;"	d
+EXPRESSION	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	EXPRESSION,$/;"	e	enum:cfi_mode
+Elf64_Addr	/home/giuseppe/CE/include/ce/elf64.h	/^typedef natq   Elf64_Addr;$/;"	t	typeref:typename:natq
+Elf64_Ehdr	/home/giuseppe/CE/include/ce/elf64.h	/^} Elf64_Ehdr;$/;"	t	typeref:struct:__anon2c6aacd50108
+Elf64_Half	/home/giuseppe/CE/include/ce/elf64.h	/^typedef natw   Elf64_Half;$/;"	t	typeref:typename:natw
+Elf64_Off	/home/giuseppe/CE/include/ce/elf64.h	/^typedef natq   Elf64_Off;$/;"	t	typeref:typename:natq
+Elf64_Phdr	/home/giuseppe/CE/include/ce/elf64.h	/^} Elf64_Phdr;$/;"	t	typeref:struct:__anon2c6aacd50208
+Elf64_Shdr	/home/giuseppe/CE/include/ce/elf64.h	/^} Elf64_Shdr;$/;"	t	typeref:struct:__anon2c6aacd50308
+Elf64_Word	/home/giuseppe/CE/include/ce/elf64.h	/^typedef natl   Elf64_Word;$/;"	t	typeref:typename:natl
+Elf64_XWord	/home/giuseppe/CE/include/ce/elf64.h	/^typedef unsigned long long Elf64_XWord;$/;"	t	typeref:typename:unsigned long long
+FLAGS_BUF	utente/utente.cpp	/^#define FLAGS_BUF /;"	d	file:
+GLOB	util/parse.c	/^#define GLOB /;"	d	file:
+GLOB_FMT	util/parse.c	/^#define GLOB_FMT /;"	d	file:
+GiB	include/costanti.h	/^#define GiB	/;"	d
+HD_IRQ	io/io.cpp	/^const natb HD_IRQ = 14;$/;"	v	typeref:typename:const natb
+HD_PRIO	io/io.cpp	/^const natl HD_PRIO = MIN_EXT_PRIO + 0x60;$/;"	v	typeref:typename:const natl
+HEAP_SIZE	sistema/sistema.cpp	/^const natq HEAP_SIZE = 1*MiB;$/;"	v	typeref:typename:const natq
+HEAP_START	sistema/sistema.cpp	/^const natq HEAP_START = 1*MiB;$/;"	v	typeref:typename:const natq
+ICW1M	/home/giuseppe/Compile/libce/64/8259.s	/^.set ICW1M, 0x20$/;"	d
+ICW1S	/home/giuseppe/Compile/libce/64/8259.s	/^.set ICW1S, 0xa0$/;"	d
+ICW2M	/home/giuseppe/Compile/libce/64/8259.s	/^.set ICW2M, 0x21$/;"	d
+ICW2S	/home/giuseppe/Compile/libce/64/8259.s	/^.set ICW2S, 0xa1$/;"	d
+ICW3M	/home/giuseppe/Compile/libce/64/8259.s	/^.set ICW3M, 0x21$/;"	d
+ICW3S	/home/giuseppe/Compile/libce/64/8259.s	/^.set ICW3S, 0xa1$/;"	d
+ICW4M	/home/giuseppe/Compile/libce/64/8259.s	/^.set ICW4M, 0x21$/;"	d
+ICW4S	/home/giuseppe/Compile/libce/64/8259.s	/^.set ICW4S, 0xa1$/;"	d
+INT_FMT	util/parse.c	/^#define INT_FMT /;"	d	file:
+IOREGSEL	/home/giuseppe/Compile/libce/IOREGSEL-IOWIN.cpp	/^	volatile natl* IOREGSEL = reinterpret_cast<natl*>(0xFEC0000);$/;"	v	namespace:apic	typeref:typename:volatile natl *
+IOWIN	/home/giuseppe/Compile/libce/IOREGSEL-IOWIN.cpp	/^	volatile natl* IOWIN = reinterpret_cast<natl*>(0xFEC0010);$/;"	v	namespace:apic	typeref:typename:volatile natl *
+IO_TIPO_DMAHDR	include/costanti.h	/^#define IO_TIPO_DMAHDR	/;"	d
+IO_TIPO_DMAHDW	include/costanti.h	/^#define IO_TIPO_DMAHDW	/;"	d
+IO_TIPO_GMI	include/costanti.h	/^#define IO_TIPO_GMI	/;"	d
+IO_TIPO_HDR	include/costanti.h	/^#define IO_TIPO_HDR	/;"	d
+IO_TIPO_HDW	include/costanti.h	/^#define IO_TIPO_HDW	/;"	d
+IO_TIPO_INIC	include/costanti.h	/^#define IO_TIPO_INIC	/;"	d
+IO_TIPO_RCON	include/costanti.h	/^#define IO_TIPO_RCON	/;"	d
+IO_TIPO_WCON	include/costanti.h	/^#define IO_TIPO_WCON	/;"	d
+IPOL_BIT	/home/giuseppe/CE/include/ce/apic.h	/^	const natl IPOL_BIT = (1U << 13); \/\/ interrupt polarity (0=high, 1=low)$/;"	v	namespace:apic	typeref:typename:const natl
+IRQ_MAX	/home/giuseppe/CE/include/ce/apic.h	/^	const natl IRQ_MAX = 24;$/;"	v	namespace:apic	typeref:typename:const natl
+I_MIO_C	include/costanti.h	/^#define I_MIO_C	/;"	d
+I_R10	sistema/sistema.cpp	/^	I_RSP, I_RBP, I_RSI, I_RDI, I_R8, I_R9, I_R10,$/;"	e	enum:__anond897b8910103	file:
+I_R11	sistema/sistema.cpp	/^	I_R11, I_R12, I_R13, I_R14, I_R15 };$/;"	e	enum:__anond897b8910103	file:
+I_R12	sistema/sistema.cpp	/^	I_R11, I_R12, I_R13, I_R14, I_R15 };$/;"	e	enum:__anond897b8910103	file:
+I_R13	sistema/sistema.cpp	/^	I_R11, I_R12, I_R13, I_R14, I_R15 };$/;"	e	enum:__anond897b8910103	file:
+I_R14	sistema/sistema.cpp	/^	I_R11, I_R12, I_R13, I_R14, I_R15 };$/;"	e	enum:__anond897b8910103	file:
+I_R15	sistema/sistema.cpp	/^	I_R11, I_R12, I_R13, I_R14, I_R15 };$/;"	e	enum:__anond897b8910103	file:
+I_R8	sistema/sistema.cpp	/^	I_RSP, I_RBP, I_RSI, I_RDI, I_R8, I_R9, I_R10,$/;"	e	enum:__anond897b8910103	file:
+I_R9	sistema/sistema.cpp	/^	I_RSP, I_RBP, I_RSI, I_RDI, I_R8, I_R9, I_R10,$/;"	e	enum:__anond897b8910103	file:
+I_RAX	sistema/sistema.cpp	/^enum { I_RAX, I_RCX, I_RDX, I_RBX,$/;"	e	enum:__anond897b8910103	file:
+I_RBP	sistema/sistema.cpp	/^	I_RSP, I_RBP, I_RSI, I_RDI, I_R8, I_R9, I_R10,$/;"	e	enum:__anond897b8910103	file:
+I_RBX	sistema/sistema.cpp	/^enum { I_RAX, I_RCX, I_RDX, I_RBX,$/;"	e	enum:__anond897b8910103	file:
+I_RCX	sistema/sistema.cpp	/^enum { I_RAX, I_RCX, I_RDX, I_RBX,$/;"	e	enum:__anond897b8910103	file:
+I_RDI	sistema/sistema.cpp	/^	I_RSP, I_RBP, I_RSI, I_RDI, I_R8, I_R9, I_R10,$/;"	e	enum:__anond897b8910103	file:
+I_RDX	sistema/sistema.cpp	/^enum { I_RAX, I_RCX, I_RDX, I_RBX,$/;"	e	enum:__anond897b8910103	file:
+I_RSI	sistema/sistema.cpp	/^	I_RSP, I_RBP, I_RSI, I_RDI, I_R8, I_R9, I_R10,$/;"	e	enum:__anond897b8910103	file:
+I_RSP	sistema/sistema.cpp	/^	I_RSP, I_RBP, I_RSI, I_RDI, I_R8, I_R9, I_R10,$/;"	e	enum:__anond897b8910103	file:
+I_SIS_C	include/costanti.h	/^#define I_SIS_C	/;"	d
+I_SIS_P	include/costanti.h	/^#define I_SIS_P	/;"	d
+I_UTN_C	include/costanti.h	/^#define I_UTN_C /;"	d
+I_UTN_P	include/costanti.h	/^#define I_UTN_P	/;"	d
+KBD_IRQ	io/io.cpp	/^const int KBD_IRQ = 1;$/;"	v	typeref:typename:const int
+KBD_PRIO	io/io.cpp	/^const int KBD_PRIO = MIN_EXT_PRIO + 0x50;$/;"	v	typeref:typename:const int
+KiB	include/costanti.h	/^#define KiB	/;"	d
+LIV	io/io.cpp	/^const natl LIV = LIV_SISTEMA;$/;"	v	typeref:typename:const natl
+LIV_SISTEMA	include/costanti.h	/^#define LIV_SISTEMA	/;"	d
+LIV_UTENTE	include/costanti.h	/^#define LIV_UTENTE	/;"	d
+LOG_DEBUG	/home/giuseppe/CE/include/ce/libce.h	/^enum log_sev { LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERR, LOG_USR };$/;"	e	enum:log_sev
+LOG_ERR	/home/giuseppe/CE/include/ce/libce.h	/^enum log_sev { LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERR, LOG_USR };$/;"	e	enum:log_sev
+LOG_INFO	/home/giuseppe/CE/include/ce/libce.h	/^enum log_sev { LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERR, LOG_USR };$/;"	e	enum:log_sev
+LOG_USR	/home/giuseppe/CE/include/ce/libce.h	/^enum log_sev { LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERR, LOG_USR };$/;"	e	enum:log_sev
+LOG_WARN	/home/giuseppe/CE/include/ce/libce.h	/^enum log_sev { LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERR, LOG_USR };$/;"	e	enum:log_sev
+LUN_NOME	util/parse.c	/^#define LUN_NOME /;"	d	file:
+LUN_OGGETTI	util/parse.c	/^#define LUN_OGGETTI /;"	d	file:
+LUN_RIGA	util/parse.c	/^#define LUN_RIGA /;"	d	file:
+MAIN	util/parse.c	/^#define MAIN /;"	d	file:
+MAIN_HEAD	util/parse.c	/^#define MAIN_HEAD /;"	d	file:
+MAIN_TAIL	util/parse.c	/^#define MAIN_TAIL /;"	d	file:
+MASCHERA_MODULO	/home/giuseppe/CE/include/ce/vm.h	/^static const natq MASCHERA_MODULO = BIT_SEGNO - 1;$/;"	v	typeref:typename:const natq
+MAX_CODE	/home/giuseppe/CE/include/ce/kbd.h	/^	const natl MAX_CODE = 40; $/;"	v	namespace:kbd	typeref:typename:const natl
+MAX_EXT_PRIO	include/costanti.h	/^#define MAX_EXT_PRIO	/;"	d
+MAX_INT_LEN	util/parse.c	/^#define MAX_INT_LEN /;"	d	file:
+MAX_IRQ	sistema/sistema.cpp	/^const natl MAX_IRQ  = 24;$/;"	v	typeref:typename:const natl
+MAX_LIV	/home/giuseppe/CE/include/ce/vm.h	/^static const int MAX_LIV = 4;$/;"	v	typeref:typename:const int
+MAX_LOG	/home/giuseppe/Compile/libce/MAX_LOG.cpp	/^int MAX_LOG = 4;$/;"	v	typeref:typename:int
+MAX_LOG	sistema/sistema.cpp	/^int MAX_LOG = 4;$/;"	v	typeref:typename:int
+MAX_LOG	sistema/sistema.cpp	/^int MAX_LOG = 5;$/;"	v	typeref:typename:int
+MAX_MA_PAGES	include/costanti.h	/^#define MAX_MA_PAGES	/;"	d
+MAX_PRD	include/costanti.h	/^#define MAX_PRD	/;"	d
+MAX_PRIORITY	include/costanti.h	/^#define MAX_PRIORITY	/;"	d
+MAX_PROC	include/costanti.h	/^#define MAX_PROC /;"	d
+MAX_PROC_ID	include/costanti.h	/^#define MAX_PROC_ID	/;"	d
+MAX_PS_LVL	include/costanti.h	/^#define MAX_PS_LVL	/;"	d
+MAX_SEM	include/costanti.h	/^#define MAX_SEM	/;"	d
+MEM_TOT	include/costanti.h	/^#define MEM_TOT	/;"	d
+MIN_EXT_PRIO	include/costanti.h	/^#define MIN_EXT_PRIO	/;"	d
+MIN_PRIORITY	include/costanti.h	/^#define MIN_PRIORITY	/;"	d
+MIN_PROC_ID	include/costanti.h	/^#define MIN_PROC_ID	/;"	d
+MIRQ_BIT	/home/giuseppe/CE/include/ce/apic.h	/^	const natl MIRQ_BIT = (1U << 16); \/\/ mask irq bit$/;"	v	namespace:apic	typeref:typename:const natl
+MULTIBOOT2_BOOTLOADER_MAGIC	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT2_BOOTLOADER_MAGIC	/;"	d
+MULTIBOOT2_HEADER_MAGIC	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT2_HEADER_MAGIC	/;"	d
+MULTIBOOT_AOUT_KLUDGE	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_AOUT_KLUDGE	/;"	d
+MULTIBOOT_BOOTLOADER_MAGIC	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_BOOTLOADER_MAGIC	/;"	d
+MULTIBOOT_FRAMEBUFFER_TYPE_EGA_TEXT	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_FRAMEBUFFER_TYPE_EGA_TEXT	/;"	d
+MULTIBOOT_FRAMEBUFFER_TYPE_INDEXED	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_FRAMEBUFFER_TYPE_INDEXED /;"	d
+MULTIBOOT_FRAMEBUFFER_TYPE_RGB	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_FRAMEBUFFER_TYPE_RGB /;"	d
+MULTIBOOT_HEADER	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_HEADER /;"	d
+MULTIBOOT_HEADER_MAGIC	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_HEADER_MAGIC	/;"	d
+MULTIBOOT_INFO_ALIGN	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_ALIGN	/;"	d
+MULTIBOOT_INFO_AOUT_SYMS	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_AOUT_SYMS	/;"	d
+MULTIBOOT_INFO_APM_TABLE	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_APM_TABLE	/;"	d
+MULTIBOOT_INFO_BOOTDEV	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_BOOTDEV	/;"	d
+MULTIBOOT_INFO_BOOT_LOADER_NAME	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_BOOT_LOADER_NAME	/;"	d
+MULTIBOOT_INFO_CMDLINE	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_CMDLINE	/;"	d
+MULTIBOOT_INFO_CONFIG_TABLE	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_CONFIG_TABLE	/;"	d
+MULTIBOOT_INFO_DRIVE_INFO	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_DRIVE_INFO	/;"	d
+MULTIBOOT_INFO_ELF_SHDR	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_ELF_SHDR	/;"	d
+MULTIBOOT_INFO_FRAMEBUFFER_INFO	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_FRAMEBUFFER_INFO	/;"	d
+MULTIBOOT_INFO_MEMORY	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_MEMORY	/;"	d
+MULTIBOOT_INFO_MEM_MAP	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_MEM_MAP	/;"	d
+MULTIBOOT_INFO_MODS	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_MODS	/;"	d
+MULTIBOOT_INFO_VBE_INFO	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_INFO_VBE_INFO	/;"	d
+MULTIBOOT_MEMORY_ACPI_RECLAIMABLE	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_MEMORY_ACPI_RECLAIMABLE /;"	d
+MULTIBOOT_MEMORY_AVAILABLE	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_MEMORY_AVAILABLE	/;"	d
+MULTIBOOT_MEMORY_INFO	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_MEMORY_INFO	/;"	d
+MULTIBOOT_MEMORY_NVS	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_MEMORY_NVS /;"	d
+MULTIBOOT_MEMORY_RESERVED	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_MEMORY_RESERVED	/;"	d
+MULTIBOOT_MOD_ALIGN	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_MOD_ALIGN	/;"	d
+MULTIBOOT_PAGE_ALIGN	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_PAGE_ALIGN	/;"	d
+MULTIBOOT_SEARCH	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_SEARCH	/;"	d
+MULTIBOOT_VIDEO_MODE	/home/giuseppe/CE/include/ce/mboot.h	/^#define MULTIBOOT_VIDEO_MODE	/;"	d
+MiB	include/costanti.h	/^#define MiB	/;"	d
+NREG	/home/giuseppe/CE/include/ce/cfi.h	/^	NREG$/;"	e	enum:CFI
+N_FRAME	sistema/sistema.cpp	/^natq const N_FRAME = MEM_TOT \/ DIM_PAGINA;$/;"	v	typeref:typename:natq const
+N_M1	sistema/sistema.cpp	/^natq N_M1;$/;"	v	typeref:typename:natq
+N_M2	sistema/sistema.cpp	/^natq N_M2;$/;"	v	typeref:typename:natq
+N_MIO_C	include/costanti.h	/^#define N_MIO_C	/;"	d
+N_REG	sistema/sistema.cpp	/^const int N_REG = 16;	\/\/ numero di registri nel campo contesto$/;"	v	typeref:typename:const int
+N_SIS_C	include/costanti.h	/^#define N_SIS_C	/;"	d
+N_SIS_P	include/costanti.h	/^#define N_SIS_P	/;"	d
+N_STEP	sistema/sistema.cpp	/^#define N_STEP /;"	d	file:
+N_UTN_C	include/costanti.h	/^#define N_UTN_C	/;"	d
+N_UTN_P	include/costanti.h	/^#define N_UTN_P	/;"	d
+OCW1M	/home/giuseppe/Compile/libce/64/8259.s	/^.set OCW1M, 0x21$/;"	d
+OCW1S	/home/giuseppe/Compile/libce/64/8259.s	/^.set OCW1S, 0xa1$/;"	d
+OCW2M	/home/giuseppe/Compile/libce/64/8259.s	/^.set OCW2M, 0x20$/;"	d
+OCW2S	/home/giuseppe/Compile/libce/64/8259.s	/^.set OCW2S, 0xa0$/;"	d
+OCW3M	/home/giuseppe/Compile/libce/64/8259.s	/^.set OCW3M, 0x20$/;"	d
+OCW3S	/home/giuseppe/Compile/libce/64/8259.s	/^.set OCW3S, 0xa0$/;"	d
+OFFSET	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	OFFSET,$/;"	e	enum:cfi_mode
+PF_PROT	sistema/sistema.cpp	/^static const natq PF_PROT  = 1U << 0;$/;"	v	typeref:typename:const natq	file:
+PF_R	/home/giuseppe/CE/include/ce/elf.h	/^#define PF_R /;"	d
+PF_RES	sistema/sistema.cpp	/^static const natq PF_RES   = 1U << 3;$/;"	v	typeref:typename:const natq	file:
+PF_USER	sistema/sistema.cpp	/^static const natq PF_USER  = 1U << 2;$/;"	v	typeref:typename:const natq	file:
+PF_W	/home/giuseppe/CE/include/ce/elf.h	/^#define PF_W /;"	d
+PF_WRITE	sistema/sistema.cpp	/^static const natq PF_WRITE = 1U << 1;$/;"	v	typeref:typename:const natq	file:
+PF_X	/home/giuseppe/CE/include/ce/elf.h	/^#define PF_X /;"	d
+PRINTF_BUF	utente/lib.cpp	/^static const natq PRINTF_BUF = 1024;$/;"	v	typeref:typename:const natq	file:
+PROC_FMT	util/parse.c	/^#define PROC_FMT /;"	d	file:
+PT_DYNAMIC	/home/giuseppe/CE/include/ce/elf.h	/^#define PT_DYNAMIC	/;"	d
+PT_HIPROC	/home/giuseppe/CE/include/ce/elf.h	/^#define PT_HIPROC	/;"	d
+PT_INTERP	/home/giuseppe/CE/include/ce/elf.h	/^#define PT_INTERP	/;"	d
+PT_LOAD	/home/giuseppe/CE/include/ce/elf.h	/^#define PT_LOAD	/;"	d
+PT_LOPROC	/home/giuseppe/CE/include/ce/elf.h	/^#define PT_LOPROC	/;"	d
+PT_NOTE	/home/giuseppe/CE/include/ce/elf.h	/^#define PT_NOTE	/;"	d
+PT_NULL	/home/giuseppe/CE/include/ce/elf.h	/^#define	PT_NULL	/;"	d
+PT_PHDR	/home/giuseppe/CE/include/ce/elf.h	/^#define PT_PHDR	/;"	d
+PT_SHLIB	/home/giuseppe/CE/include/ce/elf.h	/^#define PT_SHLIB	/;"	d
+PUNT_NUCLEO	sistema/sistema.s	/^.set PUNT_NUCLEO, 8$/;"	d
+R10	/home/giuseppe/CE/include/ce/cfi.h	/^	R10,$/;"	e	enum:CFI
+R10	sistema/sistema.s	/^.set R10, CTX+80$/;"	d
+R11	/home/giuseppe/CE/include/ce/cfi.h	/^	R11,$/;"	e	enum:CFI
+R11	sistema/sistema.s	/^.set R11, CTX+88$/;"	d
+R12	/home/giuseppe/CE/include/ce/cfi.h	/^	R12,$/;"	e	enum:CFI
+R12	sistema/sistema.s	/^.set R12, CTX+96$/;"	d
+R13	/home/giuseppe/CE/include/ce/cfi.h	/^	R13,$/;"	e	enum:CFI
+R13	sistema/sistema.s	/^.set R13, CTX+104$/;"	d
+R14	/home/giuseppe/CE/include/ce/cfi.h	/^	R14,$/;"	e	enum:CFI
+R14	sistema/sistema.s	/^.set R14, CTX+112$/;"	d
+R15	/home/giuseppe/CE/include/ce/cfi.h	/^	R15,$/;"	e	enum:CFI
+R15	sistema/sistema.s	/^.set R15, CTX+120$/;"	d
+R8	/home/giuseppe/CE/include/ce/cfi.h	/^	R8,$/;"	e	enum:CFI
+R8	sistema/sistema.s	/^.set R8,  CTX+64$/;"	d
+R9	/home/giuseppe/CE/include/ce/cfi.h	/^	R9,$/;"	e	enum:CFI
+R9	sistema/sistema.s	/^.set R9,  CTX+72$/;"	d
+RA	/home/giuseppe/CE/include/ce/cfi.h	/^	RA,	\/\/ return address$/;"	e	enum:CFI
+RAX	/home/giuseppe/CE/include/ce/cfi.h	/^	RAX = 0,$/;"	e	enum:CFI
+RAX	sistema/sistema.s	/^.set RAX, CTX+0$/;"	d
+RBP	/home/giuseppe/CE/include/ce/cfi.h	/^	RBP,$/;"	e	enum:CFI
+RBP	sistema/sistema.s	/^.set RBP, CTX+40$/;"	d
+RBX	/home/giuseppe/CE/include/ce/cfi.h	/^	RBX,$/;"	e	enum:CFI
+RBX	sistema/sistema.s	/^.set RBX, CTX+24$/;"	d
+RCX	/home/giuseppe/CE/include/ce/cfi.h	/^	RCX,$/;"	e	enum:CFI
+RCX	sistema/sistema.s	/^.set RCX, CTX+8$/;"	d
+RDI	/home/giuseppe/CE/include/ce/cfi.h	/^	RDI,$/;"	e	enum:CFI
+RDI	sistema/sistema.s	/^.set RDI, CTX+56$/;"	d
+RDX	/home/giuseppe/CE/include/ce/cfi.h	/^	RDX,$/;"	e	enum:CFI
+RDX	sistema/sistema.s	/^.set RDX, CTX+16$/;"	d
+READ_DMA	/home/giuseppe/CE/include/ce/libce.h	/^	READ_DMA   = 0xC8$/;"	e	enum:hd_cmd
+READ_SECT	/home/giuseppe/CE/include/ce/libce.h	/^	READ_SECT  = 0x20,$/;"	e	enum:hd_cmd
+REGISTER	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	REGISTER,$/;"	e	enum:cfi_mode
+ROWS	/home/giuseppe/CE/include/ce/vid.h	/^	const natl ROWS = 25;$/;"	v	namespace:vid	typeref:typename:const natl
+RSI	/home/giuseppe/CE/include/ce/cfi.h	/^	RSI,$/;"	e	enum:CFI
+RSI	sistema/sistema.s	/^.set RSI, CTX+48$/;"	d
+RSP	/home/giuseppe/CE/include/ce/cfi.h	/^	RSP,$/;"	e	enum:CFI
+RSP	sistema/sistema.s	/^.set RSP, CTX+32$/;"	d
+RTO	/home/giuseppe/CE/include/ce/apic.h	/^	const natl RTO = 0x10;$/;"	v	namespace:apic	typeref:typename:const natl
+SAME_VALUE	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	SAME_VALUE,$/;"	e	enum:cfi_mode
+SEL_CODICE_SISTEMA	include/costanti.h	/^#define SEL_CODICE_SISTEMA	/;"	d
+SEL_CODICE_UTENTE	include/costanti.h	/^#define SEL_CODICE_UTENTE	/;"	d
+SEL_DATI_UTENTE	include/costanti.h	/^#define SEL_DATI_UTENTE /;"	d
+SEM_FMT	util/parse.c	/^#define SEM_FMT /;"	d	file:
+SE_EXT	sistema/sistema.cpp	/^static const natq SE_EXT   = 1U << 0;$/;"	v	typeref:typename:const natq	file:
+SE_IDT	sistema/sistema.cpp	/^static const natq SE_IDT   = 1U << 1;$/;"	v	typeref:typename:const natq	file:
+SE_TI	sistema/sistema.cpp	/^static const natq SE_TI    = 1U << 2;$/;"	v	typeref:typename:const natq	file:
+SHF_ALLOC	/home/giuseppe/CE/include/ce/elf.h	/^#define SHF_ALLOC /;"	d
+SHF_EXECINSTR	/home/giuseppe/CE/include/ce/elf.h	/^#define SHF_EXECINSTR /;"	d
+SHF_MASKPROC	/home/giuseppe/CE/include/ce/elf.h	/^#define SHF_MASKPROC /;"	d
+SHF_WRITE	/home/giuseppe/CE/include/ce/elf.h	/^#define SHF_WRITE /;"	d
+SHT_DYNAMIC	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_DYNAMIC /;"	d
+SHT_DYNSYM	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_DYNSYM /;"	d
+SHT_HASH	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_HASH /;"	d
+SHT_HIPROC	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_HIPROC /;"	d
+SHT_HIUSER	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_HIUSER /;"	d
+SHT_LOPROC	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_LOPROC /;"	d
+SHT_LOUSER	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_LOUSER /;"	d
+SHT_NOBITS	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_NOBITS /;"	d
+SHT_NOTE	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_NOTE /;"	d
+SHT_NULL	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_NULL /;"	d
+SHT_PROGBITS	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_PROGBITS /;"	d
+SHT_REL	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_REL /;"	d
+SHT_RELA	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_RELA /;"	d
+SHT_SHLIB	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_SHLIB /;"	d
+SHT_STRTAB	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_STRTAB /;"	d
+SHT_SYMTAB	/home/giuseppe/CE/include/ce/elf.h	/^#define SHT_SYMTAB /;"	d
+SHT_X86_64_UNWIND	/home/giuseppe/Compile/libce/find_eh_frame.cpp	/^static const Elf64_Word SHT_X86_64_UNWIND = 0x70000001;$/;"	v	typeref:typename:const Elf64_Word	file:
+TCNT	utente/utente.cpp	/^#define TCNT(/;"	d	file:
+TIPO_A	include/costanti.h	/^#define TIPO_A	/;"	d
+TIPO_AB	include/costanti.h	/^#define TIPO_AB	/;"	d
+TIPO_ACC	include/costanti.h	/^#define TIPO_ACC	/;"	d
+TIPO_APE	include/costanti.h	/^#define TIPO_APE	/;"	d
+TIPO_D	include/costanti.h	/^#define TIPO_D	/;"	d
+TIPO_FG	include/costanti.h	/^#define TIPO_FG	/;"	d
+TIPO_GMI	include/costanti.h	/^#define TIPO_GMI	/;"	d
+TIPO_IOP	include/costanti.h	/^#define TIPO_IOP	/;"	d
+TIPO_L	include/costanti.h	/^#define TIPO_L	/;"	d
+TIPO_MAA	include/costanti.h	/^#define TIPO_MAA	/;"	d
+TIPO_MAC	include/costanti.h	/^#define TIPO_MAC	/;"	d
+TIPO_MAM	include/costanti.h	/^#define TIPO_MAM	/;"	d
+TIPO_MAW	include/costanti.h	/^#define TIPO_MAW	/;"	d
+TIPO_S	include/costanti.h	/^#define TIPO_S	/;"	d
+TIPO_SI	include/costanti.h	/^#define TIPO_SI	/;"	d
+TIPO_T	include/costanti.h	/^#define TIPO_T	/;"	d
+TIPO_TIMER	include/costanti.h	/^#define TIPO_TIMER	/;"	d
+TIPO_TRA	include/costanti.h	/^#define TIPO_TRA	/;"	d
+TIPO_W	include/costanti.h	/^#define TIPO_W	/;"	d
+TIPO_WFI	include/costanti.h	/^#define TIPO_WFI	/;"	d
+TRGM_BIT	/home/giuseppe/CE/include/ce/apic.h	/^	const natl TRGM_BIT = (1U << 15); \/\/ trigger mode (1=level, 0=edge)$/;"	v	namespace:apic	typeref:typename:const natl
+UNDEFINED	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	UNDEFINED,$/;"	e	enum:cfi_mode
+VAL_EXPRESSION	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	VAL_EXPRESSION$/;"	e	enum:cfi_mode
+VAL_OFFSET	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	VAL_OFFSET,$/;"	e	enum:cfi_mode
+VBE_DISPI_8BIT_DAC	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_8BIT_DAC = 0x20;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_BPP_15	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_BPP_15 = 0x0F;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_BPP_16	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_BPP_16 = 0x10;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_BPP_24	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_BPP_24 = 0x18;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_BPP_32	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_BPP_32 = 0x20;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_BPP_4	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_BPP_4 = 0x04;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_BPP_8	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_BPP_8 = 0x08;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_DISABLED	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_DISABLED = 0x00;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_ENABLED	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_ENABLED = 0x01;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_GETCAPS	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_GETCAPS = 0x02;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_BANK	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_BANK = 0x5;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_BPP	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_BPP = 0x3;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_ENABLE	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_ENABLE = 0x4;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_ID	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_ID = 0x0;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_VIRT_HEIGHT	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_VIRT_HEIGHT = 0x7;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_VIRT_WIDTH	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_VIRT_WIDTH = 0x6;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_XRES	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_XRES = 0x1;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_X_OFFSET	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_X_OFFSET = 0x8;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_YRES	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_YRES = 0x2;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_INDEX_Y_OFFSET	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_INDEX_Y_OFFSET = 0x9;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_LFB_ENABLED	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_LFB_ENABLED = 0x40;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VBE_DISPI_NOCLEARMEM	/home/giuseppe/CE/include/ce/bochsvga.h	/^	static const natw VBE_DISPI_NOCLEARMEM = 0x80;$/;"	v	namespace:bochsvga	typeref:typename:const natw
+VECT_MSK	/home/giuseppe/CE/include/ce/apic.h	/^	const natl VECT_MSK = 0x000000FF; \/\/ vector field mask$/;"	v	namespace:apic	typeref:typename:const natl
+VECT_SHF	/home/giuseppe/CE/include/ce/apic.h	/^	const natl VECT_SHF = 0;          \/\/ vector field shift$/;"	v	namespace:apic	typeref:typename:const natl
+VENDOR_ID	/home/giuseppe/CE/include/ce/piix3.h	/^	const natw VENDOR_ID = 0x8086;$/;"	v	namespace:piix3	typeref:typename:const natw
+VIDEO_SIZE	/home/giuseppe/CE/include/ce/vid.h	/^	const natl VIDEO_SIZE = COLS * ROWS;$/;"	v	namespace:vid	typeref:typename:const natl
+WRITE_DMA	/home/giuseppe/CE/include/ce/libce.h	/^	WRITE_DMA  = 0xCA,$/;"	e	enum:hd_cmd
+WRITE_SECT	/home/giuseppe/CE/include/ce/libce.h	/^	WRITE_SECT = 0x30,$/;"	e	enum:hd_cmd
+XBCS	/home/giuseppe/CE/include/ce/piix3.h	/^	const natb XBCS = 0x4e;$/;"	v	namespace:piix3	typeref:typename:const natb
+XBCS_ENABLE	/home/giuseppe/CE/include/ce/piix3.h	/^	const natl XBCS_ENABLE = (1U << 8);$/;"	v	namespace:piix3	typeref:typename:const natl
+XIP	/home/giuseppe/Compile/libce/gestore_eccezioni.cpp	/^#define XIP /;"	d	file:
+__anon2c6aacd50108	/home/giuseppe/CE/include/ce/elf64.h	/^typedef struct {$/;"	s
+__anon2c6aacd50208	/home/giuseppe/CE/include/ce/elf64.h	/^typedef struct {$/;"	s
+__anon2c6aacd50308	/home/giuseppe/CE/include/ce/elf64.h	/^typedef struct {$/;"	s
+__anon7dac2af5010a	/home/giuseppe/CE/include/ce/mboot.h	/^  {$/;"	u	struct:multiboot_info
+__anon7dac2af5020a	/home/giuseppe/CE/include/ce/mboot.h	/^  {$/;"	u	struct:multiboot_info
+__anon7dac2af50308	/home/giuseppe/CE/include/ce/mboot.h	/^    {$/;"	s	union:multiboot_info::__anon7dac2af5020a
+__anon7dac2af50408	/home/giuseppe/CE/include/ce/mboot.h	/^    {$/;"	s	union:multiboot_info::__anon7dac2af5020a
+__anond897b8910103	sistema/sistema.cpp	/^enum { I_RAX, I_RCX, I_RDX, I_RBX,$/;"	g	file:
+__anond897b891020a	sistema/sistema.cpp	/^	union {$/;"	u	struct:des_frame	file:
+__anond897b8910302	sistema/sistema.cpp	/^	auto identity_map = [] (vaddr v) -> paddr { return v; };$/;"	f	function:crea_finestra_FM	typeref:typename:paddr	file:
+__anond897b8910402	sistema/sistema.cpp	/^		[](vaddr) { return alloca_frame(); });$/;"	f	function:crea_pila	file:
+__anond897b8910502	sistema/sistema.cpp	/^			[](paddr p, int) { rilascia_frame(p); });$/;"	f	function:crea_pila	file:
+__anond897b8910602	sistema/sistema.cpp	/^		[](paddr p, int) { rilascia_frame(p); });$/;"	f	function:distruggi_pila	file:
+__anond897b8910702	sistema/sistema.cpp	/^		unmap(p->cr3, ini_utn_p, ini_utn_p + p->ma_npag * DIM_PAGINA, [](paddr, int) {});$/;"	f	function:distruggi_processo	file:
+__anond897b8910802	sistema/sistema.cpp	/^		[](vaddr) { return alloca_frame(); }) != last_vaddr + heap_size)$/;"	f	function:carica_modulo	file:
+_start	io/io.s	/^_start:$/;"	l
+_start	sistema/sistema.s	/^_start:				\/\/ entry point$/;"	l
+_start	utente/utente.s	/^_start:$/;"	l
+a_abort_p	sistema/sistema.s	/^a_abort_p:$/;"	l
+a_access	sistema/sistema.s	/^a_access:$/;"	l
+a_activate_p	sistema/sistema.s	/^a_activate_p:$/;"	l
+a_activate_pe	sistema/sistema.s	/^a_activate_pe:$/;"	l
+a_delay	sistema/sistema.s	/^a_delay:$/;"	l
+a_dmareadhd_n	io/io.s	/^a_dmareadhd_n:$/;"	l
+a_dmawritehd_n	io/io.s	/^a_dmawritehd_n:$/;"	l
+a_do_log	sistema/sistema.s	/^a_do_log:$/;"	l
+a_fill_gate	sistema/sistema.s	/^a_fill_gate:$/;"	l
+a_getiomeminfo	io/io.s	/^a_getiomeminfo:$/;"	l
+a_getmeminfo	sistema/sistema.s	/^a_getmeminfo:$/;"	l
+a_iniconsole	io/io.s	/^a_iniconsole:$/;"	l
+a_io_panic	sistema/sistema.s	/^a_io_panic:$/;"	l
+a_ma_attach	sistema/sistema.s	/^a_ma_attach:$/;"	l
+a_ma_cont	sistema/sistema.s	/^a_ma_cont:$/;"	l
+a_ma_map	sistema/sistema.s	/^a_ma_map:$/;"	l
+a_ma_wait	sistema/sistema.s	/^a_ma_wait:$/;"	l
+a_p	sistema/sistema.cpp	/^des_proc *a_p[MAX_IRQ];$/;"	v	typeref:typename:des_proc * []
+a_readconsole	io/io.s	/^a_readconsole:$/;"	l
+a_readhd_n	io/io.s	/^a_readhd_n:$/;"	l
+a_sem_ini	sistema/sistema.s	/^a_sem_ini:$/;"	l
+a_sem_signal	sistema/sistema.s	/^a_sem_signal:$/;"	l
+a_sem_wait	sistema/sistema.s	/^a_sem_wait:$/;"	l
+a_terminate_p	sistema/sistema.s	/^a_terminate_p:$/;"	l
+a_trasforma	sistema/sistema.s	/^a_trasforma:$/;"	l
+a_wfi	sistema/sistema.s	/^a_wfi:$/;"	l
+a_writeconsole	io/io.s	/^a_writeconsole:$/;"	l
+a_writehd_n	io/io.s	/^a_writehd_n:$/;"	l
+abort_p	io/io.s	/^abort_p:$/;"	l
+ac_exc	/home/giuseppe/Compile/libce/64/ac_exc.s	/^ac_exc:$/;"	l
+ac_exc	sistema/sistema.s	/^ac_exc:$/;"	l
+access	io/io.s	/^access:$/;"	l
+activate_p	io/io.s	/^activate_p:$/;"	l
+activate_p	sistema/sistema.s	/^activate_p:$/;"	l
+activate_p	utente/utente.s	/^activate_p:$/;"	l
+activate_pe	io/io.s	/^activate_pe:$/;"	l
+add_expected_npf	utente/utente.cpp	/^void add_expected_npf(int n)$/;"	f	typeref:typename:void
+addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t addr;$/;"	m	struct:multiboot_aout_symbol_table	typeref:typename:multiboot_uint32_t
+addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t addr;$/;"	m	struct:multiboot_elf_section_header_table	typeref:typename:multiboot_uint32_t
+addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint64_t addr;$/;"	m	struct:multiboot_mmap_entry	typeref:typename:multiboot_uint64_t
+agg_proc	util/parse.c	/^void agg_proc(const char *nome_proc, const char *corpo_proc, const char *par_att,$/;"	f	typeref:typename:void
+agg_riga	util/parse.c	/^void agg_riga(int sez, char *r)$/;"	f	typeref:typename:void
+agg_sem	util/parse.c	/^void agg_sem(const char *nome_sem, int valore)$/;"	f	typeref:typename:void
+aggiungi_pe	sistema/sistema.cpp	/^bool aggiungi_pe(des_proc *p, natw tipo, natb irq)$/;"	f	typeref:typename:bool
+align	utente/utente.cpp	/^vaddr align(vaddr v)$/;"	f	typeref:typename:vaddr
+align_val_t	/home/giuseppe/CE/include/ce/libce.h	/^enum class align_val_t : size_t {};$/;"	g	typeref:typename:size_t
+allinea	/home/giuseppe/CE/include/ce/libce.h	/^T constexpr allinea(T v, size_t a) {$/;"	f	typeref:typename:T 
+alloc_aligned	/home/giuseppe/Compile/libce/alloc_aligned.cpp	/^void *alloc_aligned(size_t dim, align_val_t a)$/;"	f	typeref:typename:void *
+alloca	/home/giuseppe/Compile/libce/alloca.cpp	/^void* alloca(size_t dim)$/;"	f	typeref:typename:void *
+alloca_frame	sistema/sistema.cpp	/^paddr alloca_frame()$/;"	f	typeref:typename:paddr
+alloca_proc_id	sistema/sistema.cpp	/^natl alloca_proc_id(des_proc *p)$/;"	f	typeref:typename:natl
+alloca_sem	sistema/sistema.cpp	/^natl alloca_sem()$/;"	f	typeref:typename:natl
+alloca_tab	sistema/sistema.cpp	/^paddr alloca_tab()$/;"	f	typeref:typename:paddr
+aout_sym	/home/giuseppe/CE/include/ce/mboot.h	/^    multiboot_aout_symbol_table_t aout_sym;$/;"	m	union:multiboot_info::__anon7dac2af5010a	typeref:typename:multiboot_aout_symbol_table_t
+apic	/home/giuseppe/CE/include/ce/apic.h	/^namespace apic {$/;"	n
+apic	/home/giuseppe/Compile/libce/IOAPIC_EOIR.cpp	/^namespace apic {$/;"	n	file:
+apic	/home/giuseppe/Compile/libce/IOREGSEL-IOWIN.cpp	/^namespace apic {$/;"	n	file:
+apic_in	/home/giuseppe/Compile/libce/apic_in.cpp	/^natl apic_in(natb off)$/;"	f	typeref:typename:natl
+apic_init	/home/giuseppe/Compile/libce/apic_init.cpp	/^bool apic_init()$/;"	f	typeref:typename:bool
+apic_out	/home/giuseppe/Compile/libce/apic_out.cpp	/^void apic_out(natb off, natl v)$/;"	f	typeref:typename:void
+apic_read_rth	/home/giuseppe/Compile/libce/apic_read_rth.cpp	/^natl apic_read_rth(natb irq)$/;"	f	typeref:typename:natl
+apic_read_rtl	/home/giuseppe/Compile/libce/apic_read_rtl.cpp	/^natl apic_read_rtl(natb irq)$/;"	f	typeref:typename:natl
+apic_reset	/home/giuseppe/Compile/libce/apic_reset.cpp	/^void apic_reset()$/;"	f	typeref:typename:void
+apic_send_EOI	/home/giuseppe/Compile/libce/apic_send_EOI.cpp	/^extern "C" void apic_send_EOI()$/;"	f	typeref:typename:void
+apic_set_DEST	/home/giuseppe/Compile/libce/apic_set_DEST.cpp	/^void apic_set_DEST(natl irq, natb dest)$/;"	f	typeref:typename:void
+apic_set_IPOL	/home/giuseppe/Compile/libce/apic_set_IPOL.cpp	/^void apic_set_IPOL(natl irq, bool v)$/;"	f	typeref:typename:void
+apic_set_MIRQ	/home/giuseppe/Compile/libce/apic_set_MIRQ.cpp	/^void apic_set_MIRQ(natl ir, bool v)$/;"	f	typeref:typename:void
+apic_set_TRGM	/home/giuseppe/Compile/libce/apic_set_TRGM.cpp	/^void apic_set_TRGM(natl irq, bool v)$/;"	f	typeref:typename:void
+apic_set_VECT	/home/giuseppe/Compile/libce/apic_set_VECT.cpp	/^void apic_set_VECT(natl ir, natb vec)$/;"	f	typeref:typename:void
+apic_write_rth	/home/giuseppe/Compile/libce/apic_write_rth.cpp	/^void apic_write_rth(natb irq, natl w)$/;"	f	typeref:typename:void
+apic_write_rtl	/home/giuseppe/Compile/libce/apic_write_rtl.cpp	/^void apic_write_rtl(natb irq, natl w)$/;"	f	typeref:typename:void
+apm_table	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t apm_table;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+array_dess	sistema/sistema.cpp	/^des_sem array_dess[MAX_SEM * 2];$/;"	v	typeref:typename:des_sem[]
+atteso	util/parse.c	/^void atteso(const char *msg, char c)$/;"	f	typeref:typename:void
+attiva_timer	/home/giuseppe/Compile/libce/attiva_timer.cpp	/^void attiva_timer(natw N)$/;"	f	typeref:typename:void
+attr	/home/giuseppe/Compile/libce/attr.cpp	/^natw attr = 0x0F;$/;"	v	namespace:vid	typeref:typename:natw
+avanza	util/parse.c	/^void avanza()$/;"	f	typeref:typename:void
+b2s	utente/utente.cpp	/^const char *b2s(bool b)$/;"	f	typeref:typename:const char *
+backtrace	sistema/sistema.cpp	/^void backtrace(des_proc *p, log_sev sev, const char* msg)$/;"	f	typeref:typename:void
+base	/home/giuseppe/CE/include/ce/vm.h	/^static inline vaddr base(vaddr v, int liv)$/;"	f	typeref:typename:vaddr
+blue	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint8_t blue;$/;"	m	struct:multiboot_color	typeref:typename:multiboot_uint8_t
+bm	/home/giuseppe/CE/include/ce/bm.h	/^namespace bm {$/;"	n
+bm_ack	/home/giuseppe/Compile/libce/bm_ack.cpp	/^void bm_ack()$/;"	f	typeref:typename:void
+bm_find	/home/giuseppe/Compile/libce/bm_find.cpp	/^bool bm_find(natb& bus, natb& dev, natb& fun)$/;"	f	typeref:typename:bool
+bm_init	/home/giuseppe/Compile/libce/bm_init.cpp	/^void bm_init(natb bus, natb dev, natb fun)$/;"	f	typeref:typename:void
+bm_prepare	/home/giuseppe/Compile/libce/bm_prepare.cpp	/^void bm_prepare(paddr prd, bool write)$/;"	f	typeref:typename:void
+bm_start	/home/giuseppe/Compile/libce/bm_start.cpp	/^void bm_start()$/;"	f	typeref:typename:void
+bochsvga	/home/giuseppe/CE/include/ce/bochsvga.h	/^namespace bochsvga {$/;"	n
+bochsvga	/home/giuseppe/Compile/libce/bochsvga.cpp	/^namespace bochsvga {$/;"	n	file:
+bochsvga	/home/giuseppe/Compile/libce/bochsvga_framebuffer.cpp	/^namespace bochsvga {$/;"	n	file:
+bochsvga_config	/home/giuseppe/Compile/libce/bochsvga_config.cpp	/^volatile natb* bochsvga_config(natw max_screenx, natw max_screeny)$/;"	f	typeref:typename:volatile natb *
+bochsvga_init	/home/giuseppe/Compile/libce/bochsvga_init.cpp	/^bool bochsvga_init()$/;"	f	typeref:typename:bool
+boot_device	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t boot_device;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+boot_loader_name	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t boot_loader_name;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+bound_re	/home/giuseppe/Compile/libce/64/bound_re.s	/^bound_re:$/;"	l
+bound_re	sistema/sistema.s	/^bound_re:$/;"	l
+breakpoint	/home/giuseppe/Compile/libce/64/breakpoint.s	/^breakpoint:$/;"	l
+breakpoint	sistema/sistema.s	/^breakpoint:$/;"	l
+bss_end_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t bss_end_addr;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+buf	utente/utente.cpp	/^natb buf[MAX_MA_PAGES] __attribute__((aligned(DIM_PAGINA)));$/;"	v	typeref:typename:natb[]
+c_abort_p	sistema/sistema.cpp	/^extern "C" void c_abort_p(bool selfdump)$/;"	f	typeref:typename:void
+c_access	sistema/sistema.cpp	/^extern "C" bool c_access(vaddr begin, natq dim, bool writeable, bool shared = true)$/;"	f	typeref:typename:bool
+c_activate_p	sistema/sistema.cpp	/^c_activate_p(void f(natq), natq a, natl prio, natl liv)$/;"	f	typeref:typename:void
+c_activate_pe	sistema/sistema.cpp	/^extern "C" void c_activate_pe(void f(natq), natq a, natl prio, natl liv, natb irq)$/;"	f	typeref:typename:void
+c_delay	sistema/sistema.cpp	/^extern "C" void c_delay(natl n)$/;"	f	typeref:typename:void
+c_dmareadhd_n	io/io.cpp	/^extern "C" void c_dmareadhd_n(natb vetti[], natl primo, natb quanti,$/;"	f	typeref:typename:void
+c_dmawritehd_n	io/io.cpp	/^extern "C" void c_dmawritehd_n(natb vetto[], natl primo, natb quanti)$/;"	f	typeref:typename:void
+c_do_log	sistema/sistema.cpp	/^extern "C" void c_do_log(log_sev sev, const char* buf, natl quanti)$/;"	f	typeref:typename:void
+c_driver_td	sistema/sistema.cpp	/^extern "C" void c_driver_td(void)$/;"	f	typeref:typename:void
+c_getiomeminfo	io/io.cpp	/^extern "C" natq c_getiomeminfo()$/;"	f	typeref:typename:natq
+c_getmeminfo	sistema/sistema.cpp	/^extern "C" meminfo c_getmeminfo()$/;"	f	typeref:typename:meminfo
+c_iniconsole	io/io.cpp	/^extern "C" void c_iniconsole(natb cc)$/;"	f	typeref:typename:void
+c_io_panic	sistema/sistema.cpp	/^extern "C" void c_io_panic()$/;"	f	typeref:typename:void
+c_ma_attach	sistema/sistema.cpp	/^extern "C" void c_ma_attach(natw pid, natq npag)$/;"	f	typeref:typename:void
+c_ma_cont	sistema/sistema.cpp	/^extern "C" void c_ma_cont()$/;"	f	typeref:typename:void
+c_ma_map	sistema/sistema.cpp	/^extern "C" void c_ma_map(vaddr src, vaddr dst, bool P, bool W)$/;"	f	typeref:typename:void
+c_ma_wait	sistema/sistema.cpp	/^extern "C" void c_ma_wait()$/;"	f	typeref:typename:void
+c_nmi	sistema/sistema.cpp	/^extern "C" void c_nmi()$/;"	f	typeref:typename:void
+c_readconsole	io/io.cpp	/^extern "C" natq c_readconsole(char* buff, natq quanti) \/\/$/;"	f	typeref:typename:natq
+c_readhd_n	io/io.cpp	/^extern "C" void c_readhd_n(natb vetti[], natl primo, natb quanti)$/;"	f	typeref:typename:void
+c_sem_ini	sistema/sistema.cpp	/^extern "C" void c_sem_ini(int val)$/;"	f	typeref:typename:void
+c_sem_signal	sistema/sistema.cpp	/^extern "C" void c_sem_signal(natl sem)$/;"	f	typeref:typename:void
+c_sem_wait	sistema/sistema.cpp	/^extern "C" void c_sem_wait(natl sem)$/;"	f	typeref:typename:void
+c_terminate_p	sistema/sistema.cpp	/^extern "C" void c_terminate_p()$/;"	f	typeref:typename:void
+c_trasforma	sistema/sistema.cpp	/^extern "C" paddr c_trasforma(vaddr ind_virt)$/;"	f	typeref:typename:paddr
+c_writeconsole	io/io.cpp	/^extern "C" void c_writeconsole(const char* buff, natq quanti) \/\/$/;"	f	typeref:typename:void
+c_writehd_n	io/io.cpp	/^extern "C" void c_writehd_n(natb vetto[], natl primo, natb quanti)$/;"	f	typeref:typename:void
+caf	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	natq caf;$/;"	m	struct:cfi_interp	typeref:typename:natq
+carica_IO	sistema/sistema.cpp	/^vaddr carica_IO(multiboot_module_t* mod, paddr root_tab)$/;"	f	typeref:typename:vaddr
+carica_gate	/home/giuseppe/Compile/libce/64/init_idt.s	/^.macro carica_gate num routine$/;"	m
+carica_gate	sistema/sistema.s	/^.macro carica_gate num routine dpl$/;"	m
+carica_modulo	sistema/sistema.cpp	/^vaddr carica_modulo(multiboot_module_t* mod, paddr root_tab, natq flags, natq heap_size)$/;"	f	typeref:typename:vaddr
+carica_registri	/home/giuseppe/CE/include/ce/libce.s	/^.macro carica_registri$/;"	m
+carica_registri	/home/giuseppe/Compile/libce/libce.s	/^.macro carica_registri$/;"	m
+carica_stato	sistema/sistema.s	/^carica_stato:$/;"	l
+carica_utente	sistema/sistema.cpp	/^vaddr carica_utente(multiboot_module_t* mod, paddr root_tab)$/;"	f	typeref:typename:vaddr
+cfa	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	vaddr cfa;$/;"	m	struct:cfi_interp	typeref:typename:vaddr
+cfa_offset	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	long cfa_offset;$/;"	m	struct:cfi_interp	typeref:typename:long
+cfa_register	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	int cfa_register;$/;"	m	struct:cfi_interp	typeref:typename:int
+cfi	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	cfi_d *cfi;$/;"	m	struct:cfi_interp	typeref:typename:cfi_d *
+cfi_backstep	/home/giuseppe/Compile/libce/cfi_backstep.cpp	/^bool cfi_backstep(cfi_d& cfi, vaddr rip)$/;"	f	typeref:typename:bool
+cfi_d	/home/giuseppe/CE/include/ce/cfi.h	/^struct cfi_d {$/;"	s
+cfi_interp	/home/giuseppe/CE/include/ce/cfi_internal.h	/^struct cfi_interp {$/;"	s
+cfi_mode	/home/giuseppe/CE/include/ce/cfi_internal.h	/^enum cfi_mode {$/;"	g
+cfi_reg_info	/home/giuseppe/CE/include/ce/cfi_internal.h	/^struct cfi_reg_info {$/;"	s
+char_read	/home/giuseppe/Compile/libce/char_read.cpp	/^char char_read()$/;"	f	typeref:typename:char
+char_read_int	/home/giuseppe/Compile/libce/char_read_int.cpp	/^char char_read_int()$/;"	f	typeref:typename:char
+char_write	/home/giuseppe/Compile/libce/char_write.cpp	/^void char_write(natb c) {$/;"	f	typeref:typename:void
+check_ma	sistema/sistema.cpp	/^bool check_ma(vaddr v, natq error) {$/;"	f	typeref:typename:bool
+check_ma_attach	utente/utente.cpp	/^#define check_ma_attach(/;"	d	file:
+check_ma_map	utente/utente.cpp	/^#define check_ma_map(/;"	d	file:
+check_ma_wait	utente/utente.cpp	/^#define check_ma_wait(/;"	d	file:
+checksum	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t checksum;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+cie_regs	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	cfi_reg_info cie_regs[CFI::NREG];$/;"	m	struct:cfi_interp	typeref:typename:cfi_reg_info[]
+cleanup_self_dump	sistema/sistema.s	/^cleanup_self_dump:$/;"	l
+clear_root_tab	sistema/sistema.cpp	/^void clear_root_tab(paddr dest)$/;"	f	typeref:typename:void
+clear_screen	/home/giuseppe/Compile/libce/clear_screen.cpp	/^void clear_screen(natb a) $/;"	f	typeref:typename:void
+cli	/home/giuseppe/Compile/libce/64/cli.s	/^cli:$/;"	l
+cmdline	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t cmdline;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+cmdline	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t cmdline;$/;"	m	struct:multiboot_mod_list	typeref:typename:multiboot_uint32_t
+code	/home/giuseppe/Compile/libce/pci_decode_class.cpp	/^	natb code;$/;"	m	struct:pci_class_codes_t	typeref:typename:natb	file:
+code_sys_seg	/home/giuseppe/Compile/libce/64/gdt.s	/^code_sys_seg:$/;"	l
+code_sys_seg	sistema/sistema.s	/^code_sys_seg:$/;"	l
+code_usr_seg	/home/giuseppe/Compile/libce/64/gdt.s	/^code_usr_seg:$/;"	l
+code_usr_seg	sistema/sistema.s	/^code_usr_seg:$/;"	l
+colonna	util/parse.c	/^int riga, colonna, pos;		\/* posizione corrente *\/$/;"	v	typeref:typename:int
+com1	/home/giuseppe/CE/include/ce/com1.h	/^namespace com1 {$/;"	n
+com2	/home/giuseppe/CE/include/ce/com2.h	/^namespace com2 {$/;"	n
+comando	io/io.cpp	/^	natb comando;$/;"	m	struct:des_ata	typeref:typename:natb	file:
+comm_exc	/home/giuseppe/Compile/libce/64/comm_exc.s	/^comm_exc:$/;"	l
+componi_gate	/home/giuseppe/Compile/libce/64/componi_gate.s	/^componi_gate:$/;"	l
+config_table	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t config_table;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+console	io/io.cpp	/^} console;$/;"	v	typeref:struct:des_console
+console_init	io/io.cpp	/^bool console_init()$/;"	f	typeref:typename:bool
+cont	io/io.cpp	/^	natb cont;$/;"	m	struct:des_ata	typeref:typename:natb	file:
+cont	io/io.cpp	/^	natq cont;$/;"	m	struct:des_console	typeref:typename:natq	file:
+contesto	sistema/sistema.cpp	/^	natq contesto[N_REG];$/;"	m	struct:des_proc	typeref:typename:natq[]	file:
+conv	/home/giuseppe/Compile/libce/conv.cpp	/^char conv(natb c) {$/;"	f	typeref:typename:char
+copia_car	util/parse.c	/^void copia_car()$/;"	f	typeref:typename:void
+copia_nome	util/parse.c	/^void copia_nome()$/;"	f	typeref:typename:void
+coproc_so	/home/giuseppe/Compile/libce/64/coproc_so.s	/^coproc_so:$/;"	l
+coproc_so	sistema/sistema.s	/^coproc_so:$/;"	l
+copy	/home/giuseppe/Compile/libce/copy.cpp	/^char* copy(const char* src, char* dst)$/;"	f	typeref:typename:char *
+copy_des	sistema/sistema.cpp	/^void copy_des(paddr src, paddr dst, natl i, natl n)$/;"	f	typeref:typename:void
+copy_segment	sistema/sistema.cpp	/^struct copy_segment {$/;"	s	file:
+counter	sistema/sistema.cpp	/^	int counter;$/;"	m	struct:des_sem	typeref:typename:int	file:
+cr3	sistema/sistema.cpp	/^	paddr cr3;$/;"	m	struct:des_proc	typeref:typename:paddr	file:
+crea_dummy	sistema/sistema.cpp	/^natl crea_dummy()$/;"	f	typeref:typename:natl
+crea_finestra_FM	sistema/sistema.cpp	/^bool crea_finestra_FM(paddr root_tab)$/;"	f	typeref:typename:bool
+crea_main_sistema	sistema/sistema.cpp	/^natl crea_main_sistema(natq mbi)$/;"	f	typeref:typename:natl
+crea_pila	sistema/sistema.cpp	/^bool crea_pila(paddr root_tab, vaddr bottom, natq size, natl liv)$/;"	f	typeref:typename:bool
+crea_processo	sistema/sistema.cpp	/^des_proc* crea_processo(void f(natq), natq a, int prio, char liv, bool IF)$/;"	f	typeref:typename:des_proc *
+crea_spazio_condiviso	sistema/sistema.cpp	/^bool crea_spazio_condiviso(paddr root_tab, paddr mbi_)$/;"	f	typeref:typename:bool
+cur	/home/giuseppe/CE/include/ce/vm.h	/^		vaddr cur, end;$/;"	m	struct:tab_iter::stack	typeref:typename:vaddr
+cur_loc	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	vaddr cur_loc;$/;"	m	struct:cfi_interp	typeref:typename:vaddr
+currfile	util/parse.c	/^const char* currfile;$/;"	v	typeref:typename:const char *
+cursore	/home/giuseppe/Compile/libce/cursore.cpp	/^void cursore()$/;"	f	typeref:typename:void
+d_attesa	sistema/sistema.cpp	/^	natl d_attesa;$/;"	m	struct:richiesta	typeref:typename:natl	file:
+daf	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	long daf;$/;"	m	struct:cfi_interp	typeref:typename:long
+data_usr_seg	/home/giuseppe/Compile/libce/64/gdt.s	/^data_usr_seg:$/;"	l
+data_usr_seg	sistema/sistema.s	/^data_usr_seg:$/;"	l
+dbg	utente/utente.cpp	/^#define dbg(/;"	d	file:
+dealloca	/home/giuseppe/Compile/libce/dealloca.cpp	/^void dealloca(void* p)$/;"	f	typeref:typename:void
+debug	/home/giuseppe/Compile/libce/64/debug.s	/^debug:$/;"	l
+debug	sistema/sistema.s	/^debug:$/;"	l
+dec_ref	sistema/sistema.cpp	/^void dec_ref(paddr f)$/;"	f	typeref:typename:void
+delay	/home/giuseppe/Compile/libce/64/delay.s	/^delay:           int   $240               # sottoprogramma di interfaccia$/;"	l
+delay	io/io.s	/^delay:$/;"	l
+delay	utente/utente.s	/^delay:$/;"	l
+depth	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t depth;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+des	/home/giuseppe/Compile/libce/pci_decode_class.cpp	/^	const char *des;$/;"	m	struct:pci_class_codes_t	typeref:typename:const char *	file:
+des_ata	io/io.cpp	/^struct des_ata {$/;"	s	file:
+des_console	io/io.cpp	/^struct des_console {$/;"	s	file:
+des_frame	sistema/sistema.cpp	/^struct des_frame {$/;"	s	file:
+des_mem	/home/giuseppe/CE/include/ce/heap.h	/^struct des_mem {$/;"	s
+des_p	sistema/sistema.cpp	/^extern "C" des_proc *des_p(natl id)$/;"	f	typeref:typename:des_proc *
+des_proc	/home/giuseppe/Compile/libce/do_log.cpp	/^struct des_proc {$/;"	s	file:
+des_proc	/home/giuseppe/Compile/libce/esecuzione.cpp	/^struct des_proc {$/;"	s	file:
+des_proc	sistema/sistema.cpp	/^struct des_proc {$/;"	s	file:
+des_sem	sistema/sistema.cpp	/^struct des_sem {$/;"	s	file:
+des_tss	/home/giuseppe/Compile/libce/64/gdt.s	/^des_tss:$/;"	l
+dev_na	/home/giuseppe/Compile/libce/64/dev_na.s	/^dev_na:$/;"	l
+dev_na	sistema/sistema.s	/^dev_na:$/;"	l
+die	utente/utente.cpp	/^#define die(/;"	d	file:
+dim	io/io.cpp	/^	natq dim;$/;"	m	struct:des_console	typeref:typename:natq	file:
+dim_region	/home/giuseppe/CE/include/ce/vm.h	/^static inline constexpr natq dim_region(int liv)$/;"	f	typeref:typename:natq
+dimensione	/home/giuseppe/CE/include/ce/heap.h	/^	size_t dimensione;$/;"	m	struct:des_mem	typeref:typename:size_t
+disable_8259	/home/giuseppe/Compile/libce/64/8259.s	/^disable_8259:$/;"	l
+disable_intr_kbd	/home/giuseppe/Compile/libce/disable_intr_kbd.cpp	/^void disable_intr_kbd()$/;"	f	typeref:typename:void
+disponibile	/home/giuseppe/Compile/libce/disponibile.cpp	/^size_t disponibile()$/;"	f	typeref:typename:size_t
+distruggi_pila	sistema/sistema.cpp	/^void distruggi_pila(paddr root_tab, vaddr bottom, natq size)$/;"	f	typeref:typename:void
+distruggi_pila_precedente	sistema/sistema.cpp	/^extern "C" void distruggi_pila_precedente() {$/;"	f	typeref:typename:void
+distruggi_processo	sistema/sistema.cpp	/^void distruggi_processo(des_proc* p)$/;"	f	typeref:typename:void
+divide_error	/home/giuseppe/Compile/libce/64/divide_error.s	/^divide_error:$/;"	l
+divide_error	sistema/sistema.s	/^divide_error:$/;"	l
+dmareadhd_n	utente/utente.s	/^dmareadhd_n:$/;"	l
+dmastarthd_in	io/io.cpp	/^void dmastarthd_in(des_ata *d, natb vetti[], natl primo, natb quanti)$/;"	f	typeref:typename:void
+dmastarthd_out	io/io.cpp	/^void dmastarthd_out(des_ata *d, natb vetto[], natl primo, natb quanti)$/;"	f	typeref:typename:void
+dmawritehd_n	utente/utente.s	/^dmawritehd_n:$/;"	l
+do_log	/home/giuseppe/Compile/libce/do_log.cpp	/^extern "C" void do_log(log_sev sev, const char* buf, natl quanti)$/;"	f	typeref:typename:void
+do_log	io/io.s	/^do_log:$/;"	l
+do_log	utente/utente.s	/^do_log:$/;"	l
+done	/home/giuseppe/CE/include/ce/vm.h	/^	bool done() const { return !sp()->tab; }$/;"	f	class:tab_iter	typeref:typename:bool
+double_fault	/home/giuseppe/Compile/libce/64/double_fault.s	/^double_fault:$/;"	l
+double_fault	sistema/sistema.s	/^double_fault:$/;"	l
+down	/home/giuseppe/Compile/libce/tab_iter_down.cpp	/^bool tab_iter::down()$/;"	f	class:tab_iter	typeref:typename:bool
+drain_kbd	/home/giuseppe/Compile/libce/drain_kbd.cpp	/^void drain_kbd()$/;"	f	typeref:typename:void
+driver_td	sistema/sistema.s	/^driver_td:$/;"	l
+drives_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t drives_addr;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+drives_length	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t drives_length;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+dummy	sistema/sistema.cpp	/^void dummy(natq i)$/;"	f	typeref:typename:void
+dw1	/home/giuseppe/Compile/libce/gate_init.cpp	/^	natl dw1;$/;"	m	struct:gate	typeref:typename:natl	file:
+dw2	/home/giuseppe/Compile/libce/gate_init.cpp	/^	natl dw2;$/;"	m	struct:gate	typeref:typename:natl	file:
+dw3	/home/giuseppe/Compile/libce/gate_init.cpp	/^	natl dw3;$/;"	m	struct:gate	typeref:typename:natl	file:
+dw4	/home/giuseppe/Compile/libce/gate_init.cpp	/^	natl dw4;$/;"	m	struct:gate	typeref:typename:natl	file:
+e_ehsize	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Half    e_ehsize;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Half
+e_entry	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Addr    e_entry;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Addr
+e_flags	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word    e_flags;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Word
+e_ident	/home/giuseppe/CE/include/ce/elf64.h	/^        unsigned char e_ident[EI_NIDENT];$/;"	m	struct:__anon2c6aacd50108	typeref:typename:unsigned char[]
+e_machine	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Half    e_machine;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Half
+e_phentsize	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Half    e_phentsize;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Half
+e_phnum	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Half    e_phnum;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Half
+e_phoff	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Off     e_phoff;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Off
+e_shentsize	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Half    e_shentsize;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Half
+e_shnum	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Half    e_shnum;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Half
+e_shoff	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Off     e_shoff;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Off
+e_shstrndx	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Half    e_shstrndx;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Half
+e_type	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Half    e_type;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Half
+e_version	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word    e_version;$/;"	m	struct:__anon2c6aacd50108	typeref:typename:Elf64_Word
+eccezioni	sistema/sistema.cpp	/^static const char *eccezioni[] = {$/;"	v	typeref:typename:const char * []	file:
+eh_frame	/home/giuseppe/CE/include/ce/cfi.h	/^	vaddr eh_frame;$/;"	m	struct:cfi_d	typeref:typename:vaddr
+eh_frame_len	/home/giuseppe/CE/include/ce/cfi.h	/^	natq eh_frame_len;$/;"	m	struct:cfi_d	typeref:typename:natq
+elf_sec	/home/giuseppe/CE/include/ce/mboot.h	/^    multiboot_elf_section_header_table_t elf_sec;$/;"	m	union:multiboot_info::__anon7dac2af5010a	typeref:typename:multiboot_elf_section_header_table_t
+emetti	util/parse.c	/^void emetti(const char *t)$/;"	f	typeref:typename:void
+emetti_line	util/parse.c	/^void emetti_line()$/;"	f	typeref:typename:void
+emetti_line2	util/parse.c	/^void emetti_line2()$/;"	f	typeref:typename:void
+enable_8259	/home/giuseppe/Compile/libce/64/8259.s	/^enable_8259:$/;"	l
+enable_intr_kbd	/home/giuseppe/Compile/libce/enable_intr_kbd.cpp	/^void enable_intr_kbd()$/;"	f	typeref:typename:void
+end	/home/giuseppe/CE/include/ce/vm.h	/^		vaddr cur, end;$/;"	m	struct:tab_iter::stack	typeref:typename:vaddr
+end_gdt	/home/giuseppe/Compile/libce/64/gdt.s	/^end_gdt:$/;"	l
+end_gdt	sistema/sistema.s	/^end_gdt:$/;"	l
+end_idt	sistema/sistema.s	/^end_idt:$/;"	l
+end_program	sistema/sistema.s	/^end_program:$/;"	l
+end_subtest	utente/utente.cpp	/^#define end_subtest(/;"	d	file:
+end_test	utente/utente.cpp	/^#define end_test(/;"	d	file:
+end_test	utente/utente.cpp	/^natl end_test; \/\/ sync$/;"	v	typeref:typename:natl
+entry_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t entry_addr;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+err	utente/utente.cpp	/^#define err(/;"	d	file:
+errore	util/parse.c	/^void errore(const char *msg)$/;"	f	typeref:typename:void
+esecuzione	/home/giuseppe/Compile/libce/esecuzione.cpp	/^struct des_proc *esecuzione = &fake_process;$/;"	v	typeref:struct:des_proc *
+esecuzione	sistema/sistema.cpp	/^des_proc *esecuzione;$/;"	v	typeref:typename:des_proc *
+esecuzione_precedente	sistema/sistema.cpp	/^des_proc *esecuzione_precedente;$/;"	v	typeref:typename:des_proc *
+esternAta	io/io.cpp	/^void esternAta(int h)			\/\/ codice commune ai 2 processi esterni ATA$/;"	f	typeref:typename:void
+estern_kbd	io/io.cpp	/^void estern_kbd(int h) \/\/$/;"	f	typeref:typename:void
+exc_error	sistema/sistema.s	/^exc_error:$/;"	l
+exec	/home/giuseppe/Compile/libce/cfi_interp_exec.cpp	/^void cfi_interp::exec()$/;"	f	class:cfi_interp	typeref:typename:void
+expected_npf	utente/utente.cpp	/^natl expected_npf;$/;"	v	typeref:typename:natl
+extr_IND_FISICO	/home/giuseppe/CE/include/ce/vm.h	/^static inline paddr extr_IND_FISICO(tab_entry descrittore)$/;"	f	typeref:typename:paddr
+f2s	utente/utente.cpp	/^const char *f2s(natq f, char *buf)$/;"	f	typeref:typename:const char *
+fake_process	/home/giuseppe/Compile/libce/esecuzione.cpp	/^} fake_process = { 0xFFFF };$/;"	v	typeref:struct:des_proc
+file_elem	util/parse.c	/^struct file_elem {$/;"	s	file:
+fill_gate	io/io.s	/^fill_gate:$/;"	l
+fill_io_gate	io/io.s	/^.macro fill_io_gate gate off$/;"	m
+fill_io_gates	io/io.s	/^fill_io_gates:$/;"	l
+fin_mio_c	sistema/sistema.cpp	/^const vaddr fin_mio_c = ini_mio_c + dim_region(MAX_LIV - 1) * N_MIO_C;$/;"	v	typeref:typename:const vaddr
+fin_sis_c	sistema/sistema.cpp	/^const vaddr fin_sis_c = ini_sis_c + dim_region(MAX_LIV - 1) * N_SIS_C;$/;"	v	typeref:typename:const vaddr
+fin_sis_p	sistema/sistema.cpp	/^const vaddr fin_sis_p = ini_sis_p + dim_region(MAX_LIV - 1) * N_SIS_P;$/;"	v	typeref:typename:const vaddr
+fin_utn_c	sistema/sistema.cpp	/^const vaddr fin_utn_c = ini_utn_c + dim_region(MAX_LIV - 1) * N_UTN_C;$/;"	v	typeref:typename:const vaddr
+fin_utn_c	utente/utente.cpp	/^const vaddr fin_utn_c = ini_utn_c + dim_region(MAX_LIV - 1) * N_UTN_C;$/;"	v	typeref:typename:const vaddr
+fin_utn_p	sistema/sistema.cpp	/^const vaddr fin_utn_p = ini_utn_p + dim_region(MAX_LIV - 1) * N_UTN_P;$/;"	v	typeref:typename:const vaddr
+find_eh_frame	/home/giuseppe/Compile/libce/find_eh_frame.cpp	/^bool find_eh_frame(vaddr elf, vaddr& eh_frame, natq& eh_frame_len)$/;"	f	typeref:typename:bool
+fine	util/parse.c	/^struct file_elem *utente[2], *fine[2];$/;"	v	typeref:struct:file_elem * [2]* [2]
+flags	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t flags;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+flags	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t flags;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+flog	/home/giuseppe/Compile/libce/flog.cpp	/^extern "C" void flog(log_sev sev, const char* fmt, ...)$/;"	f	typeref:typename:void
+fp_exc	/home/giuseppe/Compile/libce/64/fp_exc.s	/^fp_exc:$/;"	l
+fp_exc	sistema/sistema.s	/^fp_exc:$/;"	l
+framebuffer	/home/giuseppe/Compile/libce/bochsvga_framebuffer.cpp	/^	volatile void* framebuffer;$/;"	v	namespace:bochsvga	typeref:typename:volatile void *
+framebuffer_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint64_t framebuffer_addr;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint64_t
+framebuffer_blue_field_position	/home/giuseppe/CE/include/ce/mboot.h	/^      multiboot_uint8_t framebuffer_blue_field_position;$/;"	m	struct:multiboot_info::__anon7dac2af5020a::__anon7dac2af50408	typeref:typename:multiboot_uint8_t
+framebuffer_blue_mask_size	/home/giuseppe/CE/include/ce/mboot.h	/^      multiboot_uint8_t framebuffer_blue_mask_size;$/;"	m	struct:multiboot_info::__anon7dac2af5020a::__anon7dac2af50408	typeref:typename:multiboot_uint8_t
+framebuffer_bpp	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint8_t framebuffer_bpp;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint8_t
+framebuffer_green_field_position	/home/giuseppe/CE/include/ce/mboot.h	/^      multiboot_uint8_t framebuffer_green_field_position;$/;"	m	struct:multiboot_info::__anon7dac2af5020a::__anon7dac2af50408	typeref:typename:multiboot_uint8_t
+framebuffer_green_mask_size	/home/giuseppe/CE/include/ce/mboot.h	/^      multiboot_uint8_t framebuffer_green_mask_size;$/;"	m	struct:multiboot_info::__anon7dac2af5020a::__anon7dac2af50408	typeref:typename:multiboot_uint8_t
+framebuffer_height	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t framebuffer_height;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+framebuffer_palette_addr	/home/giuseppe/CE/include/ce/mboot.h	/^      multiboot_uint32_t framebuffer_palette_addr;$/;"	m	struct:multiboot_info::__anon7dac2af5020a::__anon7dac2af50308	typeref:typename:multiboot_uint32_t
+framebuffer_palette_num_colors	/home/giuseppe/CE/include/ce/mboot.h	/^      multiboot_uint16_t framebuffer_palette_num_colors;$/;"	m	struct:multiboot_info::__anon7dac2af5020a::__anon7dac2af50308	typeref:typename:multiboot_uint16_t
+framebuffer_pitch	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t framebuffer_pitch;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+framebuffer_red_field_position	/home/giuseppe/CE/include/ce/mboot.h	/^      multiboot_uint8_t framebuffer_red_field_position;$/;"	m	struct:multiboot_info::__anon7dac2af5020a::__anon7dac2af50408	typeref:typename:multiboot_uint8_t
+framebuffer_red_mask_size	/home/giuseppe/CE/include/ce/mboot.h	/^      multiboot_uint8_t framebuffer_red_mask_size;$/;"	m	struct:multiboot_info::__anon7dac2af5020a::__anon7dac2af50408	typeref:typename:multiboot_uint8_t
+framebuffer_type	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint8_t framebuffer_type;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint8_t
+framebuffer_width	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t framebuffer_width;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+free_interna	/home/giuseppe/Compile/libce/free_interna.cpp	/^void free_interna(void* indirizzo, size_t quanti)$/;"	f	typeref:typename:void
+gate	/home/giuseppe/Compile/libce/gate_init.cpp	/^struct gate {$/;"	s	file:
+gate_init	/home/giuseppe/Compile/libce/gate_init.cpp	/^void gate_init(natl num, void routine())$/;"	f	typeref:typename:void
+gdb_breakpoint	sistema/sistema.cpp	/^void gdb_breakpoint() { asm volatile ("":::"memory"); }$/;"	f	typeref:typename:void
+gdt	/home/giuseppe/Compile/libce/64/gdt.s	/^gdt:$/;"	l
+gdt	sistema/sistema.s	/^gdt:$/;"	l
+gdt_pointer	/home/giuseppe/Compile/libce/64/gdt.s	/^gdt_pointer:$/;"	l
+gdt_pointer	sistema/sistema.s	/^gdt_pointer:$/;"	l
+gestore_eccezioni	/home/giuseppe/Compile/libce/gestore_eccezioni.cpp	/^extern "C" void gestore_eccezioni(unsigned long tipo, unsigned long err, void* eip)$/;"	f	typeref:typename:void
+gestore_eccezioni	sistema/sistema.cpp	/^extern "C" void gestore_eccezioni(int tipo, natq errore, vaddr rip)$/;"	f	typeref:typename:void
+get_code	/home/giuseppe/Compile/libce/get_code.cpp	/^natb get_code()$/;"	f	typeref:typename:natb
+get_code_int	/home/giuseppe/Compile/libce/get_code_int.cpp	/^natb get_code_int()$/;"	f	typeref:typename:natb
+get_e	/home/giuseppe/CE/include/ce/vm.h	/^	tab_entry& get_e() const {$/;"	f	class:tab_iter	typeref:typename:tab_entry &
+get_entry	/home/giuseppe/CE/include/ce/vm.h	/^static inline tab_entry& get_entry(paddr tab, natl index)$/;"	f	typeref:typename:tab_entry &
+get_l	/home/giuseppe/CE/include/ce/vm.h	/^	int get_l() const {$/;"	f	class:tab_iter	typeref:typename:int
+get_ref	sistema/sistema.cpp	/^natl get_ref(paddr f)$/;"	f	typeref:typename:natl
+get_tab	/home/giuseppe/CE/include/ce/vm.h	/^	paddr get_tab() const {$/;"	f	class:tab_iter	typeref:typename:paddr
+get_v	/home/giuseppe/CE/include/ce/vm.h	/^	vaddr get_v() const {$/;"	f	class:tab_iter	typeref:typename:vaddr
+getiomeminfo	utente/utente.s	/^getiomeminfo:$/;"	l
+getmeminfo	io/io.s	/^getmeminfo:$/;"	l
+getmeminfo	utente/utente.s	/^getmeminfo:$/;"	l
+getpid	utente/lib.cpp	/^natl getpid()$/;"	f	typeref:typename:natl
+green	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint8_t green;$/;"	m	struct:multiboot_color	typeref:typename:multiboot_uint8_t
+halt	sistema/sistema.s	/^halt:$/;"	l
+handler_0	sistema/sistema.s	/^handler_0:$/;"	l
+handler_1	sistema/sistema.s	/^handler_1:$/;"	l
+handler_10	sistema/sistema.s	/^handler_10:$/;"	l
+handler_11	sistema/sistema.s	/^handler_11:$/;"	l
+handler_12	sistema/sistema.s	/^handler_12:$/;"	l
+handler_13	sistema/sistema.s	/^handler_13:$/;"	l
+handler_14	sistema/sistema.s	/^handler_14:$/;"	l
+handler_15	sistema/sistema.s	/^handler_15:$/;"	l
+handler_16	sistema/sistema.s	/^handler_16:$/;"	l
+handler_17	sistema/sistema.s	/^handler_17:$/;"	l
+handler_18	sistema/sistema.s	/^handler_18:$/;"	l
+handler_19	sistema/sistema.s	/^handler_19:$/;"	l
+handler_2	sistema/sistema.s	/^handler_2:$/;"	l
+handler_20	sistema/sistema.s	/^handler_20:$/;"	l
+handler_21	sistema/sistema.s	/^handler_21:$/;"	l
+handler_22	sistema/sistema.s	/^handler_22:$/;"	l
+handler_23	sistema/sistema.s	/^handler_23:$/;"	l
+handler_24	sistema/sistema.s	/^handler_24:$/;"	l
+handler_3	sistema/sistema.s	/^handler_3:$/;"	l
+handler_4	sistema/sistema.s	/^handler_4:$/;"	l
+handler_5	sistema/sistema.s	/^handler_5:$/;"	l
+handler_6	sistema/sistema.s	/^handler_6:$/;"	l
+handler_7	sistema/sistema.s	/^handler_7:$/;"	l
+handler_8	sistema/sistema.s	/^handler_8:$/;"	l
+handler_9	sistema/sistema.s	/^handler_9:$/;"	l
+hd	/home/giuseppe/CE/include/ce/hd.h	/^namespace hd {$/;"	n
+hd	io/io.cpp	/^} hd;$/;"	v	typeref:struct:des_ata
+hd_ack_intr	/home/giuseppe/Compile/libce/hd_ack_intr.cpp	/^void hd_ack_intr()$/;"	f	typeref:typename:void
+hd_cmd	/home/giuseppe/CE/include/ce/libce.h	/^enum hd_cmd {$/;"	g
+hd_disable_intr	/home/giuseppe/Compile/libce/hd_disable_intr.cpp	/^void hd_disable_intr()$/;"	f	typeref:typename:void
+hd_enable_intr	/home/giuseppe/Compile/libce/hd_enable_intr.cpp	/^void hd_enable_intr()$/;"	f	typeref:typename:void
+hd_init	io/io.cpp	/^bool hd_init()$/;"	f	typeref:typename:bool
+hd_input_sect	/home/giuseppe/Compile/libce/hd_input.sect.cpp	/^void hd_input_sect(natb vetto[])$/;"	f	typeref:typename:void
+hd_output_sect	/home/giuseppe/Compile/libce/hd_output_sect.cpp	/^void hd_output_sect(natb vetto[])$/;"	f	typeref:typename:void
+hd_prd	io/io.s	/^hd_prd:$/;"	l
+hd_prepare_prd	io/io.cpp	/^void hd_prepare_prd(natb* vett, natb quanti)$/;"	f	typeref:typename:void
+hd_set_lba	/home/giuseppe/Compile/libce/hd_set_lba.cpp	/^void hd_set_lba(natl lba)$/;"	f	typeref:typename:void
+hd_start_cmd	/home/giuseppe/Compile/libce/hd_start_cmd.cpp	/^void hd_start_cmd(natl lba, natb n, natb cmd)$/;"	f	typeref:typename:void
+hd_wait_for_br	/home/giuseppe/Compile/libce/hd_wait_for_br.cpp	/^void hd_wait_for_br()$/;"	f	typeref:typename:void
+header_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t header_addr;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+heap_init	/home/giuseppe/Compile/libce/heap_init.cpp	/^void heap_init(void *start, size_t size)$/;"	f	typeref:typename:void
+heap_libero	include/sys.h	/^	natl heap_libero;$/;"	m	struct:meminfo	typeref:typename:natl
+height	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t height;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+hex_map	/home/giuseppe/Compile/libce/htostr.cpp	/^static const char hex_map[16] = { '0', '1', '2', '3', '4', '5', '6', '7',$/;"	v	typeref:typename:const char[16]	file:
+htostr	/home/giuseppe/Compile/libce/htostr.cpp	/^void htostr(char *buf, unsigned long long l, int cifre)$/;"	f	typeref:typename:void
+iASR	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iASR = 0x03F6;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iBMCMD	/home/giuseppe/Compile/libce/bm.cpp	/^ioaddr bm::iBMCMD;$/;"	m	class:bm	typeref:typename:ioaddr
+iBMDTPR	/home/giuseppe/Compile/libce/bm.cpp	/^ioaddr bm::iBMDTPR;$/;"	m	class:bm	typeref:typename:ioaddr
+iBMSTR	/home/giuseppe/Compile/libce/bm.cpp	/^ioaddr bm::iBMSTR;$/;"	m	class:bm	typeref:typename:ioaddr
+iBR	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iBR  = 0x01F0;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iCMD	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iCMD = 0x01F7;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iCMR	/home/giuseppe/CE/include/ce/kbd.h	/^	const ioaddr iCMR = 0x64;$/;"	v	namespace:kbd	typeref:typename:const ioaddr
+iCNH	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iCNH = 0x01F5;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iCNL	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iCNL = 0x01F4;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iCTR0_HIG	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iCTR0_HIG = 0x40;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iCTR0_LOW	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iCTR0_LOW = 0x40;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iCTR1_HIG	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iCTR1_HIG = 0x41;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iCTR1_LOW	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iCTR1_LOW = 0x41;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iCTR2_HIG	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iCTR2_HIG = 0x42;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iCTR2_LOW	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iCTR2_LOW = 0x42;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iCWR	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iCWR = 0x43;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iDAT	/home/giuseppe/CE/include/ce/vid.h	/^	const ioaddr iDAT = 0x03D5;$/;"	v	namespace:vid	typeref:typename:const ioaddr
+iDCR	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iDCR = 0x03F6;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iDLR_LSB	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iDLR_LSB = 0x03F8;		\/\/ DLAB deve essere 1$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iDLR_LSB	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iDLR_LSB = 0x02F8;		\/\/ DLAB deve essere 1$/;"	v	namespace:com2	typeref:typename:const ioaddr
+iDLR_MSB	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iDLR_MSB = 0x03F9;		\/\/ DLAB deve essere 1$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iDLR_MSB	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iDLR_MSB = 0x02F9;		\/\/ DLAB deve essere 1$/;"	v	namespace:com2	typeref:typename:const ioaddr
+iERR	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iERR = 0x01F1;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iHND	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iHND = 0x01F6;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iIER	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iIER = 0x03F9;		\/\/ DLAB deve essere 0$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iIER	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iIER = 0x02F9;		\/\/ DLAB deve essere 0$/;"	v	namespace:com2	typeref:typename:const ioaddr
+iIIR	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iIIR = 0x03FA;$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iIIR	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iIIR = 0x02FA;$/;"	v	namespace:com2	typeref:typename:const ioaddr
+iIND	/home/giuseppe/CE/include/ce/vid.h	/^	const ioaddr iIND = 0x03D4;$/;"	v	namespace:vid	typeref:typename:const ioaddr
+iLCR	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iLCR = 0x03FB;$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iLCR	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iLCR = 0x02FB;$/;"	v	namespace:com2	typeref:typename:const ioaddr
+iLSR	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iLSR = 0x03FD;$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iLSR	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iLSR = 0x02FD;$/;"	v	namespace:com2	typeref:typename:const ioaddr
+iMCR	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iMCR = 0x03FC;$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iMCR	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iMCR = 0x02FC;$/;"	v	namespace:com2	typeref:typename:const ioaddr
+iRBR	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iRBR = 0x03F8;		\/\/ DLAB deve essere 0$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iRBR	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iRBR = 0x02F8;		\/\/ DLAB deve essere 0$/;"	v	namespace:com2	typeref:typename:const ioaddr
+iRBR	/home/giuseppe/CE/include/ce/kbd.h	/^	const ioaddr iRBR = 0x60;$/;"	v	namespace:kbd	typeref:typename:const ioaddr
+iSCR	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iSCR = 0x01F2;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iSNR	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iSNR = 0x01F3;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iSTR	/home/giuseppe/CE/include/ce/kbd.h	/^	const ioaddr iSTR = 0x64;$/;"	v	namespace:kbd	typeref:typename:const ioaddr
+iSTS	/home/giuseppe/CE/include/ce/hd.h	/^	const ioaddr iSTS = 0x01F7;$/;"	v	namespace:hd	typeref:typename:const ioaddr
+iSTS0_HIG	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iSTS0_HIG = 0x40;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iSTS0_LOW	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iSTS0_LOW = 0x40;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iSTS1_HIG	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iSTS1_HIG = 0x41;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iSTS1_LOW	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iSTS1_LOW = 0x41;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iSTS2_HIG	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iSTS2_HIG = 0x42;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iSTS2_LOW	/home/giuseppe/CE/include/ce/timer.h	/^	static const ioaddr iSTS2_LOW = 0x42;$/;"	v	namespace:tim	typeref:typename:const ioaddr
+iTBR	/home/giuseppe/CE/include/ce/kbd.h	/^	const ioaddr iTBR = 0x60;$/;"	v	namespace:kbd	typeref:typename:const ioaddr
+iTHR	/home/giuseppe/CE/include/ce/com1.h	/^	const ioaddr iTHR = 0x03F8;		\/\/ DLAB deve essere 0$/;"	v	namespace:com1	typeref:typename:const ioaddr
+iTHR	/home/giuseppe/CE/include/ce/com2.h	/^	const ioaddr iTHR = 0x02F8;		\/\/ DLAB deve essere 0$/;"	v	namespace:com2	typeref:typename:const ioaddr
+i_tab	/home/giuseppe/CE/include/ce/vm.h	/^static inline int i_tab(vaddr ind_virt, int liv)$/;"	f	typeref:typename:int
+id	/home/giuseppe/Compile/libce/do_log.cpp	/^	natw id;$/;"	m	struct:des_proc	typeref:typename:natw	file:
+id	/home/giuseppe/Compile/libce/esecuzione.cpp	/^	natw id;$/;"	m	struct:des_proc	typeref:typename:natw	file:
+id	sistema/sistema.cpp	/^	natw id;$/;"	m	struct:des_proc	typeref:typename:natw	file:
+idt	/home/giuseppe/Compile/libce/64/idt.s	/^idt:$/;"	l
+idt	sistema/sistema.s	/^idt:$/;"	l
+idt_pointer	/home/giuseppe/Compile/libce/64/idt_pointer.s	/^idt_pointer:$/;"	l
+idt_pointer	sistema/sistema.s	/^idt_pointer:$/;"	l
+idt_reset	/home/giuseppe/Compile/libce/64/idt_reset.s	/^idt_reset:$/;"	l
+ignore_pic	/home/giuseppe/Compile/libce/64/ignore_pic.s	/^ignore_pic:$/;"	l
+in_ma	sistema/sistema.cpp	/^bool in_ma(vaddr v, des_proc *p)$/;"	f	typeref:typename:bool
+in_utn_c	sistema/sistema.cpp	/^bool in_utn_c(vaddr v)$/;"	f	typeref:typename:bool
+inc_ref	sistema/sistema.cpp	/^void inc_ref(paddr f)$/;"	f	typeref:typename:void
+ini	/home/giuseppe/Compile/libce/ini.cpp	/^void ini() {}$/;"	f	typeref:typename:void
+ini_COM1	/home/giuseppe/Compile/libce/ini_COM1.cpp	/^void ini_COM1()$/;"	f	typeref:typename:void
+ini_COM2	/home/giuseppe/Compile/libce/ini_COM2.cpp	/^void ini_COM2()$/;"	f	typeref:typename:void
+ini_mio_c	sistema/sistema.cpp	/^const vaddr ini_mio_c = norm(I_MIO_C * dim_region(MAX_LIV - 1)); \/\/ modulo IO$/;"	v	typeref:typename:const vaddr
+ini_sis_c	sistema/sistema.cpp	/^const vaddr ini_sis_c = norm(I_SIS_C * dim_region(MAX_LIV - 1)); \/\/ sistema condivisa$/;"	v	typeref:typename:const vaddr
+ini_sis_p	sistema/sistema.cpp	/^const vaddr ini_sis_p = norm(I_SIS_P * dim_region(MAX_LIV - 1)); \/\/ sistema privata$/;"	v	typeref:typename:const vaddr
+ini_utn_c	sistema/sistema.cpp	/^const vaddr ini_utn_c = norm(I_UTN_C * dim_region(MAX_LIV - 1)); \/\/ utente condivisa$/;"	v	typeref:typename:const vaddr
+ini_utn_c	utente/utente.cpp	/^const vaddr ini_utn_c = norm(I_UTN_C * dim_region(MAX_LIV - 1)); \/\/ utente condivisa$/;"	v	typeref:typename:const vaddr
+ini_utn_p	sistema/sistema.cpp	/^const vaddr ini_utn_p = norm(I_UTN_P * dim_region(MAX_LIV - 1)); \/\/ utente privata$/;"	v	typeref:typename:const vaddr
+ini_utn_p	utente/utente.cpp	/^const vaddr ini_utn_p = norm(I_UTN_P * dim_region(MAX_LIV - 1)); \/\/ inizio utente privata$/;"	v	typeref:typename:const vaddr
+iniconsole	utente/utente.s	/^iniconsole:$/;"	l
+init	/home/giuseppe/Compile/libce/cfi_interp_init.cpp	/^void cfi_interp::init(cfi_d* cfi_, vaddr rip_ini)$/;"	f	class:cfi_interp	typeref:typename:void
+init	sistema/sistema.cpp	/^des_proc init;$/;"	v	typeref:typename:des_proc
+init_all	/home/giuseppe/Compile/libce/init_all.cpp	/^extern "C" bool init_all()$/;"	f	typeref:typename:bool
+init_frame	sistema/sistema.cpp	/^void init_frame()$/;"	f	typeref:typename:void
+init_gate	sistema/sistema.s	/^init_gate: \/\/rdi = indice nella idt; rsi = offset della routine; rdx = dpl, rcx = trap se non /;"	l
+init_gdt	/home/giuseppe/Compile/libce/64/init_gdt.s	/^init_gdt:$/;"	l
+init_gdt	sistema/sistema.s	/^init_gdt:$/;"	l
+init_idt	/home/giuseppe/Compile/libce/64/init_idt.s	/^init_idt:$/;"	l
+init_idt	sistema/sistema.s	/^init_idt:$/;"	l
+init_root_tab	sistema/sistema.cpp	/^void init_root_tab(paddr dest)$/;"	f	typeref:typename:void
+input	util/parse.c	/^FILE *input,*output;	        	\/* uscita del parser *\/$/;"	v	typeref:typename:FILE *
+inputb	/home/giuseppe/Compile/libce/64/inputb.s	/^inputb:$/;"	l
+inputbw	/home/giuseppe/Compile/libce/64/inputbw.s	/^inputbw:$/;"	l
+inputl	/home/giuseppe/Compile/libce/64/inputl.s	/^inputl:$/;"	l
+inputw	/home/giuseppe/Compile/libce/64/inputw.s	/^inputw:$/;"	l
+inserimento_lista	sistema/sistema.cpp	/^void inserimento_lista(des_proc *&p_lista, des_proc *p_elem)$/;"	f	typeref:typename:void
+inserimento_lista_attesa	sistema/sistema.cpp	/^void inserimento_lista_attesa(richiesta *p)$/;"	f	typeref:typename:void
+inspronti	sistema/sistema.cpp	/^extern "C" void inspronti()$/;"	f	typeref:typename:void
+int_tipo_pf	/home/giuseppe/Compile/libce/64/int_tipo_pf.s	/^int_tipo_pf:$/;"	l
+invalid_opcode	/home/giuseppe/Compile/libce/64/invalid_opcode.s	/^invalid_opcode:$/;"	l
+invalid_opcode	sistema/sistema.s	/^invalid_opcode:$/;"	l
+invalid_tss	/home/giuseppe/Compile/libce/64/invalid_tss.s	/^invalid_tss:$/;"	l
+invalid_tss	sistema/sistema.s	/^invalid_tss:$/;"	l
+invalida_TLB	/home/giuseppe/Compile/libce/64/invalida_TLB.s	/^invalida_TLB:$/;"	l
+invalida_entrata_TLB	/home/giuseppe/Compile/libce/64/invalida_entrata_TLB.s	/^invalida_entrata_TLB:$/;"	l
+io_entry	sistema/sistema.cpp	/^void (*io_entry)(natq);$/;"	v	typeref:typename:void (*)(natq)
+io_panic	io/io.s	/^io_panic:$/;"	l
+ioaddr	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned short ioaddr;$/;"	t	typeref:typename:unsigned short
+is_leaf	/home/giuseppe/CE/include/ce/vm.h	/^	bool is_leaf() const {$/;"	f	class:tab_iter	typeref:typename:bool
+is_write	include/sys.h	/^	bool  is_write;$/;"	m	struct:ma_fault	typeref:typename:bool
+itostr	/home/giuseppe/Compile/libce/itostr.cpp	/^void itostr(char *buf, unsigned int len, long l)$/;"	f	typeref:typename:void
+jump	/home/giuseppe/Compile/libce/cfi_interp_jump.cpp	/^void cfi_interp::jump(vaddr op)$/;"	f	class:cfi_interp	typeref:typename:void
+kbd	/home/giuseppe/CE/include/ce/kbd.h	/^namespace kbd {$/;"	n
+kbd_init	io/io.cpp	/^bool kbd_init()$/;"	f	typeref:typename:bool
+keyboard_init	/home/giuseppe/Compile/libce/keyboard_init.cpp	/^void keyboard_init()$/;"	f	typeref:typename:void
+keyboard_reset	/home/giuseppe/Compile/libce/keyboard_reset.cpp	/^void keyboard_reset()$/;"	f	typeref:typename:void
+l	/home/giuseppe/CE/include/ce/vm.h	/^	int l;$/;"	m	class:tab_iter	typeref:typename:int
+last_cr2	sistema/sistema.cpp	/^	vaddr last_cr2;$/;"	m	struct:des_proc	typeref:typename:vaddr	file:
+leggi_arg	util/parse.c	/^void leggi_arg(int salta)$/;"	f	typeref:typename:void
+leggi_car	util/parse.c	/^void leggi_car()$/;"	f	typeref:typename:void
+leggi_nome	util/parse.c	/^void leggi_nome(int salta)$/;"	f	typeref:typename:void
+leggi_numero	util/parse.c	/^void leggi_numero(int salta)$/;"	f	typeref:typename:void
+len	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint64_t len;$/;"	m	struct:multiboot_mmap_entry	typeref:typename:multiboot_uint64_t
+lib_init	utente/lib.cpp	/^void lib_init()$/;"	f	typeref:typename:void
+limit	/home/giuseppe/CE/include/ce/vm.h	/^static inline vaddr limit(vaddr e, int liv)$/;"	f	typeref:typename:vaddr
+line_needed	util/parse.c	/^int line_needed = 0;$/;"	v	typeref:typename:int
+liv_chiamante	sistema/sistema.cpp	/^int liv_chiamante()$/;"	f	typeref:typename:int
+livello	sistema/sistema.cpp	/^	natw livello;$/;"	m	struct:des_proc	typeref:typename:natw	file:
+loadCR3	/home/giuseppe/Compile/libce/64/loadCR3.s	/^loadCR3:$/;"	l
+load_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t load_addr;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+load_end_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t load_end_addr;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+load_gdt	/home/giuseppe/Compile/libce/64/load_gdt.s	/^load_gdt:$/;"	l
+load_handler	sistema/sistema.s	/^load_handler:$/;"	l
+log_sev	/home/giuseppe/CE/include/ce/libce.h	/^enum log_sev { LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERR, LOG_USR };$/;"	g
+look	util/parse.c	/^char look;			\/* carattere sotto esame *\/$/;"	v	typeref:typename:char
+ma_attach	utente/utente.s	/^ma_attach:$/;"	l
+ma_cont	utente/utente.s	/^ma_cont:$/;"	l
+ma_fault	include/sys.h	/^struct ma_fault {$/;"	s
+ma_map	utente/utente.s	/^ma_map:$/;"	l
+ma_npag	sistema/sistema.cpp	/^	natq ma_npag;$/;"	m	struct:des_proc	typeref:typename:natq	file:
+ma_wait	utente/utente.s	/^ma_wait:$/;"	l
+magic	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t magic;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+main	io/io.cpp	/^extern "C" void main(int sem_io)$/;"	f	typeref:typename:void
+main	sistema/sistema.cpp	/^extern "C" void main(paddr mbi)$/;"	f	typeref:typename:void
+main	utente/utente.cpp	/^void main()$/;"	f	typeref:typename:void
+main	util/mkstart.cpp	/^int main()$/;"	f	typeref:typename:int
+main	util/parse.c	/^int main(int argc, char* argv[])$/;"	f	typeref:typename:int
+main_body	utente/utente.cpp	/^void main_body(natq id)$/;"	f	typeref:typename:void
+main_sistema	sistema/sistema.cpp	/^void main_sistema(natq mbi)$/;"	f	typeref:typename:void
+mainp	utente/utente.cpp	/^natl mainp;$/;"	v	typeref:typename:natl
+make_CAP	/home/giuseppe/Compile/libce/make_CAP.cpp	/^natl make_CAP(natb bus, natb dev, natb fun, natb off)$/;"	f	typeref:typename:natl
+map	sistema/sistema.cpp	/^vaddr map(paddr tab, vaddr begin, vaddr end, natl flags, T& getpaddr, int ps_lvl)$/;"	f	typeref:typename:vaddr
+map	sistema/sistema.cpp	/^vaddr map(paddr tab, vaddr begin, vaddr end, natl flags, const T& getpaddr, int ps_lvl = 1)$/;"	f	typeref:typename:vaddr
+max	/home/giuseppe/CE/include/ce/libce.h	/^T max(T a, T b)$/;"	f	typeref:typename:T
+mc_exc	/home/giuseppe/Compile/libce/64/mc_exc.s	/^mc_exc:$/;"	l
+mc_exc	sistema/sistema.s	/^mc_exc:$/;"	l
+mem_lower	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mem_lower;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+mem_mutex	io/io.cpp	/^natl mem_mutex;$/;"	v	typeref:typename:natl
+mem_mutex	utente/lib.cpp	/^natl mem_mutex;$/;"	v	typeref:typename:natl
+mem_upper	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mem_upper;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+memcpy	/home/giuseppe/Compile/libce/memcpy.cpp	/^void *memcpy(void *dest, const void *src, size_t n)$/;"	f	typeref:typename:void *
+meminfo	include/sys.h	/^struct meminfo {$/;"	s
+memlibera	/home/giuseppe/Compile/libce/memlibera.cpp	/^des_mem* memlibera = 0;$/;"	v	typeref:typename:des_mem *
+memset	/home/giuseppe/Compile/libce/memset.cpp	/^void *memset(void *dest, int c, size_t n)$/;"	f	typeref:typename:void *
+min	/home/giuseppe/CE/include/ce/libce.h	/^T min(T a, T b)$/;"	f	typeref:typename:T
+mio_eh_frame	sistema/sistema.cpp	/^vaddr mio_eh_frame;$/;"	v	typeref:typename:vaddr
+mio_eh_frame_len	sistema/sistema.cpp	/^natq  mio_eh_frame_len;$/;"	v	typeref:typename:natq
+mmap_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mmap_addr;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+mmap_length	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mmap_length;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+mod_beg	sistema/sistema.cpp	/^	paddr mod_beg;$/;"	m	struct:copy_segment	typeref:typename:paddr	file:
+mod_end	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mod_end;$/;"	m	struct:multiboot_mod_list	typeref:typename:multiboot_uint32_t
+mod_end	sistema/sistema.cpp	/^	paddr mod_end;$/;"	m	struct:copy_segment	typeref:typename:paddr	file:
+mod_start	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mod_start;$/;"	m	struct:multiboot_mod_list	typeref:typename:multiboot_uint32_t
+mode	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	cfi_mode mode;$/;"	m	struct:cfi_reg_info	typeref:typename:cfi_mode
+mode_type	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mode_type;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+mods_addr	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mods_addr;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+mods_count	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t mods_count;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+monitor	sistema/sistema.cpp	/^	des_proc *monitor;$/;"	m	struct:des_proc	typeref:typename:des_proc *	file:
+monitored	sistema/sistema.cpp	/^	des_proc *monitored;$/;"	m	struct:des_proc	typeref:typename:des_proc *	file:
+msg	utente/utente.cpp	/^#define msg(/;"	d	file:
+multiboot_aout_symbol_table	/home/giuseppe/CE/include/ce/mboot.h	/^struct multiboot_aout_symbol_table$/;"	s
+multiboot_aout_symbol_table_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef struct multiboot_aout_symbol_table multiboot_aout_symbol_table_t;$/;"	t	typeref:struct:multiboot_aout_symbol_table
+multiboot_color	/home/giuseppe/CE/include/ce/mboot.h	/^struct multiboot_color$/;"	s
+multiboot_elf_section_header_table	/home/giuseppe/CE/include/ce/mboot.h	/^struct multiboot_elf_section_header_table$/;"	s
+multiboot_elf_section_header_table_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef struct multiboot_elf_section_header_table multiboot_elf_section_header_table_t;$/;"	t	typeref:struct:multiboot_elf_section_header_table
+multiboot_header	/home/giuseppe/CE/include/ce/mboot.h	/^struct multiboot_header$/;"	s
+multiboot_info	/home/giuseppe/CE/include/ce/mboot.h	/^struct multiboot_info$/;"	s
+multiboot_info_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef struct multiboot_info multiboot_info_t;$/;"	t	typeref:struct:multiboot_info
+multiboot_memory_map_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef struct multiboot_mmap_entry multiboot_memory_map_t;$/;"	t	typeref:struct:multiboot_mmap_entry
+multiboot_mmap_entry	/home/giuseppe/CE/include/ce/mboot.h	/^struct multiboot_mmap_entry$/;"	s
+multiboot_mod_list	/home/giuseppe/CE/include/ce/mboot.h	/^struct multiboot_mod_list$/;"	s
+multiboot_module_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef struct multiboot_mod_list multiboot_module_t;$/;"	t	typeref:struct:multiboot_mod_list
+multiboot_uint16_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef unsigned short		multiboot_uint16_t;$/;"	t	typeref:typename:unsigned short
+multiboot_uint32_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef unsigned int		multiboot_uint32_t;$/;"	t	typeref:typename:unsigned int
+multiboot_uint64_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef unsigned long long	multiboot_uint64_t;$/;"	t	typeref:typename:unsigned long long
+multiboot_uint8_t	/home/giuseppe/CE/include/ce/mboot.h	/^typedef unsigned char		multiboot_uint8_t;$/;"	t	typeref:typename:unsigned char
+mutex	io/io.cpp	/^	natl mutex;$/;"	m	struct:des_ata	typeref:typename:natl	file:
+mutex	io/io.cpp	/^	natl mutex;$/;"	m	struct:des_console	typeref:typename:natl	file:
+natb	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned char natb;$/;"	t	typeref:typename:unsigned char
+natl	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned int natl;$/;"	t	typeref:typename:unsigned int
+natq	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned long long natq;$/;"	t	typeref:typename:unsigned long long
+natq	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned long natq;$/;"	t	typeref:typename:unsigned long
+natq	util/mkstart.cpp	/^typedef unsigned long natq;$/;"	t	typeref:typename:unsigned long	file:
+natw	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned short natw;$/;"	t	typeref:typename:unsigned short
+new_proc	utente/utente.cpp	/^#define new_proc(/;"	d	file:
+next	/home/giuseppe/CE/include/ce/heap.h	/^	des_mem* next;$/;"	m	struct:des_mem	typeref:typename:des_mem *
+next	/home/giuseppe/Compile/libce/tab_iter_next.cpp	/^void tab_iter::next()$/;"	f	class:tab_iter	typeref:typename:void
+next_op	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	vaddr next_op;$/;"	m	struct:cfi_interp	typeref:typename:vaddr
+next_post	/home/giuseppe/Compile/libce/tab_iter_next_post.cpp	/^void tab_iter::next_post()$/;"	f	class:tab_iter	typeref:typename:void
+nmi	/home/giuseppe/Compile/libce/64/nmi.s	/^nmi:$/;"	l
+nmi	sistema/sistema.s	/^nmi:$/;"	l
+nome	util/parse.c	/^char nome[LUN_NOME];		\/* ultimo identificatore (o intero) letto *\/$/;"	v	typeref:typename:char[]
+norm	/home/giuseppe/CE/include/ce/vm.h	/^static inline vaddr norm(vaddr a)$/;"	f	typeref:typename:vaddr
+npfmutex	utente/utente.cpp	/^natl npfmutex;$/;"	v	typeref:typename:natl
+num	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t num;$/;"	m	struct:multiboot_elf_section_header_table	typeref:typename:multiboot_uint32_t
+num_frame_liberi	include/sys.h	/^	natl num_frame_liberi;$/;"	m	struct:meminfo	typeref:typename:natl
+num_frame_liberi	sistema/sistema.cpp	/^natq num_frame_liberi;$/;"	v	typeref:typename:natq
+num_make	/home/giuseppe/Compile/libce/num_make.cpp	/^natl num_make = 0;$/;"	v	typeref:typename:natl
+num_t	/home/giuseppe/Compile/libce/num_t.cpp	/^natl __attribute__((section(".data"))) num_t = 0;$/;"	v	typeref:typename:natl
+nvalide	sistema/sistema.cpp	/^		natw nvalide;$/;"	m	union:des_frame::__anond897b891020a	typeref:typename:natw	file:
+ocw1m_save	/home/giuseppe/Compile/libce/64/8259.s	/^ocw1m_save:$/;"	l
+ocw1s_save	/home/giuseppe/Compile/libce/64/8259.s	/^ocw1s_save:$/;"	l
+offset	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	long offset;$/;"	m	struct:cfi_reg_info	typeref:typename:long
+oggetti	util/parse.c	/^char oggetti[LUN_OGGETTI];$/;"	v	typeref:typename:char[]
+operator ()	sistema/sistema.cpp	/^paddr copy_segment::operator()(vaddr v)$/;"	f	class:copy_segment	typeref:typename:paddr
+operator delete	/home/giuseppe/CE/include/ce/libce.h	/^inline void operator delete(void *p, size_t s)$/;"	f	typeref:typename:void
+operator delete	io/io.cpp	/^void operator delete(void* p)$/;"	f	typeref:typename:void
+operator delete	sistema/sistema.cpp	/^void operator delete(void *p)$/;"	f	typeref:typename:void
+operator delete	utente/lib.cpp	/^void operator delete(void* p)$/;"	f	typeref:typename:void
+operator delete[]	/home/giuseppe/CE/include/ce/libce.h	/^inline void operator delete[](void *p)$/;"	f	typeref:typename:void
+operator delete[]	/home/giuseppe/CE/include/ce/libce.h	/^inline void operator delete[](void *p, size_t s)$/;"	f	typeref:typename:void
+operator new	io/io.cpp	/^void* operator new(size_t s)$/;"	f	typeref:typename:void *
+operator new	io/io.cpp	/^void* operator new(size_t s, align_val_t a)$/;"	f	typeref:typename:void *
+operator new	sistema/sistema.cpp	/^void* operator new(size_t size)$/;"	f	typeref:typename:void *
+operator new	sistema/sistema.cpp	/^void* operator new(size_t size, align_val_t align)$/;"	f	typeref:typename:void *
+operator new	utente/lib.cpp	/^void* operator new(size_t s)$/;"	f	typeref:typename:void *
+operator new[]	/home/giuseppe/CE/include/ce/libce.h	/^inline void *operator new[](size_t s)$/;"	f	typeref:typename:void *
+operator new[]	/home/giuseppe/CE/include/ce/libce.h	/^inline void *operator new[](size_t s, align_val_t a)$/;"	f	typeref:typename:void *
+outname	util/parse.c	/^const char* outname = "utente.cpp";$/;"	v	typeref:typename:const char *
+output	util/parse.c	/^FILE *input,*output;	        	\/* uscita del parser *\/$/;"	v	typeref:typename:FILE **
+outputb	/home/giuseppe/Compile/libce/64/outputb.s	/^outputb:$/;"	l
+outputbw	/home/giuseppe/Compile/libce/64/outputbw.s	/^outputbw:$/;"	l
+outputl	/home/giuseppe/Compile/libce/64/outputl.s	/^outputl:$/;"	l
+outputw	/home/giuseppe/Compile/libce/64/outputw.s	/^outputw:$/;"	l
+overflow	/home/giuseppe/Compile/libce/64/overflow.s	/^overflow:$/;"	l
+overflow	sistema/sistema.s	/^overflow:$/;"	l
+p2s	utente/utente.cpp	/^const char *p2s(T b)$/;"	f	typeref:typename:const char *
+p_align	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_XWord p_align;$/;"	m	struct:__anon2c6aacd50208	typeref:typename:Elf64_XWord
+p_filesz	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_XWord p_filesz;$/;"	m	struct:__anon2c6aacd50208	typeref:typename:Elf64_XWord
+p_flags	/home/giuseppe/CE/include/ce/elf64.h	/^	Elf64_Word p_flags;$/;"	m	struct:__anon2c6aacd50208	typeref:typename:Elf64_Word
+p_memsz	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_XWord p_memsz;$/;"	m	struct:__anon2c6aacd50208	typeref:typename:Elf64_XWord
+p_offset	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Off  p_offset;$/;"	m	struct:__anon2c6aacd50208	typeref:typename:Elf64_Off
+p_paddr	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Addr p_paddr;$/;"	m	struct:__anon2c6aacd50208	typeref:typename:Elf64_Addr
+p_rich	sistema/sistema.cpp	/^	richiesta *p_rich;$/;"	m	struct:richiesta	typeref:typename:richiesta *	file:
+p_sospesi	sistema/sistema.cpp	/^richiesta *p_sospesi;$/;"	v	typeref:typename:richiesta *
+p_type	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word p_type;$/;"	m	struct:__anon2c6aacd50208	typeref:typename:Elf64_Word
+p_vaddr	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Addr p_vaddr;$/;"	m	struct:__anon2c6aacd50208	typeref:typename:Elf64_Addr
+pad	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t pad;$/;"	m	struct:multiboot_mod_list	typeref:typename:multiboot_uint32_t
+paddr	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned long long paddr;$/;"	t	typeref:typename:unsigned long long
+paddr	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned long paddr;$/;"	t	typeref:typename:unsigned long
+page_fault	sistema/sistema.s	/^page_fault:$/;"	l
+panic	io/io.cpp	/^extern "C" void panic(const char *msg)$/;"	f	typeref:typename:void
+panic	sistema/sistema.cpp	/^extern "C" void panic(const char *msg)$/;"	f	typeref:typename:void
+panic	utente/lib.cpp	/^extern "C" void panic(const char* msg)$/;"	f	typeref:typename:void
+parse_file	util/parse.c	/^void parse_file(const char* inname, FILE* output)$/;"	f	typeref:typename:void
+pause	/home/giuseppe/Compile/libce/pause.cpp	/^void pause()$/;"	f	typeref:typename:void
+pause	utente/lib.cpp	/^void pause()$/;"	f	typeref:typename:void
+pause_buf	utente/lib.cpp	/^char pause_buf[1];$/;"	v	typeref:typename:char[1]
+pci	/home/giuseppe/CE/include/ce/pci.h	/^namespace pci {$/;"	n
+pci_class_codes	/home/giuseppe/Compile/libce/pci_decode_class.cpp	/^pci_class_codes_t pci_class_codes[] = {$/;"	v	typeref:typename:pci_class_codes_t[]
+pci_class_codes_t	/home/giuseppe/Compile/libce/pci_decode_class.cpp	/^struct pci_class_codes_t {$/;"	s	file:
+pci_decode_class	/home/giuseppe/Compile/libce/pci_decode_class.cpp	/^const char* pci_decode_class(natb code)$/;"	f	typeref:typename:const char *
+pci_find_class	/home/giuseppe/Compile/libce/pci_find_class.cpp	/^bool pci_find_class(natb& bus, natb& dev, natb& fun, natb code[])$/;"	f	typeref:typename:bool
+pci_find_dev	/home/giuseppe/Compile/libce/pci_find_dev.cpp	/^bool pci_find_dev(natb& bus, natb& dev, natb& fun, natw devID, natw vendID)$/;"	f	typeref:typename:bool
+pci_next	/home/giuseppe/Compile/libce/pci_next.cpp	/^bool pci_next(natb& bus, natb& dev, natb& fun)$/;"	f	typeref:typename:bool
+pci_read_confb	/home/giuseppe/Compile/libce/pci_read_confb.cpp	/^natb pci_read_confb(natb bus, natb dev, natb fun, natb off)$/;"	f	typeref:typename:natb
+pci_read_confl	/home/giuseppe/Compile/libce/pci_read_confl.cpp	/^natl pci_read_confl(natb bus, natb dev, natb fun, natb off)$/;"	f	typeref:typename:natl
+pci_read_confw	/home/giuseppe/Compile/libce/pci_read_confw.cpp	/^natw pci_read_confw(natb bus, natb dev, natb fun, natb off)$/;"	f	typeref:typename:natw
+pci_write_confb	/home/giuseppe/Compile/libce/pci_write_confb.cpp	/^void pci_write_confb(natb bus, natb dev, natb fun, natb off, natb data)$/;"	f	typeref:typename:void
+pci_write_confl	/home/giuseppe/Compile/libce/pci_write_confl.cpp	/^void pci_write_confl(natb bus, natb dev, natb fun, natb off, natl data)$/;"	f	typeref:typename:void
+pci_write_confw	/home/giuseppe/Compile/libce/pci_write_confw.cpp	/^void pci_write_confw(natb bus, natb dev, natb fun, natb off, natw data)$/;"	f	typeref:typename:void
+pending_event	sistema/sistema.cpp	/^	bool pending_event;$/;"	m	struct:des_proc	typeref:typename:bool	file:
+pid	include/sys.h	/^	natl pid;$/;"	m	struct:meminfo	typeref:typename:natl
+piix3	/home/giuseppe/CE/include/ce/piix3.h	/^namespace piix3 {$/;"	n
+piix3_ioapic_disable	/home/giuseppe/Compile/libce/piix3_ioapic_disable.cpp	/^bool piix3_ioapic_disable(natb bus, natb dev, natb fun)$/;"	f	typeref:typename:bool
+piix3_ioapic_enable	/home/giuseppe/Compile/libce/piix3_ioapic_enable.cpp	/^bool piix3_ioapic_enable(natb bus, natb dev, natb fun)$/;"	f	typeref:typename:bool
+pointer	sistema/sistema.cpp	/^	des_proc *pointer;$/;"	m	struct:des_sem	typeref:typename:des_proc *	file:
+pos	util/parse.c	/^int riga, colonna, pos;		\/* posizione corrente *\/$/;"	v	typeref:typename:int
+post	/home/giuseppe/Compile/libce/tab_iter_post.cpp	/^void tab_iter::post()$/;"	f	class:tab_iter	typeref:typename:void
+pp	/home/giuseppe/CE/include/ce/vm.h	/^	stack *pp() { return &s[MAX_LIV]; }$/;"	f	class:tab_iter	typeref:typename:stack *
+pp	/home/giuseppe/CE/include/ce/vm.h	/^	stack const *pp() const { return &s[MAX_LIV]; }$/;"	f	class:tab_iter	typeref:typename:stack const *
+pp	sistema/sistema.cpp	/^	des_proc *pp;$/;"	m	struct:richiesta	typeref:typename:des_proc *	file:
+precedenza	sistema/sistema.cpp	/^	natl precedenza;$/;"	m	struct:des_proc	typeref:typename:natl	file:
+primo_frame_libero	sistema/sistema.cpp	/^natq primo_frame_libero;$/;"	v	typeref:typename:natq
+printf	/home/giuseppe/Compile/libce/printf.cpp	/^int printf(const char *fmt, ...)$/;"	f	typeref:typename:int
+printf	utente/lib.cpp	/^int printf(const char *fmt, ...)$/;"	f	typeref:typename:int
+proc_table	sistema/sistema.cpp	/^des_proc *proc_table[MAX_PROC];$/;"	v	typeref:typename:des_proc * []
+process	util/parse.c	/^void process()$/;"	f	typeref:typename:void
+process_body	util/parse.c	/^void process_body()$/;"	f	typeref:typename:void
+process_dump	sistema/sistema.cpp	/^void process_dump(des_proc *p, log_sev sev)$/;"	f	typeref:typename:void
+processi	sistema/sistema.cpp	/^volatile natl processi;$/;"	v	typeref:typename:volatile natl
+pronti	sistema/sistema.cpp	/^des_proc *pronti;$/;"	v	typeref:typename:des_proc *
+prossimo_libero	sistema/sistema.cpp	/^		natl prossimo_libero;$/;"	m	union:des_frame::__anond897b891020a	typeref:typename:natl	file:
+prot_fault	/home/giuseppe/Compile/libce/64/prot_fault.s	/^prot_fault:$/;"	l
+prot_fault	sistema/sistema.s	/^prot_fault:$/;"	l
+punt	io/io.cpp	/^	char* punt;$/;"	m	struct:des_console	typeref:typename:char *	file:
+punt	io/io.cpp	/^	natb* punt;$/;"	m	struct:des_ata	typeref:typename:natb *	file:
+punt_nucleo	sistema/sistema.cpp	/^	vaddr punt_nucleo;$/;"	m	struct:des_proc	typeref:typename:vaddr	file:
+puntatore	sistema/sistema.cpp	/^	des_proc *puntatore;$/;"	m	struct:des_proc	typeref:typename:des_proc *	file:
+puts	/home/giuseppe/Compile/libce/puts.cpp	/^int puts(const char *buf)$/;"	f	typeref:typename:int
+rar	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	int rar;$/;"	m	struct:cfi_interp	typeref:typename:int
+readCR2	/home/giuseppe/Compile/libce/64/readCR2.s	/^readCR2:$/;"	l
+readCR3	/home/giuseppe/Compile/libce/64/readCR3.s	/^readCR3:$/;"	l
+read_mem	sistema/sistema.cpp	/^natq read_mem(void *token, vaddr v)$/;"	f	typeref:typename:natq
+read_sleb128	/home/giuseppe/Compile/libce/read_sleb128.cpp	/^long read_sleb128(vaddr& s)$/;"	f	typeref:typename:long
+read_stack	/home/giuseppe/CE/include/ce/cfi.h	/^	natq (*read_stack)(void* token, vaddr);$/;"	m	struct:cfi_d	typeref:typename:natq (*)(void * token,vaddr)
+read_uleb128	/home/giuseppe/Compile/libce/read_uleb128.cpp	/^natq read_uleb128(vaddr& s)$/;"	f	typeref:typename:natq
+readconsole	utente/utente.s	/^readconsole:$/;"	l
+readhd_n	utente/utente.s	/^readhd_n:$/;"	l
+reboot	/home/giuseppe/Compile/libce/reboot.cpp	/^void reboot()$/;"	f	typeref:typename:void
+red	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint8_t red;$/;"	m	struct:multiboot_color	typeref:typename:multiboot_uint8_t
+regn	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	int regn;$/;"	m	struct:cfi_reg_info	typeref:typename:int
+regs	/home/giuseppe/CE/include/ce/cfi.h	/^	natq regs[CFI::NREG];$/;"	m	struct:cfi_d	typeref:typename:natq[]
+regs	/home/giuseppe/CE/include/ce/cfi_internal.h	/^	cfi_reg_info regs[CFI::NREG];$/;"	m	struct:cfi_interp	typeref:typename:cfi_reg_info[]
+reserved	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t reserved;$/;"	m	struct:multiboot_aout_symbol_table	typeref:typename:multiboot_uint32_t
+richiesta	sistema/sistema.cpp	/^struct richiesta {$/;"	s	file:
+riga	util/parse.c	/^int riga, colonna, pos;		\/* posizione corrente *\/$/;"	v	typeref:typename:int
+riga_out	util/parse.c	/^int riga_out = 1;$/;"	v	typeref:typename:int
+right	/home/giuseppe/Compile/libce/tab_iter_right.cpp	/^bool tab_iter::right()$/;"	f	class:tab_iter	typeref:typename:bool
+rilascia_frame	sistema/sistema.cpp	/^void rilascia_frame(paddr f)$/;"	f	typeref:typename:void
+rilascia_proc_id	sistema/sistema.cpp	/^void rilascia_proc_id(natw id)$/;"	f	typeref:typename:void
+rilascia_righe	util/parse.c	/^void rilascia_righe()$/;"	f	typeref:typename:void
+rilascia_tab	sistema/sistema.cpp	/^void rilascia_tab(paddr f)$/;"	f	typeref:typename:void
+rimozione_lista	sistema/sistema.cpp	/^des_proc *rimozione_lista(des_proc *&p_lista)$/;"	f	typeref:typename:des_proc *
+s	/home/giuseppe/CE/include/ce/vm.h	/^	} s[MAX_LIV + 1];$/;"	m	class:tab_iter	typeref:struct:tab_iter::stack[]
+salta_a_main	sistema/sistema.s	/^salta_a_main:$/;"	l
+salta_commento	util/parse.c	/^void salta_commento()$/;"	f	typeref:typename:void
+salta_spazi	util/parse.c	/^void salta_spazi()$/;"	f	typeref:typename:void
+salva_registri	/home/giuseppe/CE/include/ce/libce.s	/^.macro salva_registri$/;"	m
+salva_registri	/home/giuseppe/Compile/libce/libce.s	/^.macro salva_registri$/;"	m
+salva_stato	sistema/sistema.s	/^salva_stato:$/;"	l
+save_cie	/home/giuseppe/Compile/libce/cfi_interp_save_cie.cpp	/^void cfi_interp::save_cie()$/;"	f	class:cfi_interp	typeref:typename:void
+schedulatore	sistema/sistema.cpp	/^extern "C" void schedulatore(void)$/;"	f	typeref:typename:void
+scrivi_utente	util/parse.c	/^void scrivi_utente()$/;"	f	typeref:typename:void
+scroll	/home/giuseppe/Compile/libce/scroll.cpp	/^void scroll()$/;"	f	typeref:typename:void
+sec_exc	sistema/sistema.s	/^sec_exc:$/;"	l
+segm_fault	/home/giuseppe/Compile/libce/64/segm_fault.s	/^segm_fault:$/;"	l
+segm_fault	sistema/sistema.s	/^segm_fault:$/;"	l
+sem_allocati_sistema	sistema/sistema.cpp	/^natl sem_allocati_sistema = 0;$/;"	v	typeref:typename:natl
+sem_allocati_utente	sistema/sistema.cpp	/^natl sem_allocati_utente  = 0;$/;"	v	typeref:typename:natl
+sem_ini	io/io.s	/^sem_ini:$/;"	l
+sem_ini	sistema/sistema.s	/^sem_ini:$/;"	l
+sem_ini	utente/utente.s	/^sem_ini:$/;"	l
+sem_signal	io/io.s	/^sem_signal:$/;"	l
+sem_signal	utente/utente.s	/^sem_signal:$/;"	l
+sem_valido	sistema/sistema.cpp	/^bool sem_valido(natl sem)$/;"	f	typeref:typename:bool
+sem_wait	io/io.s	/^sem_wait:$/;"	l
+sem_wait	sistema/sistema.s	/^sem_wait:$/;"	l
+sem_wait	utente/utente.s	/^sem_wait:$/;"	l
+semaphore	util/parse.c	/^void semaphore()$/;"	f	typeref:typename:void
+serial2_o	/home/giuseppe/Compile/libce/serial2_o.cpp	/^void serial2_o(natb c)$/;"	f	typeref:typename:void
+serial_o	/home/giuseppe/Compile/libce/serial_o.cpp	/^void serial_o(natb c)$/;"	f	typeref:typename:void
+set_IND_FISICO	/home/giuseppe/CE/include/ce/vm.h	/^static inline void  set_IND_FISICO(tab_entry& descrittore, paddr ind_fisico) \/\/$/;"	f	typeref:typename:void
+set_des	sistema/sistema.cpp	/^void set_des(paddr dst, natl i, natl n, tab_entry e)$/;"	f	typeref:typename:void
+set_entry	sistema/sistema.cpp	/^void set_entry(paddr tab, natl j, tab_entry se)$/;"	f	typeref:typename:void
+setup_self_dump	sistema/sistema.s	/^setup_self_dump:$/;"	l
+sh_addr	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Addr sh_addr;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Addr
+sh_addralign	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word sh_addralign;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Word
+sh_entsize	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word sh_entsize;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Word
+sh_flags	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word sh_flags;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Word
+sh_info	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word sh_info;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Word
+sh_link	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word sh_link;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Word
+sh_name	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word sh_name;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Word
+sh_offset	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Off  sh_offset;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Off
+sh_size	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word sh_size;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Word
+sh_type	/home/giuseppe/CE/include/ce/elf64.h	/^        Elf64_Word sh_type;$/;"	m	struct:__anon2c6aacd50308	typeref:typename:Elf64_Word
+shift	/home/giuseppe/Compile/libce/shift.cpp	/^bool __attribute__((section(".data"))) kbd::shift = false;$/;"	m	class:kbd	typeref:typename:bool
+shndx	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t shndx;$/;"	m	struct:multiboot_elf_section_header_table	typeref:typename:multiboot_uint32_t
+simd_exc	/home/giuseppe/Compile/libce/64/simd_exc.s	/^simd_exc:$/;"	l
+simd_exc	sistema/sistema.s	/^simd_exc:$/;"	l
+sincr	io/io.cpp	/^	natl sincr;$/;"	m	struct:des_ata	typeref:typename:natl	file:
+sincr	io/io.cpp	/^	natl sincr;$/;"	m	struct:des_console	typeref:typename:natl	file:
+sis_eh_frame	sistema/sistema.cpp	/^vaddr sis_eh_frame;$/;"	v	typeref:typename:vaddr
+sis_eh_frame_len	sistema/sistema.cpp	/^natq  sis_eh_frame_len;$/;"	v	typeref:typename:natq
+size	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t size;$/;"	m	struct:multiboot_elf_section_header_table	typeref:typename:multiboot_uint32_t
+size	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t size;$/;"	m	struct:multiboot_mmap_entry	typeref:typename:multiboot_uint32_t
+size_t	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned int size_t;$/;"	t	typeref:typename:unsigned int
+size_t	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned long size_t;$/;"	t	typeref:typename:unsigned long
+snapshot	/home/giuseppe/Compile/libce/cfi_interp_snapshot.cpp	/^void cfi_interp::snapshot()$/;"	f	class:cfi_interp	typeref:typename:void
+snprintf	/home/giuseppe/Compile/libce/snprintf.cpp	/^int snprintf(char *buf, natl n, const char *fmt, ...)$/;"	f	typeref:typename:int
+sp	/home/giuseppe/CE/include/ce/vm.h	/^	stack *sp() { return &s[l - 1]; }$/;"	f	class:tab_iter	typeref:typename:stack *
+sp	/home/giuseppe/CE/include/ce/vm.h	/^	stack *sp(int lvl) { return &s[lvl - 1]; }$/;"	f	class:tab_iter	typeref:typename:stack *
+sp	/home/giuseppe/CE/include/ce/vm.h	/^	stack const *sp() const { return &s[l - 1]; }$/;"	f	class:tab_iter	typeref:typename:stack const *
+stack	/home/giuseppe/CE/include/ce/vm.h	/^	struct stack {$/;"	s	class:tab_iter
+stack_fault	/home/giuseppe/Compile/libce/64/stack_fault.s	/^stack_fault:$/;"	l
+stack_fault	sistema/sistema.s	/^stack_fault:$/;"	l
+start	io/io.s	/^start:$/;"	l
+start	sistema/sistema.s	/^start:$/;"	l
+start	utente/utente.s	/^start:$/;"	l
+starthd_in	io/io.cpp	/^void starthd_in(des_ata *d, natb vetti[], natl primo, natb quanti)$/;"	f	typeref:typename:void
+starthd_out	io/io.cpp	/^void starthd_out(des_ata *d, natb vetto[], natl primo, natb quanti)$/;"	f	typeref:typename:void
+startkbd_in	io/io.cpp	/^void startkbd_in(des_console* d, char* buff, natq dim)$/;"	f	typeref:typename:void
+sti	/home/giuseppe/Compile/libce/64/sti.s	/^sti:$/;"	l
+stop_all	/home/giuseppe/Compile/libce/stop_all.cpp	/^extern "C" void stop_all()$/;"	f	typeref:typename:void
+str_write	/home/giuseppe/Compile/libce/str_write.cpp	/^void str_write(const char buf[])$/;"	f	typeref:typename:void
+strlen	/home/giuseppe/Compile/libce/strlen.cpp	/^size_t strlen(const char *s)$/;"	f	typeref:typename:size_t
+strncpy	/home/giuseppe/Compile/libce/strncpy.cpp	/^char *strncpy(char *dest, const char *src, natl l)$/;"	f	typeref:typename:char *
+strsize	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t strsize;$/;"	m	struct:multiboot_aout_symbol_table	typeref:typename:multiboot_uint32_t
+succ	util/parse.c	/^	struct file_elem *succ;$/;"	m	struct:file_elem	typeref:struct:file_elem *	file:
+sys_tss	/home/giuseppe/Compile/libce/64/sys_tss.s	/^sys_tss:$/;"	l
+sys_tss_end	/home/giuseppe/Compile/libce/64/sys_tss.s	/^sys_tss_end:$/;"	l
+t00p0	utente/utente.cpp	/^natl t00p0;$/;"	v	typeref:typename:natl
+t00p0b	utente/utente.cpp	/^void t00p0b(natq test_num)$/;"	f	typeref:typename:void
+t00p1	utente/utente.cpp	/^natl t00p1;$/;"	v	typeref:typename:natl
+t00p1b	utente/utente.cpp	/^void t00p1b(natq test_num)$/;"	f	typeref:typename:void
+t00p2	utente/utente.cpp	/^natl t00p2;$/;"	v	typeref:typename:natl
+t00p2b	utente/utente.cpp	/^void t00p2b(natq test_num)$/;"	f	typeref:typename:void
+t00p3	utente/utente.cpp	/^natl t00p3;$/;"	v	typeref:typename:natl
+t00p3b	utente/utente.cpp	/^void t00p3b(natq test_num)$/;"	f	typeref:typename:void
+t00p4	utente/utente.cpp	/^natl t00p4;$/;"	v	typeref:typename:natl
+t00p4b	utente/utente.cpp	/^void t00p4b(natq test_num)$/;"	f	typeref:typename:void
+t00p5	utente/utente.cpp	/^natl t00p5;$/;"	v	typeref:typename:natl
+t00p5b	utente/utente.cpp	/^void t00p5b(natq test_num)$/;"	f	typeref:typename:void
+t00p6	utente/utente.cpp	/^natl t00p6;$/;"	v	typeref:typename:natl
+t00p6b	utente/utente.cpp	/^void t00p6b(natq test_num)$/;"	f	typeref:typename:void
+t00p7	utente/utente.cpp	/^natl t00p7;$/;"	v	typeref:typename:natl
+t00p7b	utente/utente.cpp	/^void t00p7b(natq test_num)$/;"	f	typeref:typename:void
+t00p8	utente/utente.cpp	/^natl t00p8;$/;"	v	typeref:typename:natl
+t00p8b	utente/utente.cpp	/^void t00p8b(natq test_num)$/;"	f	typeref:typename:void
+t00p9	utente/utente.cpp	/^natl t00p9;$/;"	v	typeref:typename:natl
+t00p9b	utente/utente.cpp	/^void t00p9b(natq test_num)$/;"	f	typeref:typename:void
+t00pA	utente/utente.cpp	/^natl t00pA;$/;"	v	typeref:typename:natl
+t00pAb	utente/utente.cpp	/^void t00pAb(natq test_num)$/;"	f	typeref:typename:void
+t00s0	utente/utente.cpp	/^natl t00s0;$/;"	v	typeref:typename:natl
+t01p0	utente/utente.cpp	/^natl t01p0;$/;"	v	typeref:typename:natl
+t01p0b	utente/utente.cpp	/^void t01p0b(natq test_num)$/;"	f	typeref:typename:void
+t01p1	utente/utente.cpp	/^natl t01p1;$/;"	v	typeref:typename:natl
+t01p1b	utente/utente.cpp	/^void t01p1b(natq test_num)$/;"	f	typeref:typename:void
+t01s0	utente/utente.cpp	/^natl t01s0;$/;"	v	typeref:typename:natl
+t01w0	utente/utente.cpp	/^natb *t01w0 = reinterpret_cast<natb*>(ini_utn_p);$/;"	v	typeref:typename:natb *
+t02p0	utente/utente.cpp	/^natl t02p0;$/;"	v	typeref:typename:natl
+t02p0b	utente/utente.cpp	/^void t02p0b(natq test_num)$/;"	f	typeref:typename:void
+t02p1	utente/utente.cpp	/^natl t02p1;$/;"	v	typeref:typename:natl
+t02p1b	utente/utente.cpp	/^void t02p1b(natq test_num)$/;"	f	typeref:typename:void
+t02s0	utente/utente.cpp	/^natl t02s0;$/;"	v	typeref:typename:natl
+t02w0	utente/utente.cpp	/^natb *t02w0 = reinterpret_cast<natb*>(ini_utn_p);$/;"	v	typeref:typename:natb *
+t03p0	utente/utente.cpp	/^natl t03p0;$/;"	v	typeref:typename:natl
+t03p0b	utente/utente.cpp	/^void t03p0b(natq test_num)$/;"	f	typeref:typename:void
+t03p1	utente/utente.cpp	/^natl t03p1;$/;"	v	typeref:typename:natl
+t03p1b	utente/utente.cpp	/^void t03p1b(natq test_num)$/;"	f	typeref:typename:void
+t03s0	utente/utente.cpp	/^natl t03s0;$/;"	v	typeref:typename:natl
+t03w0	utente/utente.cpp	/^natb *t03w0 = reinterpret_cast<natb*>(ini_utn_p);$/;"	v	typeref:typename:natb *
+t04p0	utente/utente.cpp	/^natl t04p0;$/;"	v	typeref:typename:natl
+t04p0b	utente/utente.cpp	/^void t04p0b(natq test_num)$/;"	f	typeref:typename:void
+t04p1	utente/utente.cpp	/^natl t04p1;$/;"	v	typeref:typename:natl
+t04p1b	utente/utente.cpp	/^void t04p1b(natq test_num)$/;"	f	typeref:typename:void
+t04s0	utente/utente.cpp	/^natl t04s0;$/;"	v	typeref:typename:natl
+t04w0	utente/utente.cpp	/^natb *t04w0 = reinterpret_cast<natb*>(ini_utn_p);$/;"	v	typeref:typename:natb *
+t05p0	utente/utente.cpp	/^natl t05p0;$/;"	v	typeref:typename:natl
+t05p0b	utente/utente.cpp	/^void t05p0b(natq test_num)$/;"	f	typeref:typename:void
+t05p1	utente/utente.cpp	/^natl t05p1;$/;"	v	typeref:typename:natl
+t05p1b	utente/utente.cpp	/^void t05p1b(natq test_num)$/;"	f	typeref:typename:void
+t05s0	utente/utente.cpp	/^natl t05s0;$/;"	v	typeref:typename:natl
+t05w0	utente/utente.cpp	/^natb *t05w0 = reinterpret_cast<natb*>(ini_utn_p);$/;"	v	typeref:typename:natb *
+t06p0	utente/utente.cpp	/^natl t06p0;$/;"	v	typeref:typename:natl
+t06p0b	utente/utente.cpp	/^void t06p0b(natq test_num)$/;"	f	typeref:typename:void
+t06p1	utente/utente.cpp	/^natl t06p1;$/;"	v	typeref:typename:natl
+t06p1b	utente/utente.cpp	/^void t06p1b(natq test_num)$/;"	f	typeref:typename:void
+t06s0	utente/utente.cpp	/^natl t06s0;$/;"	v	typeref:typename:natl
+t06w0	utente/utente.cpp	/^natb *t06w0 = reinterpret_cast<natb*>(ini_utn_p);$/;"	v	typeref:typename:natb *
+tab	/home/giuseppe/CE/include/ce/vm.h	/^		paddr tab;$/;"	m	struct:tab_iter::stack	typeref:typename:paddr
+tab	/home/giuseppe/Compile/libce/tab.cpp	/^natb kbd::tab[MAX_CODE] = $/;"	m	class:kbd	typeref:typename:natb[]
+tab_entry	/home/giuseppe/CE/include/ce/vm.h	/^typedef natq tab_entry;$/;"	t	typeref:typename:natq
+tab_iter	/home/giuseppe/CE/include/ce/vm.h	/^class tab_iter {$/;"	c
+tab_iter	/home/giuseppe/Compile/libce/tab_iter.cpp	/^tab_iter::tab_iter(paddr tab, vaddr beg, natq dim, int lvl)$/;"	f	class:tab_iter
+tabmai	/home/giuseppe/Compile/libce/tabmai.cpp	/^char kbd::tabmai[MAX_CODE] = $/;"	m	class:kbd	typeref:typename:char[]
+tabmin	/home/giuseppe/Compile/libce/tabmin.cpp	/^char kbd::tabmin[MAX_CODE] = $/;"	m	class:kbd	typeref:typename:char[]
+tabsize	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t tabsize;$/;"	m	struct:multiboot_aout_symbol_table	typeref:typename:multiboot_uint32_t
+term_cur_proc	sistema/sistema.cpp	/^void term_cur_proc(log_sev sev, const char *mode)$/;"	f	typeref:typename:void
+terminate_p	io/io.s	/^terminate_p:$/;"	l
+terminate_p	sistema/sistema.s	/^terminate_p:$/;"	l
+terminate_p	utente/utente.s	/^terminate_p:$/;"	l
+test_num	utente/utente.cpp	/^int test_num;$/;"	v	typeref:typename:int
+testo	util/parse.c	/^	char *testo;$/;"	m	struct:file_elem	typeref:typename:char *	file:
+testok	utente/utente.cpp	/^#define testok(/;"	d	file:
+tim	/home/giuseppe/CE/include/ce/timer.h	/^namespace tim {$/;"	n
+token	/home/giuseppe/CE/include/ce/cfi.h	/^	void *token;$/;"	m	struct:cfi_d	typeref:typename:void *
+tokmux	utente/utente.cpp	/^natl tokmux;$/;"	v	typeref:typename:natl
+trap_init	/home/giuseppe/Compile/libce/gate_init.cpp	/^void trap_init(natl num, void routine())$/;"	f	typeref:typename:void
+trasforma	io/io.s	/^trasforma:$/;"	l
+trasforma	sistema/sistema.cpp	/^paddr trasforma(paddr root_tab, vaddr v)$/;"	f	typeref:typename:paddr
+trova	util/parse.c	/^void trova(char c, int salta)$/;"	f	typeref:typename:void
+trova_nome	util/parse.c	/^void trova_nome(const char *n, int salta)$/;"	f	typeref:typename:void
+tss	sistema/sistema.s	/^tss:$/;"	l
+tss_end	sistema/sistema.s	/^tss_end:$/;"	l
+tss_punt_nucleo	sistema/sistema.s	/^tss_punt_nucleo:$/;"	l
+tss_seg	sistema/sistema.s	/^tss_seg:$/;"	l
+type	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t type;$/;"	m	struct:multiboot_mmap_entry	typeref:typename:multiboot_uint32_t
+u	/home/giuseppe/CE/include/ce/mboot.h	/^  } u;$/;"	m	struct:multiboot_info	typeref:union:multiboot_info::__anon7dac2af5010a
+ultima_riga	util/parse.c	/^char ultima_riga[LUN_RIGA];$/;"	v	typeref:typename:char[]
+ultimo_terminato	sistema/sistema.cpp	/^paddr ultimo_terminato;$/;"	v	typeref:typename:paddr
+unknown_exc	/home/giuseppe/Compile/libce/64/unknown_exc.s	/^unknown_exc:$/;"	l
+unload_gdt	/home/giuseppe/Compile/libce/64/unload_gdt.s	/^unload_gdt:$/;"	l
+unmap	sistema/sistema.cpp	/^void unmap(paddr tab, vaddr begin, vaddr end, T& putpaddr)$/;"	f	typeref:typename:void
+unmap	sistema/sistema.cpp	/^void unmap(paddr tab, vaddr begin, vaddr end, const T& putpaddr)$/;"	f	typeref:typename:void
+up	/home/giuseppe/Compile/libce/tab_iter_up.cpp	/^bool tab_iter::up()$/;"	f	class:tab_iter	typeref:typename:bool
+user_entry	sistema/sistema.cpp	/^void (*user_entry)(natq);$/;"	v	typeref:typename:void (*)(natq)
+utente	util/parse.c	/^struct file_elem *utente[2], *fine[2];$/;"	v	typeref:struct:file_elem * [2]
+utn_eh_frame	sistema/sistema.cpp	/^vaddr utn_eh_frame;$/;"	v	typeref:typename:vaddr
+utn_eh_frame_len	sistema/sistema.cpp	/^natq  utn_eh_frame_len;$/;"	v	typeref:typename:natq
+v	include/sys.h	/^	vaddr v;$/;"	m	struct:ma_fault	typeref:typename:vaddr
+vaddr	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned long long vaddr;$/;"	t	typeref:typename:unsigned long long
+vaddr	/home/giuseppe/CE/include/ce/tipo.h	/^typedef unsigned long vaddr;$/;"	t	typeref:typename:unsigned long
+valid_interval	/home/giuseppe/CE/include/ce/vm.h	/^	static bool valid_interval(vaddr beg, natq dim)$/;"	f	class:tab_iter	typeref:typename:bool
+vbe_control_info	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t vbe_control_info;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+vbe_interface_len	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint16_t vbe_interface_len;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint16_t
+vbe_interface_off	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint16_t vbe_interface_off;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint16_t
+vbe_interface_seg	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint16_t vbe_interface_seg;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint16_t
+vbe_mode	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint16_t vbe_mode;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint16_t
+vbe_mode_info	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t vbe_mode_info;$/;"	m	struct:multiboot_info	typeref:typename:multiboot_uint32_t
+vbeext	/home/giuseppe/Compile/libce/bochsvga.cpp	/^	volatile natw* vbeext;$/;"	v	namespace:bochsvga	typeref:typename:volatile natw *
+vdf	sistema/sistema.cpp	/^des_frame vdf[N_FRAME];$/;"	v	typeref:typename:des_frame[]
+vgareg	/home/giuseppe/Compile/libce/bochsvga.cpp	/^	volatile natw* vgareg;$/;"	v	namespace:bochsvga	typeref:typename:volatile natw *
+vid	/home/giuseppe/CE/include/ce/vid.h	/^namespace vid {$/;"	n
+vid	/home/giuseppe/Compile/libce/attr.cpp	/^namespace vid {$/;"	n	file:
+vid	/home/giuseppe/Compile/libce/video.cpp	/^namespace vid {$/;"	n	file:
+vid	/home/giuseppe/Compile/libce/xy.cpp	/^namespace vid {$/;"	n	file:
+vid_init	io/io.cpp	/^bool vid_init()$/;"	f	typeref:typename:bool
+video	/home/giuseppe/Compile/libce/video.cpp	/^volatile natw* video = (natw*)0xB8000;$/;"	v	namespace:vid	typeref:typename:volatile natw *
+virt_beg	sistema/sistema.cpp	/^	vaddr virt_beg;$/;"	m	struct:copy_segment	typeref:typename:vaddr	file:
+virt_exc	sistema/sistema.s	/^virt_exc:$/;"	l
+vsnprintf	/home/giuseppe/Compile/libce/vsnprintf.cpp	/^int vsnprintf(char *str, size_t size, const char *fmt, va_list ap)$/;"	f	typeref:typename:int
+waiting	sistema/sistema.cpp	/^	bool waiting;$/;"	m	struct:des_proc	typeref:typename:bool	file:
+wfi	io/io.s	/^wfi:$/;"	l
+width	/home/giuseppe/CE/include/ce/mboot.h	/^  multiboot_uint32_t width;$/;"	m	struct:multiboot_header	typeref:typename:multiboot_uint32_t
+write_fault	sistema/sistema.cpp	/^	bool  write_fault;$/;"	m	struct:des_proc	typeref:typename:bool	file:
+writeconsole	utente/utente.s	/^writeconsole:$/;"	l
+writehd_n	utente/utente.s	/^writehd_n:$/;"	l
+x	/home/giuseppe/Compile/libce/xy.cpp	/^natb __attribute__((section(".data"))) x, y;$/;"	v	namespace:vid	typeref:typename:natb
+xmalloc	util/parse.c	/^void *xmalloc(size_t s)$/;"	f	typeref:typename:void *
+y	/home/giuseppe/Compile/libce/xy.cpp	/^natb __attribute__((section(".data"))) x, y;$/;"	v	namespace:vid	typeref:typename:natb

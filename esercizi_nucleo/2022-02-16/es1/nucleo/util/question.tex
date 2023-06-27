@@ -1,0 +1,48 @@
+Definiamo una ``memory-area'' come una zona della memoria privata di un processo $P_1$
+gestita da un secondo processo $P_2 \neq P_1$, detto {\em monitor} di $P_1$. Un processo 
+$P_2$ pu\`o diventare il monitor di $P_1$ tramite una primitiva \verb|ma_attach()|, che
+definisce anche la dimensione (in pagine) della memory-area di $P_1$.
+Da quel momento in poi, tutti i page-fault generati da $P_1$ su indirizzi che cadono
+all'interno della sua memory-area verranno intercettati da $P_2$. Il processo $P_2$
+pu\`o sospendersi in attesa che $P_1$ causi un page fault tramite
+una primitiva \verb|ma_wait()|, che restituisce informazioni sulla causa del page
+fault. 
+Il processo $P_1$ non viene distrutto e resta in attesa che $P_2$ lo riavvii tramite la
+primitiva \verb|ma_cont()|, eventualmente dopo aver creato una traduzione che risolva il page fault.
+
+Il processo $P_2$ pu\`o manipolare la memory-area di $P_1$ in qualunque momento, usando una primitiva
+\verb|ma_map(src, dst, P, W)|. Il parametro \verb|src|
+deve essere un indirizzo dello spazio utente/condiviso, il parametro \verb|dst| deve essere un indirizzo della
+memory-area di $P_1$, e i parametri \verb|P| e \verb|W| sono due booleani. Sia \verb|src| che \verb|dst|
+devono essere allineati alla pagina.
+
+Se \verb|P| \`e \verb|true| la primitiva \verb|ma_map| serve a creare o modificare una traduzione
+nella memory-area di $P_1$.
+In particolare, la primitiva deve fare in modo che, per il processo $P_1$, la pagina \verb|dst| 
+sia tradotta nel frame che corrisponde a \verb|src|. Inoltre, se \verb|W| \`e \verb|true|
+il processo $P_1$ deve poter usare la traduzione anche in scrittura, altrimenti solo in lettura.
+Se esisteva già una traduzione per \verb|dst|, questa deve essere aggiornata in modo da rispettare
+la nuova richiesta (per esempio, per vietare la scrittura se prima era concessa).
+La primitiva provvede anche ad azzerare i bit \verb|A| e \verb|D| nell'entrata di livello 1
+relativa a \verb|dst|.
+
+Se \verb|P| \`e \verb|false| la primitiva serve ad eliminare la traduzione di \verb|dst|.
+In questo caso \verb|src| e \verb|W| sono ignorati.
+
+In entrambi i casi la primitiva restituisce il precedente valore del byte di accesso dell'entrata di
+livello 1 relativa \verb|dst| (0 se la traduzione non esisteva). In particolare,
+il byte di accesso deve contenere i valori che \verb|P|, \verb|A|, \verb|D| e \verb|RW| avevano prima della loro
+eventuale modifica.
+Se non \`e stato possibile creare la traduzione (perch\'e serviva allocare una tabella e lo spazio era
+esaurito) la primitiva deve restituire \verb|0xffffffffffffffff|.
+
+Modificare il file \verb|sistema.cpp| per aggiungere la primitiva \verb|ma_map()| appena descritta.
+La primitiva deve abortire il processo chiamante nei seguenti casi di errore: il chiamante non \`e
+un monitor; \verb|dst| non \`e allineato o non appartiene alla memory-area del processo monitorato;
+\verb|src| (se utilizzato) non \`e allineato o non appartiene alla parte utente/condivisa, oppure
+non \`e accessibile in scrittura nel caso questa sia richiesta.
+
+{\bf Suggerimento}: pu\`o darsi che \verb|map()| e \verb|unmap()| non siano sufficientemente
+espressive per realizzare \verb|ma_map()|. Pu\`o essere utile lavorare direttamente con un \verb|tab_iter|.
+Fare attenzione al contatore di entrate valide delle tabelle (funzioni \verb|inc_ref()| e \verb|dec_ref()|),
+che deve restare consistente quando si cambia il valore di qualche bit \verb|P|.
