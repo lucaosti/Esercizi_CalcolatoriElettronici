@@ -1,0 +1,496 @@
+#include <all.h>
+#include <vm.h>
+#pragma GCC diagnostic ignored "-Wuninitialized"
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+
+#define dbg(s, ...) flog(LOG_DEBUG, "TEST %d: " s, test_num, ## __VA_ARGS__)
+#define msg(s, ...) printf("TEST %d PROC %d: " s "\n", test_num, getpid(), ## __VA_ARGS__)
+#define err(s, ...) msg("ERRORE: " s, ## __VA_ARGS__)
+#define die(s, ...) do { err(s, ## __VA_ARGS__); goto error; } while (0)
+
+#define new_proc(tn, pn)\
+	t##tn##p##pn = activate_p(t##tn##p##pn##b, test_num, prio--, LIV_UTENTE);
+
+natl end_test; // sync
+
+#define end_subtest() do {\
+	(void)&&error;\
+error:\
+	terminate_p();\
+} while (0)
+
+#define end_test() do {\
+	(void)&&error;\
+error:\
+	sem_signal(end_test);\
+	terminate_p();\
+} while (0)
+
+
+natl tokmux;
+#define TCNT(n)	natl t##n##n0;
+#define testok(n) do {\
+	sem_wait(tokmux);\
+	t##n##n0++;\
+	sem_signal(tokmux);\
+} while (0)
+
+int test_num;
+
+const char *b2s(bool b)
+{
+	return b ? "true" : "false";
+}
+
+template<typename T>
+const char *p2s(T b)
+{
+	return b ? "un puntatore" : "nullptr";
+}
+
+#define check_macreate(dim_, exp_) ({ \
+	void* b_ = macreate(dim_); \
+	if ((b_ && !(exp_)) || (!b_ && (exp_))) { \
+		die("macreate(%d) ha restituito 0 invece di un indirizzo, o viceversa", dim_); \
+	} \
+	b_; \
+})
+
+#define check_macopy(dst_, exp_) ({ \
+	bool b_ = macopy(dst_); \
+	if (b_ != (exp_)) { \
+		die("macopy(%d) ha restituito %s invece di %s", dst_, b2s(b_), b2s(exp_)); \
+	} \
+	b_; \
+})
+
+natl npfmutex;
+natl expected_npf;
+void add_expected_npf(int n)
+{
+	sem_wait(npfmutex);
+	expected_npf += n;
+	sem_signal(npfmutex);
+}
+
+///**********************************************************************
+// *             test 00: errori vari                                   *
+// **********************************************************************/
+
+natl t00p0;
+natl t00p1;
+natl t00p2;
+natl t00p3;
+natl t00p4;
+
+void t00p0b(natq test_num)
+{
+	macreate(1000);
+	err("macreate troppo grande non ha causato abort");
+	end_subtest();
+}
+
+void t00p1b(natq test_num)
+{
+	macreate(0);
+	err("macreate troppo piccola non ha causato abort");
+	end_subtest();
+}
+
+void t00p2b(natq test_num)
+{
+	check_macreate(1, true);
+	check_macreate(2, false);
+	end_subtest();
+}
+
+void t00p3b(natq test_num)
+{
+	check_macreate(1, true);
+	check_macopy(getpid(), false);
+	end_subtest();
+}
+
+void t00p4b(natq test_num)
+{
+	macopy(getpid());
+	err("macopy senza macreate non ha causato abort");
+	end_subtest();
+}
+
+// **********************************************************************
+// *             test 01: funzionalità minima                           *
+// **********************************************************************
+
+natl t01p0;
+natl t01p1;
+natl t01s0;
+natq *t01w0;
+TCNT(01);
+
+void t01p0b(natq test_num)
+{
+	sem_wait(t01s0);
+	if (*t01w0 != 1) {
+		die("il destinatario non legge il valore scritto dal mittente");
+	}
+	testok(01);
+	end_test();
+}
+
+void t01p1b(natq test_num)
+{
+	t01w0 = static_cast<natq*>(check_macreate(1, true));
+	*t01w0 = 1;
+	check_macopy(t01p0, true);
+	sem_signal(t01s0);
+	testok(01);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 02: scrittura dopo la copia                       *
+// **********************************************************************
+
+natl t02p0;
+natl t02p1;
+natl t02s0;
+natq *t02w0;
+TCNT(02);
+
+void t02p0b(natq test_num)
+{
+	sem_wait(t02s0);
+	if (*t02w0) {
+		die("il destinatario legge il valore scritto dal mittente dopo la copia");
+	}
+	testok(02);
+	end_test();
+}
+
+void t02p1b(natq test_num)
+{
+	t02w0 = static_cast<natq*>(check_macreate(1, true));
+	check_macopy(t02p0, true);
+	*t02w0 = 1;
+	add_expected_npf(1);
+	sem_signal(t02s0);
+	testok(02);
+	end_test();
+}
+
+
+// **********************************************************************
+// *             test 03: scrittura del destinatario                    *
+// **********************************************************************
+natl t03p0;
+natl t03p1;
+natl t03s0;
+natl t03s1;
+natq *t03w0;
+TCNT(03);
+
+void t03p0b(natq test_num)
+{
+	sem_wait(t03s0);
+	*t03w0 = 2;
+	add_expected_npf(1);
+	sem_signal(t03s1);
+	testok(03);
+	end_test();
+}
+
+void t03p1b(natq test_num)
+{
+	t03w0 = static_cast<natq*>(check_macreate(1, true));
+	check_macopy(t03p0, true);
+	*t03w0 = 1;
+	add_expected_npf(1);
+	sem_signal(t03s0);
+	sem_wait(t03s1);
+	if (*t03w0 != 1) {
+		die("la scrittura del destinatario ha influenzato il mittente");
+	}
+	testok(03);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 04: memory area grandi                            *
+// **********************************************************************
+
+natl t04p0;
+natl t04p1;
+natl t04s0;
+natl t04s1;
+natq *t04w0;
+int  t04w1;
+TCNT(04);
+
+void t04p0b(natq test_num)
+{
+	sem_wait(t04s0);
+	if (t04w0[t04w1]) {
+		die("il destinatario legge il valore scritto dal mittente dopo la copia");
+	}
+	sem_signal(t04s1);
+	testok(04);
+	end_test();
+}
+
+void t04p1b(natq test_num)
+{
+	t04w1 = DIM_PAGINA/sizeof(*t04w0);
+	t04w0 = static_cast<natq*>(check_macreate(2, true));
+	check_macopy(t04p0, true);
+	t04w0[t04w1] = 1;
+	add_expected_npf(1);
+	sem_signal(t04s0);
+	sem_wait(t04s1);
+	t04w0[0]= 2;
+	add_expected_npf(1);
+	testok(04);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 05: condivisione multipla                         *
+// **********************************************************************
+
+natl t05p0;
+natl t05p1;
+natl t05p2;
+natl t05s0;
+natl t05s1;
+natq *t05w0;
+int  t05w1;
+TCNT(05);
+
+void t05p0b(natq test_num)
+{
+	sem_wait(t05s0);
+	if (t05w0[0]) {
+		die("p0: il destinatario legge il valore scritto dal mittente dopo la copia");
+	}
+	testok(05);
+	end_test();
+}
+
+void t05p1b(natq test_num)
+{
+	sem_wait(t05s1);
+	if (t05w0[t05w1]) {
+		die("p1: il destinatario legge il valore scritto dal mittente dopo la copia");
+	}
+	testok(05);
+	end_test();
+}
+
+void t05p2b(natq test_num)
+{
+	t05w1 = DIM_PAGINA/sizeof(*t05w0);
+	t05w0 = static_cast<natq*>(check_macreate(2, true));
+	check_macopy(t05p0, true);
+	t05w0[0] = 1;
+	add_expected_npf(1);
+	check_macopy(t05p1, true);
+	t05w0[t05w1] = 2;
+	add_expected_npf(1);
+	sem_signal(t05s0);
+	sem_signal(t05s1);
+	testok(05);
+	end_test();
+}
+
+
+// **********************************************************************
+// *             test 06: condivsione a catena				*
+// **********************************************************************
+
+natl t06p0;
+natl t06p1;
+natl t06p2;
+natl t06s0;
+natl t06s1;
+natq *t06w0;
+TCNT(06);
+
+void t06p0b(natq test_num)
+{
+	sem_wait(t06s0);
+	if (t06w0[0]) {
+		die("p0: il destinatario legge il valore scritto dal mittente dopo la copia");
+	}
+	testok(06);
+	end_test();
+}
+
+void t06p1b(natq test_num)
+{
+	sem_wait(t06s1);
+	if (t06w0[0]) {
+		die("p1: il destinatario legge il valore scritto dal mittente dopo la copia");
+	}
+	check_macopy(t06p0, true);
+	t06w0[0] = 2;
+	add_expected_npf(1);
+	sem_signal(t06s0);
+	testok(06);
+	end_test();
+}
+
+void t06p2b(natq test_num)
+{
+	t06w0 = static_cast<natq*>(check_macreate(1, true));
+	check_macopy(t06p1, true);
+	t06w0[0] = 1;
+	add_expected_npf(1);
+	sem_signal(t06s1);
+	testok(06);
+	end_test();
+}
+
+// **********************************************************************
+// *             test 07: TLB (1)                                       *
+// **********************************************************************
+
+natl t07p0;
+natl t07p1;
+natl t07s0;
+natq *t07w0;
+TCNT(07);
+
+void t07p0b(natq test_num)
+{
+	sem_wait(t07s0);
+	if (*t07w0 != 1) {
+		die("il destinatario legge il valore scritto dal mittente dopo la copia");
+	}
+	testok(07);
+	end_test();
+}
+
+void t07p1b(natq test_num)
+{
+	t07w0 = static_cast<natq*>(check_macreate(1, true));
+	*t07w0 = 1;
+	check_macopy(t07p0, true);
+	*t07w0 = 2;
+	add_expected_npf(1);
+	sem_signal(t07s0);
+	testok(07);
+	end_test();
+}
+
+/**********************************************************************/
+
+
+process mainp body main_body(0), 900, LIV_UTENTE;
+
+process_body main_body(natq id)
+{
+	natl prio = 600;
+	natl membefore = getmeminfo().num_frame_liberi;
+
+	end_test = sem_ini(0);
+	tokmux = sem_ini(1);
+
+	test_num = 0;
+	dbg(">>>INIZIO<<<: errori vari");
+	new_proc(00, 0);
+	new_proc(00, 1);
+	new_proc(00, 2);
+	new_proc(00, 3);
+	new_proc(00, 4);
+	delay(10);
+	dbg("=== FINE ===");
+
+	test_num = 1;
+	dbg(">>>INIZIO<<<: funzionalita' minima");
+	t01s0 = sem_ini(0);
+	new_proc(01, 0);
+	new_proc(01, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t01n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 2;
+	dbg(">>>INIZIO<<<: scrittura dopo la copia");
+	t02s0 = sem_ini(0);
+	new_proc(02, 0);
+	new_proc(02, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t02n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 3;
+	dbg(">>>INIZIO<<<: scrittura del destinatario");
+	t03s0 = sem_ini(0);
+	new_proc(03, 0);
+	new_proc(03, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t03n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 4;
+	dbg(">>>INIZIO<<<: memory area grandi");
+	t04s0 = sem_ini(0);
+	t04s1 = sem_ini(0);
+	new_proc(04, 0);
+	new_proc(04, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t04n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 5;
+	dbg(">>>INIZIO<<<: condivisione multipla");
+	t05s0 = sem_ini(0);
+	t05s1 = sem_ini(0);
+	new_proc(05, 0);
+	new_proc(05, 1);
+	new_proc(05, 2);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t05n0 == 3) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 6;
+	dbg(">>>INIZIO<<<: condivisione multipla");
+	t06s0 = sem_ini(0);
+	t06s1 = sem_ini(0);
+	new_proc(06, 0);
+	new_proc(06, 1);
+	new_proc(06, 2);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t06n0 == 3) msg("OK");
+	dbg("=== FINE ===");
+
+	test_num = 7;
+	dbg(">>>INIZIO<<<: TLB");
+	t07s0 = sem_ini(0);
+	new_proc(07, 0);
+	new_proc(07, 1);
+	sem_wait(end_test);
+	sem_wait(end_test);
+	if (t07n0 == 2) msg("OK");
+	dbg("=== FINE ===");
+
+	delay(10);
+	test_num = 8;
+	// controlliamo che tutta la memoria sia stata correttamente rilasciata
+	meminfo m = getmeminfo();
+	natl memafter = m.num_frame_liberi;
+	if (memafter != membefore)
+		err("memoria non liberata: %d frame", membefore - memafter);
+	if (m.npf != expected_npf)
+		err("generati %d page fault invece di %d", m.npf, expected_npf);
+
+	pause();
+}

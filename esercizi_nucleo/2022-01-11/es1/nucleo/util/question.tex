@@ -1,0 +1,57 @@
+Definiamo una ``memory-area'' come una zona della memoria privata di un processo,
+accessibile in lettura/scrittura a partire dal primo indirizzo della parte utente/privata.
+I processi non hanno inizialmente una memory-area, ma possono crearne una tramite
+la primitiva \verb|macreate(dim)|, dove \verb|dim| \`e la dimensione in pagine.
+
+Un processo sorgente pu\`o inviare una {\em copia} della propria memory-area ad un altro
+processo destinario, con identificatore \verb|pid|, usando la primitiva \verb|macopy(pid)|,
+purch\'e il destinatario non ne possegga gi\`a un'altra. 
+Pi\`u processi possono ricevere una copia della stessa memory-area, sia direttamente dal
+processo che l'aveva creata, sia indirettamente da un processo che l'aveva a sua volta
+ricevuta.
+
+Per ottimizzare la copia utilizziamo il meccanismo del {\em copy-on-write}:
+la \verb|macopy()| fa inizialmente accedere entrambi i processi (sorgente e destinario)
+agli stessi frame della memoria fisica, ma in sola lettura. La copia verr\`a eseguita solo quando,
+successivamente, uno dei processi tenta di scrivervi. Questo permette di evitare le copie
+se i processi si limitano a leggere.
+
+Visto che la stessa memory-area pu\`o essere copiata pi\`u volte, ogni frame
+di una memory-area pu\`o essere condiviso tra pi\`u processi. Aggiungiamo dunque ai descrittori
+dei frame (\verb|des_frame|) un campo \verb|nma| destinato a contare il numero di processi che condividono
+quel frame. Quando la memory-area viene creata \verb|nma| viene posto a $1$ per tutti
+i frame che la compongono; quando la memory-area viene copiata
+tutti i suoi \verb|nma| vengono incrementati.
+
+Come detto, ciascun frame verr\`a effettivamente
+copiato solo quando, e se, uno dei processi  che lo condividono tenter\`a di accedervi in scrittura.
+Pi\`u precisamente, consideriamo un frame $f$ condiviso tra i processi $P_1$, $P_2$, \dots, $P_n$
+(quindi con $\verb|nma| = n$). Se un qualsiasi processo $P_i$, con $1\le i \le n$, tenta di
+accedere in scrittura a un indirizzo $v$ mappato su $f$, la MMU causer\`a un page fault.
+La routine di gestione, riconosciuta la causa del page fault, allocher\`a un nuovo frame $f'$ e
+vi copier\`a il contenuto di $f$, decrementandone \verb|nma| e cambiando la traduzione di $v$
+in modo che ora punti a $f'$ e la scrittura sia abililitata. A questo punto il processo $P_i$
+potr\`a ripetere l'accesso.
+
+Per realizzare il meccanismo appena descritto aggiungiamo il campo \verb|masize| ai descrittori
+di processo. Il campo contiene la dimensione in pagine della memory-area del processo; vale 0 se il processo
+non ha ancora creato o ricevuto una memory-area.
+
+Aggingiamo inoltre le seguenti primitive (abortiscono il processo in caso di errore):
+
+\begin{itemize}
+  \item \verb|void* macreate(natq size)| (realizzata in parte): crea una memory-area di \verb|size| pagine.
+    \`E un errore se \verb|size| \`e zero o maggiore di \verb|MAX_MA_PAGES|, oppure se il
+    processo possiede gi\`a una memory-area. Restituisce l'indirizzo della memory-area, o \verb|nullptr|
+    se non \`e stato possibile crearla.
+  \item \verb|bool macopy(natq pid)| (realizzata in parte): invia al processo \verb|pid| una
+    copia della memory-area del processo chiamante, usando il meccanismo del copy-on-write.
+    \`E un errore se il processo chiamante non possiede una memory-area o se \verb|pid|
+    supera \verb|MAX_PROC_ID|\@.
+    Restituisce \verb|false| se il processo destinatario non esiste o possiede gi\`a una memory area,
+    oppure se non \`e stato possibile completare l'operazione (memoria esaurita); restituisce \verb|true|
+    altrimenti.
+\end{itemize}
+
+Modificare il file \verb|sistema.cpp| in modo da specificare la parti mancanti. Attenzione a deallocare
+le memory-area correttamente quando un processo termina.
