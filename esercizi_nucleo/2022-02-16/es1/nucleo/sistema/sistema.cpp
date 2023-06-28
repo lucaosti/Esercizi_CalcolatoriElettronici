@@ -2244,5 +2244,4 @@ extern "C" void c_ma_map(vaddr src, vaddr dst, bool P, bool W)
 error:
 	esecuzione->contesto[I_RAX] = 0xffffffffffffffff;
 };
-}
 //   SOLUZIONE 2022-02-16 )
